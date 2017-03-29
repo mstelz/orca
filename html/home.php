@@ -79,7 +79,7 @@
           </li>
           <li class="qp">
             <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Signed in as mdo">
-              <img src="../img/avatar-mdo.png" alt="" class="wc">
+              <!--<img src="../img/avatar-mdo.png" alt="" class="wc">-->
               <small class="brt axz">@mdo</small>
             </a>
           </li>
@@ -397,7 +397,7 @@
   </div>
 
 
-    <script src="../js/jquery.min.js"></script>
+    <!-- <script src="../js/jquery.min.js"></script> -->
     <script src="../js/chart.js"></script>
     <script src="../js/tablesorter.min.js"></script>
     <script src="../js/toolkit.js"></script>
