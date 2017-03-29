@@ -43,7 +43,8 @@
         <ul class="nav qq brs aaj">
           <li class="qp">
             <a class="qn" href="../index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Overview">
-              <span class="bv bhn"></span>
+              <!-- <span class="bv bhn"></span> -->
+              <span class="glyphicon glyphicon-home"></span>
               <small class="brt axz">Overview</small>
             </a>
           </li>
