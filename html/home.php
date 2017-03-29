@@ -43,8 +43,7 @@
         <ul class="nav qq brs aaj">
           <li class="qp">
             <a class="qn" href="../index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Overview">
-              <!-- <span class="bv bhn"></span> -->
-              <span class="glyphicon glyphicon-home"></span>
+              <span class="bv bhn"></span>
               <small class="brt axz">Overview</small>
             </a>
           </li>
@@ -80,7 +79,7 @@
           </li>
           <li class="qp">
             <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Signed in as mdo">
-              <img src="../assets/img/avatar-mdo.png" alt="" class="wc">
+              <img src="../img/avatar-mdo.png" alt="" class="wc">
               <small class="brt axz">@mdo</small>
             </a>
           </li>
@@ -398,11 +397,11 @@
   </div>
 
 
-    <script src="../assets/js/jquery.min.js"></script>
-    <script src="../assets /js/chart.js"></script>
-    <script src="../assets/js/tablesorter.min.js"></script>
-    <script src="../assets/js/toolkit.js"></script>
-    <script src="../assets/js/application.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/chart.js"></script>
+    <script src="../js/tablesorter.min.js"></script>
+    <script src="../js/toolkit.js"></script>
+    <script src="../js/application.js"></script>
     <script>
       // execute/clear BS loaders for docs
       $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}})
