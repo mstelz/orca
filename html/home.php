@@ -1,4 +1,4 @@
-<html lang="en" data-ember-extension="1">
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,10 +16,12 @@
   	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <!-- Chart.js packaged with Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
 
-    <link href="../css/toolkit-inverse.css" rel="stylesheet">
+    <link href="css/toolkit-inverse.css" rel="stylesheet">
 
-    <link href="../css/application.css" rel="stylesheet">
+    <link href="css/application.css" rel="stylesheet">
 
     <style>
       /* note: this is a hack for ios iframe for bootstrap themes shopify page */
@@ -30,6 +32,83 @@
         *width: 100%;
       }
     </style>
+
+    <script>
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var config = {
+            type: 'line',
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [{
+                    label: "My First dataset",
+                    backgroundColor:'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100)
+                    ],
+                    fill: false,
+                }, {
+                    label: "My Second dataset",
+                    fill: false,
+                    backgroundColor: 'rgb(54, 162, 235)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    data: [
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100),
+                        (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100)
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                title:{
+                    display:true,
+                    text:'Chart.js Line Chart'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    xAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                        }
+                    }],
+                    yAxes: [{
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }]
+                }
+            }
+        };
+
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myLine = new Chart(ctx, config);
+        };
+      </script>
+
+
   </head>
 <body>
 
@@ -127,24 +206,21 @@
           <div class="di awt bvh">
             <div class="en agn">
               <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[230, 130]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;">
-                </canvas>
+                <!-- <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[230, 130]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas> -->
               </div>
               <strong class="axn">Traffic</strong>
               <h4>New vs Returning</h4>
             </div>
             <div class="en agg">
               <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[330,30]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;">
-                </canvas>
+                <!-- <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[330,30]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas> -->
               </div>
               <strong class="axn">Revenue</strong>
               <h4>New vs Recurring</h4>
             </div>
             <div class="en agn">
               <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[100,260]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Referrals', 'Direct']" style="display: block; width: 235px; height: 235px;">
-                </canvas>
+                <!-- <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[100,260]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Referrals', 'Direct']" style="display: block; width: 235px; height: 235px;"></canvas> -->
               </div>
               <strong class="axn">Traffic</strong>
               <h4>Direct vs Referrals</h4>
@@ -154,15 +230,14 @@
 
         <div role="tabpanel" class="qu" id="sales" aria-expanded="false">
           <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-            <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="line" data-dataset="[[2500, 3300, 2512, 2775, 2498, 3512, 2925, 4275, 3507, 3825, 3445, 3985]]" data-labels="['','Aug 29','','','Sept 5','','','Sept 12','','','Sept 19','']" data-dark="true" style="display: block; width: 1000px; height: 273px;">
-            </canvas>
+            <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="line" data-dataset="[[2500, 3300, 2512, 2775, 2498, 3512, 2925, 4275, 3507, 3825, 3445, 3985]]" data-labels="['','Aug 29','','','Sept 5','','','Sept 12','','','Sept 19','']" data-dark="true" style="display: block; width: 1000px; height: 273px;"></canvas> -->
           </div>
         </div>
 
         <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
           <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-            <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="bar" data-dark="true" data-labels="['August','September','October','November','December','January','February']" data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]" data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]" style="display: block; width: 1000px; height: 273px;">
-            </canvas>
+            <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="bar" data-dark="true" data-labels="['August','September','October','November','December','January','February']" data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]" data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]" style="display: block; width: 1000px; height: 273px;"></canvas> -->
+            <canvas id="canvas" width="400" height="400"></canvas>
           </div>
         </div>
       </div>
@@ -398,10 +473,10 @@
 
 
     <!-- <script src="../js/jquery.min.js"></script> -->
-    <script src="../js/chart.js"></script>
-    <script src="../js/tablesorter.min.js"></script>
-    <script src="../js/toolkit.js"></script>
-    <script src="../js/application.js"></script>
+    <!-- <script src="js/chart.js"></script> -->
+    <script src="js/tablesorter.min.js"></script>
+    <script src="js/toolkit.js"></script>
+    <script src="js/application.js"></script>
     <script>
       // execute/clear BS loaders for docs
       $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}})
