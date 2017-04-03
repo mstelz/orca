@@ -34,76 +34,100 @@
     </style>
 
     <script>
-	var oReq = new XMLHttpRequest();
+	var tempChart;
+	function populateChart(interval){
+		var chartData = retrieveTempData(interval);
 
-	var tempData;
-	oReq.onload = function() {
-		tempData = this.responseText;
-	};
-	oReq.open("get", "retrieveTemps.php", false);
-	oReq.send();
-
-	console.log(tempData);
-	
-	var json = JSON.parse(tempData);
-	var chartData = [];
-	$.each(json, function(index, value) {
-		chartData.push({x: value.timestamp, y: value.temp});
-	});
-
-        var config = {
-            type: 'line',
-            data: {
-                datasets: [{
-                    label: "Temperature (F)",
-                    backgroundColor:'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: chartData,
-                    fill: false,
-                }]
-            },
-            options: {
-                responsive: true,
-                title:{
-                    display:true,
-                    text:'Evo 5 Gallon Temperature'
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                },
-                scales: {
-                    xAxes: [{
-			type: 'time',
-			time: { 
-				displayFormats: {
-					unit: 'minute'
-				}
+		var config = {
+		    type: 'line',
+		    data: {
+			datasets: [{
+			    label: "Temperature (F)",
+			    backgroundColor:'rgb(255, 99, 132)',
+			    borderColor: 'rgb(255, 99, 132)',
+			    data: chartData,
+			    fill: false,
+			}]
+		    },
+		    options: {
+			responsive: true,
+			title:{
+			    display:true,
+			    text:'Evo 5 Gallon Temperature'
 			},
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Time'
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Temperature (F)'
-                        }
-                    }]
-                }
-            }
-        };
+			tooltips: {
+			    mode: 'index',
+			    intersect: false,
+			},
+			hover: {
+			    mode: 'nearest',
+			    intersect: true
+			},
+			scales: {
+			    xAxes: [{
+				type: 'time',
+				time: { 
+					displayFormats: {
+						unit: 'minute'
+					}
+				},
+				display: true,
+				scaleLabel: {
+				    display: true,
+				    labelString: 'Time'
+				}
+			    }],
+			    yAxes: [{
+				display: true,
+				scaleLabel: {
+				    display: true,
+				    labelString: 'Temperature (F)'
+				}
+			    }]
+			}
+		    }
+		};
+		return config;
+	}
+	    
+	function retrieveTempData(interval){
+		var oReq = new XMLHttpRequest();
+		var url = "retrieveTemps.php";
+		var paramName = "?int=";
+		
+		if(interval != undefined){
+			url = url+paramName+interval;
+		}
 
+		var tempData;
+		oReq.onload = function() {
+			tempData = this.responseText;
+		};
+		oReq.open("get", url, false);
+		oReq.send();
+
+		var json = JSON.parse(tempData);
+		var chartData = [];
+		$.each(json, function(index, value) {
+			chartData.push({x: value.timestamp, y: value.temp});
+		});
+		
+		return chartData;
+	}
+	    
+	function updateChart(data){
+  		tempChart.data.datasets[0].data = data;
+		tempChart.update();
+	}
+	    
+	function changeChartInterval(interval){
+		var data = retrieveTempData(interval);
+		updateChart(data);
+	}
+	    
         window.onload = function() {
             var ctx = document.getElementById("canvas").getContext("2d");
-            window.myLine = new Chart(ctx, config);
+            tempChart = new Chart(ctx, populateChart('24h'));
         };
       </script>
 
@@ -179,9 +203,9 @@
           </div>
           <span class="bsa axy"></span>
           <div class="pz bsb bsd">
-            <button type="button" class="ce pi">Day</button>
-            <button type="button" class="ce pi active">Week</button>
-            <button type="button" class="ce pi">Month</button>
+            <button type="button" onclick="changeChartInterval('24h');" class="ce pi active">Day</button>
+            <button type="button" onclick="changeChartInterval('7d');" class="ce pi">Week</button>
+            <button type="button" onclick="changeChartInterval('30d');" class="ce pi">Month</button>
           </div>
         </div>
       </div>
