@@ -35,97 +35,138 @@
     </style>
 
     <script>
-	var oReq = new XMLHttpRequest();
 
-	var tempData;
-	oReq.onload = function() {
-		tempData = this.responseText;
-	};
-	oReq.open("get", "retrieveTemps.php", false);
-	oReq.send();
-	
-	var json = JSON.parse(tempData);
-	var chartData = [];
-	
-	// Stats
-	var max;
-	var min;
-	var count = 0; 
-	var total = 0;
-	$.each(json, function(index, value) {
-		if(max === undefined | max < value.temp){
-			max = value.temp;
-		}
+	var tempChart;
+	function populateChart(data){
+		setMinMaxAverage(data);
 
-		if(min === undefined | min > value.temp){
-			min = value.temp;
-		}
-		count++;
-		total += value.temp;
-		chartData.push({x: value.timestamp, y: value.temp});
-	});
-
-	var average = total / count;
-	average = average.toFixed(2);
-
-        var config = {
-            type: 'line',
-            data: {
-                datasets: [{
-                    label: "Temperature (F)",
-		    fill: true,
-		    backgroundColor: 'rgb(37,44,53)',
-		    borderColor: 'rgb(25, 151, 198)',
-		    pointBackgroundColor: 'rgb(25, 151, 198)',
-                    data: chartData,
-		    cubicInterpolationMode: 'monotone'
-                }]
-            },
-            options: {
-                responsive: true,
-                title:{
-                    display:true,
-                    text:'Evo 5 Gallon Temperature'
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                },
-                scales: {
-                    xAxes: [{
-			type: 'time',
-			time: { 
-				displayFormats: {
-					unit: 'minute'
-				}
+		var config = {
+		    type: 'line',
+		    data: {
+			datasets: [{
+			    label: "Temperature (F)",
+                    	    fill: true,
+                    	    backgroundColor: 'rgb(37,44,53)',
+                    	    borderColor: 'rgb(25, 151, 198)',
+                    	    pointBackgroundColor: 'rgb(25, 151, 198)',
+                    	    data: data.chartData,
+                    	    cubicInterpolationMode: 'monotone'
+			}]
+		    },
+		    options: {
+			responsive: true,
+			title:{
+			    display:true,
+			    text:'Evo 5 Gallon Temperature'
 			},
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Time'
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Temperature (F)'
-                        }
-                    }]
-                }
-            }
-        };
+			tooltips: {
+			    mode: 'index',
+			    intersect: false,
+			},
+			hover: {
+			    mode: 'nearest',
+			    intersect: true
+			},
+			scales: {
+			    xAxes: [{
+				type: 'time',
+				time: { 
+					displayFormats: {
+						unit: 'minute'
+					}
+				},
+				display: true,
+				scaleLabel: {
+				    display: true,
+				    labelString: 'Time'
+				}
+			    }],
+			    yAxes: [{
+				display: true,
+				scaleLabel: {
+				    display: true,
+				    labelString: 'Temperature (F)'
+				}
+			    }]
+			}
+		    }
+		};
+		return config;
+	}
+	    
+	function retrieveTempData(interval){
+		var oReq = new XMLHttpRequest();
+		var url = "retrieveTemps.php";
+		var paramName = "?int=";
+		
+		if(interval != undefined){
+			url = url+paramName+interval;
+		}
 
+		var tempData;
+		oReq.onload = function() {
+			tempData = this.responseText;
+		};
+		oReq.open("get", url, false);
+		oReq.send();
+
+		var json = JSON.parse(tempData);
+		var chartData = [];
+
+		// Stats
+		var max;
+		var min;
+		var count = 0; 
+		var total = 0;
+		$.each(json, function(index, value) {
+			if(max === undefined | max < value.temp){
+				max = value.temp;
+			}
+
+			if(min === undefined | min > value.temp){
+				min = value.temp;
+			}
+			count++;
+			total += value.temp;
+			chartData.push({x: value.timestamp, y: value.temp});
+		});
+
+		var average = total / count;
+		average = average.toFixed(2);
+
+		
+		return {
+			"chartData":chartData,
+			"min":min,
+			"max":max,
+			"average":average
+			};
+	}
+	    
+	function updateChart(data){
+  		tempChart.data.datasets[0].data = data;
+		tempChart.update();
+	}
+	    
+	function changeChartInterval(interval){
+		var data = retrieveTempData(interval);
+		updateChart(data.chartData);
+		setMinMaxAverage(data);
+	}
+
+	function setMinMaxAverage(data){
+	    $('#max').text(data.max);
+	    $('#min').text(data.min);
+	    $('#average').text(data.average);
+	}
+	    
         window.onload = function() {
             var ctx = document.getElementById("canvas").getContext("2d");
-            window.myLine = new Chart(ctx, config);
-	    $('#max').text(max);
-	    $('#min').text(min);
-	    $('#average').text(average);
+	    var data = retrieveTempData('24h');
+
+            tempChart = new Chart(ctx, populateChart(data));
+
+	    setMinMaxAverage(data);
 		
  	    var today = new Date();
 	    var dd = today.getDate();
@@ -219,9 +260,9 @@
           </div>
           <span class="bsa axy"></span>
           <div class="pz bsb bsd">
-            <button type="button" class="ce pi active">Day</button>
-            <button type="button" class="ce pi">Week</button>
-            <button type="button" class="ce pi">Month</button>
+            <button type="button" onclick="changeChartInterval('24h');" class="ce pi active">Day</button>
+            <button type="button" onclick="changeChartInterval('7d');" class="ce pi">Week</button>
+            <button type="button" onclick="changeChartInterval('30d');" class="ce pi">Month</button>
           </div>
         </div>
       </div>
