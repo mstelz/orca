@@ -16,8 +16,9 @@
   	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <!-- Chart.js packaged with Moment.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+
+	<!-- Chart.js packaged with Moment.js -->
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
 
     <link href="css/toolkit-inverse.css" rel="stylesheet">
 
@@ -42,24 +43,42 @@
 	};
 	oReq.open("get", "retrieveTemps.php", false);
 	oReq.send();
-
-	console.log(tempData);
 	
 	var json = JSON.parse(tempData);
 	var chartData = [];
+	
+	// Stats
+	var max;
+	var min;
+	var count = 0; 
+	var total = 0;
 	$.each(json, function(index, value) {
+		if(max === undefined | max < value.temp){
+			max = value.temp;
+		}
+
+		if(min === undefined | min > value.temp){
+			min = value.temp;
+		}
+		count++;
+		total += value.temp;
 		chartData.push({x: value.timestamp, y: value.temp});
 	});
+
+	var average = total / count;
+	average = average.toFixed(2);
 
         var config = {
             type: 'line',
             data: {
                 datasets: [{
                     label: "Temperature (F)",
-                    backgroundColor:'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
+		    fill: true,
+		    backgroundColor: 'rgb(37,44,53)',
+		    borderColor: 'rgb(25, 151, 198)',
+		    pointBackgroundColor: 'rgb(25, 151, 198)',
                     data: chartData,
-                    fill: false,
+		    cubicInterpolationMode: 'monotone'
                 }]
             },
             options: {
@@ -104,6 +123,26 @@
         window.onload = function() {
             var ctx = document.getElementById("canvas").getContext("2d");
             window.myLine = new Chart(ctx, config);
+	    $('#max').text(max);
+	    $('#min').text(min);
+	    $('#average').text(average);
+		
+ 	    var today = new Date();
+	    var dd = today.getDate();
+	    var mm = today.getMonth()+1; //January is 0!
+	    var yyyy = today.getFullYear();
+		
+            if(dd<10) {
+		dd='0'+dd
+	    } 
+		
+	    if(mm<10) {
+		mm='0'+mm
+	    } 
+		
+	    today = mm+'/'+dd+'/'+yyyy;
+
+	    $('#dateRange').val(today);
         };
       </script>
 
@@ -126,33 +165,33 @@
             </a>
           </li>
           <li class="qp">
-            <a class="qn" href="../order-history/index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Order history">
+            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="History">
               <span class="bv bnv"></span>
               <small class="brt axz">History</small>
             </a>
           </li>
           <li class="qp">
-            <a class="qn" href="../fluid/index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Fluid layout">
+            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Web Controls">
               <span class="bv bgy"></span>
-              <small class="brt axz">Fluid layout</small>
+              <small class="brt axz">Web Controls</small>
             </a>
           </li>
           <li class="qp">
-            <a class="qn active" href="../icon-nav/index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Icon-nav">
+            <a class="qn active" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Statistics">
               <span class="bv bau"></span>
-              <small class="brt axz">Icon nav</small>
+              <small class="brt axz">Statistics</small>
             </a>
           </li>
           <li class="qp">
-            <a class="qn" href="../docs/index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Docs">
+            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Documentation">
               <span class="bv biv"></span>
-              <small class="brt axz">Docs</small>
+              <small class="brt axz">Documentation</small>
             </a>
           </li>
           <li class="qp">
-            <a class="qn" href="../index-light/index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Light UI">
+            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Light Controller">
               <span class="bv bgb"></span>
-              <small class="brt axz">Light UI</small>
+              <small class="brt axz">Light Controller</small>
             </a>
           </li>
           <li class="qp">
@@ -174,13 +213,14 @@
 
         <div class="brz">
           <div class="brg bsb">
-            <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker">
+            <!-- <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker"> -->
+	    <input id="dateRange" type="text" value="today()" class="form-control" data-provide="datepicker">
             <span class="bv bck"></span>
           </div>
           <span class="bsa axy"></span>
           <div class="pz bsb bsd">
-            <button type="button" class="ce pi">Day</button>
-            <button type="button" class="ce pi active">Week</button>
+            <button type="button" class="ce pi active">Day</button>
+            <button type="button" class="ce pi">Week</button>
             <button type="button" class="ce pi">Month</button>
           </div>
         </div>
@@ -188,13 +228,13 @@
 
       <ul class="nav azh age amq afe we" role="tablist">
         <li class="qp" role="presentation">
-          <a href="#traffic" class="qn active" role="tab" data-toggle="tab" aria-controls="traffic">Traffic</a>
+          <a href="#traffic" class="qn" role="tab" data-toggle="tab" aria-controls="traffic">PH</a>
         </li>
         <li class="qp" role="presentation">
-          <a href="#sales" class="qn active" role="tab" data-toggle="tab" aria-controls="sales" aria-expanded="true">Sales</a>
+          <a href="#sales" class="qn" role="tab" data-toggle="tab" aria-controls="sales" aria-expanded="true">Salinity</a>
         </li>
         <li class="qp" role="presentation">
-          <a href="#support" class="qn active" role="tab" data-toggle="tab" aria-controls="support" aria-expanded="true">Support</a>
+          <a href="#support" class="qn active" role="tab" data-toggle="tab" aria-controls="support" aria-expanded="true">Temperature</a>
         </li>
       </ul>
 
@@ -203,27 +243,27 @@
       <div class="qt">
         <div role="tabpanel" class="qu" id="traffic" aria-expanded="false">
           <div class="di awt bvh">
-            <div class="en agn">
+            <!-- <div class="en agn">
               <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <!-- <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[230, 130]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas> -->
+                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[230, 130]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas>
               </div>
               <strong class="axn">Traffic</strong>
               <h4>New vs Returning</h4>
             </div>
             <div class="en agg">
               <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <!-- <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[330,30]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas> -->
+                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[330,30]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas>
               </div>
               <strong class="axn">Revenue</strong>
               <h4>New vs Recurring</h4>
             </div>
             <div class="en agn">
               <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <!-- <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[100,260]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Referrals', 'Direct']" style="display: block; width: 235px; height: 235px;"></canvas> -->
+                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[100,260]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Referrals', 'Direct']" style="display: block; width: 235px; height: 235px;"></canvas>
               </div>
               <strong class="axn">Traffic</strong>
               <h4>Direct vs Referrals</h4>
-            </div>
+            </div> -->
           </div>
         </div>
 
@@ -236,7 +276,7 @@
         <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
           <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
             <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="bar" data-dark="true" data-labels="['August','September','October','November','December','January','February']" data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]" data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]" style="display: block; width: 1000px; height: 273px;"></canvas> -->
-            <canvas id="canvas" width="400" height="400"></canvas>
+            <canvas id="canvas"></canvas>
           </div>
         </div>
       </div>
@@ -247,37 +287,37 @@
 
       <div class="di bsl afx afz ayo awx">
         <div class="dq em bsm agg">
-          <h3 class="bqp axp">
+          <h3 id="max" class="bqp axp">
             12,938
             <small class="bqr bqs">5%</small>
           </h3>
-          <span class="bqq">Page views</span>
+          <span class="bqq">Maximum Temp</span>
         </div>
         <div class="dq em bsm agg">
-          <h3 class="bqp axs">
+          <h3 id="min" class="bqp axs">
             758
             <small class="bqr bqt">1.3%</small>
           </h3>
-          <span class="bqq">Downloads</span>
+          <span class="bqq">Minimum Temp</span>
         </div>
         <div class="dq em bsm agg">
-          <h3 class="bqp axp">
+          <h3 id="average" class="bqp axp">
             1,293
             <small class="bqr bqs">6.75%</small>
           </h3>
-          <span class="bqq">Sign-ups</span>
+          <span class="bqq">Average Temp</span>
         </div>
         <div class="dq em bsm agg">
           <h3 class="bqp axs">
-            758
-            <small class="bqr bqt">1.3%</small>
+            ---
+            <small class="bqr bqt">-.-%</small>
           </h3>
-          <span class="bqq">Downloads</span>
+          <span class="bqq">Delta</span>
         </div>
       </div>
 
       <hr class="agj">
-
+	<!--
       <div class="di">
         <div class="fa agn">
           <div class="by afz">
@@ -464,7 +504,7 @@
               </a>
 
           </div>
-          <a href="#" class="ce pi ahr">View all pages</a>
+          <a href="#" class="ce pi ahr">View all pages</a> -->
         </div>
       </div>
     </div>
