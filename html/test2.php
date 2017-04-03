@@ -148,7 +148,9 @@
 		tempChart.update();
 	}
 	    
-	function changeChartInterval(interval){
+	function changeChartInterval(interval, button){
+		$('button.time-int.active').removeClass('active');
+	        $(button).addClass('active');
 		var data = retrieveTempData(interval);
 		updateChart(data.chartData);
 		setMinMaxAverage(data);
@@ -162,7 +164,7 @@
 	    
         window.onload = function() {
             var ctx = document.getElementById("canvas").getContext("2d");
-	    var data = retrieveTempData('24h');
+	    var data = retrieveTempData('24');
 
             tempChart = new Chart(ctx, populateChart(data));
 
@@ -260,9 +262,9 @@
           </div>
           <span class="bsa axy"></span>
           <div class="pz bsb bsd">
-            <button type="button" onclick="changeChartInterval('24h');" class="ce pi active">Day</button>
-            <button type="button" onclick="changeChartInterval('7d');" class="ce pi">Week</button>
-            <button type="button" onclick="changeChartInterval('30d');" class="ce pi">Month</button>
+            <button type="button" onclick="changeChartInterval('24', this);" class="time-int ce pi active">Day</button>
+            <button type="button" onclick="changeChartInterval('168', this);" class="time-int ce pi">Week</button>
+            <button type="button" onclick="changeChartInterval('720', this);" class="time-int ce pi">Month</button>
           </div>
         </div>
       </div>

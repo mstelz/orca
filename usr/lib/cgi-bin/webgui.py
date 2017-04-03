@@ -54,14 +54,14 @@ def get_data(interval):
 
 # convert rows from database into a javascript table
 def create_table(rows):
-    chart_table=""
+    chart_table="["
 
     for row in rows[:-1]:
-        rowstr="['{0}', {1}],\n".format(str(row[0]),str(row[1]))
+        rowstr="{{\"timestamp\":\"{0}\", \"temp\":{1}}},".format(str(row[0]),str(row[1]))
         chart_table+=rowstr
 
     row=rows[-1]
-    rowstr="['{0}', {1}]\n".format(str(row[0]),str(row[1]))
+    rowstr="{{\"timestamp\":\"{0}\", \"temp\":{1}}}]".format(str(row[0]),str(row[1]))
     chart_table+=rowstr
 
     return chart_table
@@ -115,17 +115,17 @@ def show_stats(option):
         option = str(24)
 
     curs.execute("SELECT timestamp,max(temp) FROM temps WHERE timestamp>datetime('now','-%s hour') AND timestamp<=datetime('now')" % option)
-#    curs.execute("SELECT timestamp,max(temp) FROM temps WHERE timestamp>datetime('2013-09-19 21:30:02','-%s hour') AND timestamp<=datetime('2013-09-19 21:31:02')" % option)
+
     rowmax=curs.fetchone()
     rowstrmax="{0}&nbsp&nbsp&nbsp{1} F".format(str(rowmax[0]),str(rowmax[1]))
 
     curs.execute("SELECT timestamp,min(temp) FROM temps WHERE timestamp>datetime('now','-%s hour') AND timestamp<=datetime('now')" % option)
-#    curs.execute("SELECT timestamp,min(temp) FROM temps WHERE timestamp>datetime('2013-09-19 21:30:02','-%s hour') AND timestamp<=datetime('2013-09-19 21:31:02')" % option)
+
     rowmin=curs.fetchone()
     rowstrmin="{0}&nbsp&nbsp&nbsp{1} F".format(str(rowmin[0]),str(rowmin[1]))
 
     curs.execute("SELECT avg(temp) FROM temps WHERE timestamp>datetime('now','-%s hour') AND timestamp<=datetime('now')" % option)
-#    curs.execute("SELECT avg(temp) FROM temps WHERE timestamp>datetime('2013-09-19 21:30:02','-%s hour') AND timestamp<=datetime('2013-09-19 21:31:02')" % option)
+
     rowavg=curs.fetchone()
 
 
@@ -208,15 +208,11 @@ def validate_input(option_str):
 
 #return the option passed to the script
 def get_option():
-    form=cgi.FieldStorage()
-    if "timeinterval" in form:
-        option = form["timeinterval"].value
-        return validate_input (option)
+    if len(sys.argv) > 1:
+        option = sys.argv[1]
+        return option
     else:
         return None
-
-
-
 
 # main function
 # This is where the program starts 
@@ -233,8 +229,8 @@ def main():
     # get data from the database
     records=get_data(option)
 
-    # print the HTTP header
-    printHTTPheader()
+    #print the HTTP header
+    #printHTTPheader()
 
     if len(records) != 0:
         # convert the data into a table
@@ -244,21 +240,21 @@ def main():
         return
 
     # start printing the page
-    print("<html>")
+    #print("<html>")
     # print the head section including the table
     # used by the javascript for the chart
-    printHTMLHead("Raspberry Pi Temperature Logger", table)
+    #printHTMLHead("Raspberry Pi Temperature Logger", table)
 
     # print the page body
-    print("<body>")
-    print("<h1>Raspberry Pi Temperature Logger</h1>")
-    print("<hr>")
-    print_time_selector(option)
-    show_graph()
-    show_stats(option)
-    print("</body>")
-    print("</html>")
-
+    #print("<body>")
+    #print("<h1>Raspberry Pi Temperature Logger</h1>")
+    #print("<hr>")
+    #print_time_selector(option)
+    #show_graph()
+    #show_stats(option)
+    #print("</body>")
+    #print("</html>")
+    print(table)
     sys.stdout.flush()
 
 if __name__=="__main__":
