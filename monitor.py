@@ -18,7 +18,7 @@ def log_temperature(temp):
     conn=sqlite3.connect(dbname)
     curs=conn.cursor()
 
-    curs.execute("INSERT INTO temps values(datetime('now'), (?))", (temp,))
+    curs.execute("INSERT INTO temps values(datetime('now', 'localtime'), (?))", (temp,))
 
     # commit the changes
     conn.commit()
