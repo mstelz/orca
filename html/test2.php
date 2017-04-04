@@ -38,8 +38,6 @@
 
 	var tempChart;
 	function populateChart(data){
-		setMinMaxAverage(data);
-
 		var config = {
 		    type: 'line',
 		    data: {
@@ -49,6 +47,7 @@
                     	    backgroundColor: 'rgb(37,44,53)',
                     	    borderColor: 'rgb(25, 151, 198)',
                     	    pointBackgroundColor: 'rgb(25, 151, 198)',
+			    pointRadius: 0,
                     	    data: data.chartData,
                     	    cubicInterpolationMode: 'monotone'
 			}]
@@ -133,13 +132,14 @@
 
 		var average = total / count;
 		average = average.toFixed(2);
-
+		var last = chartData[count-1].y;
 		
 		return {
 			"chartData":chartData,
 			"min":min,
 			"max":max,
-			"average":average
+			"average":average,
+			"latest":last
 			};
 	}
 	    
@@ -153,13 +153,14 @@
 	        $(button).addClass('active');
 		var data = retrieveTempData(interval);
 		updateChart(data.chartData);
-		setMinMaxAverage(data);
+		setMinMaxAverageLast(data);
 	}
 
-	function setMinMaxAverage(data){
+	function setMinMaxAverageLast(data){
 	    $('#max').text(data.max);
 	    $('#min').text(data.min);
 	    $('#average').text(data.average);
+	    $('#latest').text(data.latest);
 	}
 	    
         window.onload = function() {
@@ -168,7 +169,7 @@
 
             tempChart = new Chart(ctx, populateChart(data));
 
-	    setMinMaxAverage(data);
+	    setMinMaxAverageLast(data);
 		
  	    var today = new Date();
 	    var dd = today.getDate();
@@ -351,11 +352,11 @@
           <span class="bqq">Average Temp</span>
         </div>
         <div class="dq em bsm agg">
-          <h3 class="bqp axs">
+          <h3 id="latest" class="bqp axs">
             ---
             <small class="bqr bqt">-.-%</small>
           </h3>
-          <span class="bqq">Delta</span>
+          <span class="bqq">Latest Temp<!-- Delta? --></span>
         </div>
       </div>
 
