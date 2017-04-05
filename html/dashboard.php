@@ -40,7 +40,6 @@
             *width: 100%;
         }
     </style>
-
 </head>
 
 <body>
@@ -54,7 +53,7 @@
             <div class="bru">
                 <ul class="nav qq brs aaj">
                     <li class="qp">
-                        <a class="qn" href="../index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Overview">
+                        <a class="qn active" href="../index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Overview">
                             <span class="bv bhn"></span>
                             <small class="brt axz">Overview</small>
                         </a>
@@ -72,7 +71,7 @@
                         </a>
                     </li>
                     <li class="qp">
-                        <a class="qn active" href="video.php" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Video">
+                        <a class="qn" href="video.php" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Video">
                             <span class="bv video"></span>
                             <small class="brt axz">Video</small>
                         </a>
@@ -96,8 +95,9 @@
                         </a>
                     </li>
                     <li class="qp">
-                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="---">
-                            <small class="brt axz">---</small>
+                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Signed in as mdo">
+                            <!--<img src="../img/avatar-mdo.png" alt="" class="wc">-->
+                            <small class="brt axz">@mdo</small>
                         </a>
                     </li>
                 </ul>
@@ -108,7 +108,20 @@
             <div class="brv">
                 <div class="brw">
                     <h6 class="bry">Dashboards</h6>
-                    <h3 class="brx">Live Video</h3>
+                    <h3 class="brx">Overview</h3>
+                </div>
+
+                <div class="brz">
+                    <div class="brg bsb">
+                        <input id="dateRange" type="text" value="today()" class="form-control" data-provide="datepicker">
+                        <span class="bv bck"></span>
+                    </div>
+                    <span class="bsa axy"></span>
+                    <div class="pz bsb bsd">
+                        <button type="button" onclick="changeChartInterval('24', this);" class="time-int ce pi active">Day</button>
+                        <button type="button" onclick="changeChartInterval('168', this);" class="time-int ce pi">Week</button>
+                        <button type="button" onclick="changeChartInterval('720', this);" class="time-int ce pi">Month</button>
+                    </div>
                 </div>
             </div>
 
@@ -116,19 +129,64 @@
 
             <div class="qt">
                 <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
-                    <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                        <img class="rounded img-fluid" src="http://www.mikesfishtank.com:8080/stream/video.mjpeg">
+                    <div class="bvf agn">
+                        <div class="di bsl">
+                            <div class="ep fm afz ang ate">
+                                <div class="bsm bqv">
+                                    <div class="ahm">
+                                        <span class="bqq">Current Temperature</span>
+                                        <h2 class="bqp">
+                                            77.1
+                                            <small class="bqr">°F</small>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ep fm afz ang ate">
+                                <div class="bsm bqy">
+                                    <div class="ahm">
+                                        <span class="bqq">PH</span>
+                                        <h2 class="bqp">
+                                            8.2
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ep fm afz ang ate">
+                                <div class="bsm bqw">
+                                    <div class="ahm">
+                                        <span class="bqq">Salinity</span>
+                                        <h2 class="bqp">
+                                            1.025
+                                            <small class="bqr bqs">SG</small>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ep fm afz ang ate">
+                                <div class="bsm bqx">
+                                    <div class="ahm">
+                                        <span class="bqq">ORP</span>
+                                        <h2 class="bqp">
+                                            0
+                                            <small class="bqr bqt">1.3%</small>
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <hr class="agj">
-
         </div>
     </div>
     </div>
     </div>
 
+
+    <!-- <script src="../js/jquery.min.js"></script> -->
+    <!-- <script src="js/chart.js"></script> -->
     <script src="js/tablesorter.min.js"></script>
     <script src="js/toolkit.js"></script>
     <script src="js/application.js"></script>
