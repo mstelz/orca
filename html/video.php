@@ -143,7 +143,7 @@
             <div class="qt">
                 <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
                     <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                        <img class="stream img-fluid" src="http://www.mikesfishtank.com:8080/stream/video.mjpeg">
+                        <img class="rounded img-fluid" src="http://www.mikesfishtank.com:8080/stream/video.mjpeg">
                     </div>
                 </div>
             </div>
