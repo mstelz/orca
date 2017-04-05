@@ -1,2 +1,9 @@
+.stream {
+  border: 2px solid;
+  border-color: rgb(67, 72, 87);
+  border-radius: 1%;
+}
+
 .video:before {
-  content: "\EB9D"; }
+  content: "\EB9D";
+}
