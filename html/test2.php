@@ -1,4 +1,5 @@
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,285 +10,301 @@
 
     <title>Opex</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
-
-
+    <!-- Google api Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-	<!-- Chart.js packaged with Moment.js -->
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/toolkit-inverse.css">
+    <link rel="stylesheet" href="css/application.css">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/custom.css">
 
-    <link href="css/toolkit-inverse.css" rel="stylesheet">
-
-    <link href="css/application.css" rel="stylesheet">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <!-- Tether -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <!-- Chart.js packaged with Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.min.js"></script>
 
     <style>
-      /* note: this is a hack for ios iframe for bootstrap themes shopify page */
-      /* this chunk of css is not part of the toolkit :) */
-      body {
-        width: 1px;
-        min-width: 100%;
-        *width: 100%;
-      }
+        /* note: this is a hack for ios iframe for bootstrap themes shopify page */
+        /* this chunk of css is not part of the toolkit :) */
+
+        body {
+            width: 1px;
+            min-width: 100%;
+            *width: 100%;
+        }
     </style>
 
     <script>
+        var tempChart;
 
-	var tempChart;
-	function populateChart(data){
-		var config = {
-		    type: 'line',
-		    data: {
-			datasets: [{
-			    label: "Temperature (F)",
-                    	    fill: true,
-                    	    backgroundColor: 'rgb(37,44,53)',
-                    	    borderColor: 'rgb(25, 151, 198)',
-                    	    pointBackgroundColor: 'rgb(25, 151, 198)',
-			    pointRadius: 0,
-                    	    data: data.chartData,
-                    	    cubicInterpolationMode: 'monotone'
-			}]
-		    },
-		    options: {
-			responsive: true,
-			title:{
-			    display:true,
-			    text:'Evo 5 Gallon Temperature'
-			},
-			tooltips: {
-			    mode: 'index',
-			    intersect: false,
-			},
-			hover: {
-			    mode: 'nearest',
-			    intersect: true
-			},
-			scales: {
-			    xAxes: [{
-				type: 'time',
-				time: { 
-					displayFormats: {
-						unit: 'minute'
-					}
-				},
-				display: true,
-				scaleLabel: {
-				    display: true,
-				    labelString: 'Time'
-				}
-			    }],
-			    yAxes: [{
-				display: true,
-				scaleLabel: {
-				    display: true,
-				    labelString: 'Temperature (F)'
-				}
-			    }]
-			}
-		    }
-		};
-		return config;
-	}
-	    
-	function retrieveTempData(interval){
-		var oReq = new XMLHttpRequest();
-		var url = "retrieveTemps.php";
-		var paramName = "?int=";
-		
-		if(interval != undefined){
-			url = url+paramName+interval;
-		}
+        function populateChart(data) {
+            var config = {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: "Temperature (F)",
+                        fill: true,
+                        backgroundColor: 'rgb(37,44,53)',
+                        borderColor: 'rgb(25, 151, 198)',
+                        pointBackgroundColor: 'rgb(25, 151, 198)',
+                        pointRadius: 0,
+                        data: data.chartData,
+                        cubicInterpolationMode: 'monotone'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Evo 5 Gallon Temperature'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                displayFormats: {
+                                    unit: 'minute'
+                                }
+                            },
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Time'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Temperature (F)'
+                            }
+                        }]
+                    }
+                }
+            };
+            return config;
+        }
 
-		var tempData;
-		oReq.onload = function() {
-			tempData = this.responseText;
-		};
-		oReq.open("get", url, false);
-		oReq.send();
+        function retrieveTempData(interval) {
+            var oReq = new XMLHttpRequest();
+            var url = "retrieveTemps.php";
+            var paramName = "?int=";
 
-		var json = JSON.parse(tempData);
-		var chartData = [];
+            if (interval != undefined) {
+                url = url + paramName + interval;
+            }
 
-		// Stats
-		var max;
-		var min;
-		var count = 0; 
-		var total = 0;
-		$.each(json, function(index, value) {
-			if(max === undefined | max < value.temp){
-				max = value.temp;
-			}
+            var tempData;
+            oReq.onload = function() {
+                tempData = this.responseText;
+            };
+            oReq.open("get", url, false);
+            oReq.send();
 
-			if(min === undefined | min > value.temp){
-				min = value.temp;
-			}
-			count++;
-			total += value.temp;
-			chartData.push({x: value.timestamp, y: value.temp});
-		});
+            var json = JSON.parse(tempData);
+            var chartData = [];
 
-		var average = total / count;
-		average = average.toFixed(2);
-		var last = chartData[count-1].y;
-		
-		return {
-			"chartData":chartData,
-			"min":min,
-			"max":max,
-			"average":average,
-			"latest":last
-			};
-	}
-	    
-	function updateChart(data){
-  		tempChart.data.datasets[0].data = data;
-		tempChart.update();
-	}
-	    
-	function changeChartInterval(interval, button){
-		$('button.time-int.active').removeClass('active');
-	        $(button).addClass('active');
-		var data = retrieveTempData(interval);
-		updateChart(data.chartData);
-		setMinMaxAverageLast(data);
-	}
+            // Stats
+            var max;
+            var min;
+            var count = 0;
+            var total = 0;
+            $.each(json, function(index, value) {
+                if (max === undefined | max < value.temp) {
+                    max = value.temp;
+                }
 
-	function setMinMaxAverageLast(data){
-	    $('#max').text(data.max);
-	    $('#min').text(data.min);
-	    $('#average').text(data.average);
-	    $('#latest').text(data.latest);
-	}
-	    
+                if (min === undefined | min > value.temp) {
+                    min = value.temp;
+                }
+                count++;
+                total += value.temp;
+                chartData.push({
+                    x: value.timestamp,
+                    y: value.temp
+                });
+            });
+
+            var average = total / count;
+            average = average.toFixed(2);
+            var last = chartData[count - 1].y;
+
+            return {
+                "chartData": chartData,
+                "min": min,
+                "max": max,
+                "average": average,
+                "latest": last
+            };
+        }
+
+        function updateChart(data) {
+            tempChart.data.datasets[0].data = data;
+            tempChart.update();
+        }
+
+        function changeChartInterval(interval, button) {
+            $('button.time-int.active').removeClass('active');
+            $(button).addClass('active');
+            var data = retrieveTempData(interval);
+            updateChart(data.chartData);
+            setMinMaxAverageLast(data);
+        }
+
+        function setMinMaxAverageLast(data) {
+            $('#max').text(data.max);
+            $('#min').text(data.min);
+            $('#average').text(data.average);
+            $('#latest').text(data.latest);
+        }
+
         window.onload = function() {
             var ctx = document.getElementById("canvas").getContext("2d");
-	    var data = retrieveTempData('24');
+            var data = retrieveTempData('24');
 
             tempChart = new Chart(ctx, populateChart(data));
 
-	    setMinMaxAverageLast(data);
-		
- 	    var today = new Date();
-	    var dd = today.getDate();
-	    var mm = today.getMonth()+1; //January is 0!
-	    var yyyy = today.getFullYear();
-		
-            if(dd<10) {
-		dd='0'+dd
-	    } 
-		
-	    if(mm<10) {
-		mm='0'+mm
-	    } 
-		
-	    today = mm+'/'+dd+'/'+yyyy;
+            setMinMaxAverageLast(data);
 
-	    $('#dateRange').val(today);
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+
+            today = mm + '/' + dd + '/' + yyyy;
+
+            $('#dateRange').val(today);
         };
-      </script>
+    </script>
 
 
-  </head>
+</head>
+
 <body>
 
-  <div class="brp">
+    <div class="brp">
 
-    <nav class="ch">
-      <a class="brq" href="../index.html">
-        <span class="bv bik brr"></span>
-      </a>
-      <div class="bru">
-        <ul class="nav qq brs aaj">
-          <li class="qp">
-            <a class="qn" href="../index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Overview">
-              <span class="bv bhn"></span>
-              <small class="brt axz">Overview</small>
+        <nav class="ch">
+            <a class="brq" href="../index.html">
+                <span class="bv bik brr"></span>
             </a>
-          </li>
-          <li class="qp">
-            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="History">
-              <span class="bv bnv"></span>
-              <small class="brt axz">History</small>
-            </a>
-          </li>
-          <li class="qp">
-            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Web Controls">
-              <span class="bv bgy"></span>
-              <small class="brt axz">Web Controls</small>
-            </a>
-          </li>
-          <li class="qp">
-            <a class="qn active" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Statistics">
-              <span class="bv bau"></span>
-              <small class="brt axz">Statistics</small>
-            </a>
-          </li>
-          <li class="qp">
-            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Documentation">
-              <span class="bv biv"></span>
-              <small class="brt axz">Documentation</small>
-            </a>
-          </li>
-          <li class="qp">
-            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Light Controller">
-              <span class="bv bgb"></span>
-              <small class="brt axz">Light Controller</small>
-            </a>
-          </li>
-          <li class="qp">
-            <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Signed in as mdo">
-              <!--<img src="../img/avatar-mdo.png" alt="" class="wc">-->
-              <small class="brt axz">@mdo</small>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+            <div class="bru">
+                <ul class="nav qq brs aaj">
+                    <li class="qp">
+                        <a class="qn" href="../index.html" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Overview">
+                            <span class="bv bhn"></span>
+                            <small class="brt axz">Overview</small>
+                        </a>
+                    </li>
+                    <li class="qp">
+                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="History">
+                            <span class="bv bnv"></span>
+                            <small class="brt axz">History</small>
+                        </a>
+                    </li>
+                    <li class="qp">
+                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Web Controls">
+                            <span class="bv bgy"></span>
+                            <small class="brt axz">Web Controls</small>
+                        </a>
+                    </li>
+                    <li class="qp">
+                        <a class="qn" href="video.php" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Video">
+                            <span class="bv video"></span>
+                            <small class="brt axz">Video</small>
+                        </a>
+                    </li>
+                    <li class="qp">
+                        <a class="qn active" href="test2.php" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Statistics">
+                            <span class="bv bau"></span>
+                            <small class="brt axz">Statistics</small>
+                        </a>
+                    </li>
+                    <li class="qp">
+                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Documentation">
+                            <span class="bv biv"></span>
+                            <small class="brt axz">Documentation</small>
+                        </a>
+                    </li>
+                    <li class="qp">
+                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Light Controller">
+                            <span class="bv bgb"></span>
+                            <small class="brt axz">Light Controller</small>
+                        </a>
+                    </li>
+                    <li class="qp">
+                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Signed in as mdo">
+                            <!--<img src="../img/avatar-mdo.png" alt="" class="wc">-->
+                            <small class="brt axz">@mdo</small>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-    <div class="bw">
-      <div class="brv">
-        <div class="brw">
-          <h6 class="bry">Dashboards</h6>
-          <h3 class="brx">Overview</h3>
-        </div>
+        <div class="bw">
+            <div class="brv">
+                <div class="brw">
+                    <h6 class="bry">Dashboards</h6>
+                    <h3 class="brx">Statistics</h3>
+                </div>
 
-        <div class="brz">
-          <div class="brg bsb">
-            <!-- <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker"> -->
-	    <input id="dateRange" type="text" value="today()" class="form-control" data-provide="datepicker">
-            <span class="bv bck"></span>
-          </div>
-          <span class="bsa axy"></span>
-          <div class="pz bsb bsd">
-            <button type="button" onclick="changeChartInterval('24', this);" class="time-int ce pi active">Day</button>
-            <button type="button" onclick="changeChartInterval('168', this);" class="time-int ce pi">Week</button>
-            <button type="button" onclick="changeChartInterval('720', this);" class="time-int ce pi">Month</button>
-          </div>
-        </div>
-      </div>
+                <div class="brz">
+                    <div class="brg bsb">
+                        <!-- <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker"> -->
+                        <input id="dateRange" type="text" value="today()" class="form-control" data-provide="datepicker">
+                        <span class="bv bck"></span>
+                    </div>
+                    <span class="bsa axy"></span>
+                    <div class="pz bsb bsd">
+                        <button type="button" onclick="changeChartInterval('24', this);" class="time-int ce pi active">Day</button>
+                        <button type="button" onclick="changeChartInterval('168', this);" class="time-int ce pi">Week</button>
+                        <button type="button" onclick="changeChartInterval('720', this);" class="time-int ce pi">Month</button>
+                    </div>
+                </div>
+            </div>
 
-      <ul class="nav azh age amq afe we" role="tablist">
-        <li class="qp" role="presentation">
-          <a href="#traffic" class="qn" role="tab" data-toggle="tab" aria-controls="traffic">PH</a>
-        </li>
-        <li class="qp" role="presentation">
-          <a href="#sales" class="qn" role="tab" data-toggle="tab" aria-controls="sales" aria-expanded="true">Salinity</a>
-        </li>
-        <li class="qp" role="presentation">
-          <a href="#support" class="qn active" role="tab" data-toggle="tab" aria-controls="support" aria-expanded="true">Temperature</a>
-        </li>
-      </ul>
+            <ul class="nav azh age amq afe we" role="tablist">
+                <li class="qp" role="presentation">
+                    <a href="#traffic" class="qn" role="tab" data-toggle="tab" aria-controls="traffic">PH</a>
+                </li>
+                <li class="qp" role="presentation">
+                    <a href="#sales" class="qn" role="tab" data-toggle="tab" aria-controls="sales" aria-expanded="true">Salinity</a>
+                </li>
+                <li class="qp" role="presentation">
+                    <a href="#support" class="qn active" role="tab" data-toggle="tab" aria-controls="support" aria-expanded="true">Temperature</a>
+                </li>
+            </ul>
 
-      <hr class="afc agn">
+            <hr class="afc agn">
 
-      <div class="qt">
-        <div role="tabpanel" class="qu" id="traffic" aria-expanded="false">
-          <div class="di awt bvh">
-            <!-- <div class="en agn">
+            <div class="qt">
+                <div role="tabpanel" class="qu" id="traffic" aria-expanded="false">
+                    <div class="di awt bvh">
+                        <!-- <div class="en agn">
               <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
                 <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[230, 130]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas>
               </div>
@@ -308,60 +325,60 @@
               <strong class="axn">Traffic</strong>
               <h4>Direct vs Referrals</h4>
             </div> -->
-          </div>
-        </div>
+                    </div>
+                </div>
 
-        <div role="tabpanel" class="qu" id="sales" aria-expanded="false">
-          <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-            <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="line" data-dataset="[[2500, 3300, 2512, 2775, 2498, 3512, 2925, 4275, 3507, 3825, 3445, 3985]]" data-labels="['','Aug 29','','','Sept 5','','','Sept 12','','','Sept 19','']" data-dark="true" style="display: block; width: 1000px; height: 273px;"></canvas> -->
-          </div>
-        </div>
+                <div role="tabpanel" class="qu" id="sales" aria-expanded="false">
+                    <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                        <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="line" data-dataset="[[2500, 3300, 2512, 2775, 2498, 3512, 2925, 4275, 3507, 3825, 3445, 3985]]" data-labels="['','Aug 29','','','Sept 5','','','Sept 12','','','Sept 19','']" data-dark="true" style="display: block; width: 1000px; height: 273px;"></canvas> -->
+                    </div>
+                </div>
 
-        <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
-          <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-            <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="bar" data-dark="true" data-labels="['August','September','October','November','December','January','February']" data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]" data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]" style="display: block; width: 1000px; height: 273px;"></canvas> -->
-            <canvas id="canvas"></canvas>
-          </div>
-        </div>
-      </div>
+                <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
+                    <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                        <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="bar" data-dark="true" data-labels="['August','September','October','November','December','January','February']" data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]" data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]" style="display: block; width: 1000px; height: 273px;"></canvas> -->
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+            </div>
 
-      <div class="brc agj">
-        <h3 class="brd bre">Quick stats</h3>
-      </div>
+            <div class="brc agj">
+                <h3 class="brd bre">Quick stats</h3>
+            </div>
 
-      <div class="di bsl afx afz ayo awx">
-        <div class="dq em bsm agg">
-          <h3 id="max" class="bqp axp">
-            12,938
-            <small class="bqr bqs">5%</small>
-          </h3>
-          <span class="bqq">Maximum Temp</span>
-        </div>
-        <div class="dq em bsm agg">
-          <h3 id="min" class="bqp axs">
-            758
-            <small class="bqr bqt">1.3%</small>
-          </h3>
-          <span class="bqq">Minimum Temp</span>
-        </div>
-        <div class="dq em bsm agg">
-          <h3 id="average" class="bqp axp">
-            1,293
-            <small class="bqr bqs">6.75%</small>
-          </h3>
-          <span class="bqq">Average Temp</span>
-        </div>
-        <div class="dq em bsm agg">
-          <h3 id="latest" class="bqp axs">
-            ---
-            <small class="bqr bqt">-.-%</small>
-          </h3>
-          <span class="bqq">Latest Temp<!-- Delta? --></span>
-        </div>
-      </div>
+            <div class="di bsl afx afz ayo awx">
+                <div class="dq em bsm agg">
+                    <h3 id="max" class="bqp axp">
+                        12,938
+                        <small class="bqr bqs">5%</small>
+                    </h3>
+                    <span class="bqq">Maximum Temp</span>
+                </div>
+                <div class="dq em bsm agg">
+                    <h3 id="min" class="bqp axs">
+                        758
+                        <small class="bqr bqt">1.3%</small>
+                    </h3>
+                    <span class="bqq">Minimum Temp</span>
+                </div>
+                <div class="dq em bsm agg">
+                    <h3 id="average" class="bqp axp">
+                        1,293
+                        <small class="bqr bqs">6.75%</small>
+                    </h3>
+                    <span class="bqq">Average Temp</span>
+                </div>
+                <div class="dq em bsm agg">
+                    <h3 id="latest" class="bqp axs">
+                        ---
+                        <small class="bqr bqt">-.-%</small>
+                    </h3>
+                    <span class="bqq">Latest Temp<!-- Delta? --></span>
+                </div>
+            </div>
 
-      <hr class="agj">
-	<!--
+            <hr class="agj">
+            <!--
       <div class="di">
         <div class="fa agn">
           <div class="by afz">
@@ -550,9 +567,9 @@
           </div>
           <a href="#" class="ce pi ahr">View all pages</a> -->
         </div>
-      </div>
     </div>
-  </div>
+    </div>
+    </div>
 
 
     <!-- <script src="../js/jquery.min.js"></script> -->
@@ -561,10 +578,16 @@
     <script src="js/toolkit.js"></script>
     <script src="js/application.js"></script>
     <script>
-      // execute/clear BS loaders for docs
-      $(function(){while(window.BS&&window.BS.loader&&window.BS.loader.length){(window.BS.loader.pop())()}})
+        // execute/clear BS loaders for docs
+        $(function() {
+            while (window.BS && window.BS.loader && window.BS.loader.length) {
+                (window.BS.loader.pop())()
+            }
+        })
     </script>
 
 
 
-</body></html>
+</body>
+
+</html>
