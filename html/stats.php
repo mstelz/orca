@@ -125,14 +125,14 @@
             var count = 0;
             var total = 0;
             $.each(json, function(index, value) {
-              value.temp = value.temp.toFixed(2);
-                if (max == undefined | max < value.temp) {
-                    max = value.temp;
+                if (max === undefined | max < value.temp) {
+                    max = value.temp.toFixed(2);
                 }
 
-                if (min == undefined | min > value.temp) {
-                    min = value.temp;
+                if (min === undefined | min > value.temp) {
+                    min = value.temp.toFixed(2);
                 }
+
                 count++;
                 total += value.temp;
                 chartData.push({
@@ -141,9 +141,6 @@
                 });
             });
 
-            console.log(total);
-            console.log(count);
-            console.log(average);
             var average = total / count;
             average = average.toFixed(2);
             var last = chartData[count - 1].y;
