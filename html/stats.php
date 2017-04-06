@@ -136,7 +136,7 @@
                 total += value.temp;
                 chartData.push({
                     x: value.timestamp,
-                    y: value.temp.toFixed(2);
+                    y: value.temp.toFixed(2)
                 });
             });
 
