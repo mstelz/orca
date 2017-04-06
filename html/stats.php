@@ -159,6 +159,44 @@
         }
 
         function changeChartInterval(interval, button) {
+          //Change this to moment or bootstrap datepicker and use component
+          var d = new Date($('#dateRange').val());
+          if(interval == 168){
+            var index = d.getDay();
+            d.setDate(d.getDate() - index);
+            var endDate = new Date(d);
+            endDate.setDate(d.getDate() + 6);
+            var start_day = d.getDate();
+            var start_month = d.getMonth() + 1; //Months are zero based
+            var start_year = d.getFullYear();
+            var end_day = endDate.getDate();
+            var end_month = endDate.getMonth() + 1; //Months are zero based
+            var end_year = endDate.getFullYear();
+
+            $('#dateRange').val(start_month + "/" + start_day + "/" + start_year + " - " + end_month + "/" + end_day + "/" + end_year);
+          } else if(interval == 720){
+              if(d == "Invalid Date"){
+                var val = $('#dateRange').val();
+                val = val.split(" - ");
+                d = new Date(val[1]);
+              }
+              var firstDay = new Date(d.getFullYear(), d.getMonth(), 1);
+              var lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+
+              var start_day = firstDay.getDate();
+              var start_month = firstDay.getMonth() + 1; //Months are zero based
+              var start_year = firstDay.getFullYear();
+              var end_day = lastDay.getDate();
+              var end_month = lastDay.getMonth() + 1; //Months are zero based
+              var end_year = lastDay.getFullYear();
+
+              $('#dateRange').val(start_month + "/" + start_day + "/" + start_year + " - " + end_month + "/" + end_day + "/" + end_year);
+          } else {
+            $('#dateRange').val($.fn.datepicker.DPGlobal.formatDate(new Date(), "mm/dd/yyyy"));
+          }
+          //console.log(jQuery.fn); //displaying prototyped jquery
+
+            // Update button and chart
             $('button.time-int.active').removeClass('active');
             $(button).addClass('active');
             var data = retrieveTempData(interval);
@@ -174,22 +212,23 @@
         }
 
         window.onload = function() {
-          var today = new Date();
-          var dd = today.getDate();
-          var mm = today.getMonth() + 1; //January is 0!
-          var yyyy = today.getFullYear();
-
-          if (dd < 10) {
-              dd = '0' + dd
-          }
-
-          if (mm < 10) {
-              mm = '0' + mm
-          }
-
-          today = mm + '/' + dd + '/' + yyyy;
-
-          $('#dateRange').val(today);
+          // var today = new Date();
+          // var dd = today.getDate();
+          // var mm = today.getMonth() + 1; //January is 0!
+          // var yyyy = today.getFullYear();
+          //
+          // if (dd < 10) {
+          //     dd = '0' + dd
+          // }
+          //
+          // if (mm < 10) {
+          //     mm = '0' + mm
+          // }
+          //
+          // today = mm + '/' + dd + '/' + yyyy;
+          //
+          // $('#dateRange').val(today);
+          $('#dateRange').val($.fn.datepicker.DPGlobal.formatDate(new Date(), "mm/dd/yyyy"));
 
           var ctx = document.getElementById("canvas").getContext("2d");
           var data = retrieveTempData('24');
@@ -316,7 +355,7 @@
                 <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[330,30]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas>
               </div>
               <strong class="axn">Revenue</strong>
-              <h4>New vs Recurring</h4>
+              <h4>New vs Restarting</h4>
             </div>
             <div class="en agn">
               <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
