@@ -125,6 +125,7 @@
             var count = 0;
             var total = 0;
             $.each(json, function(index, value) {
+              value.temp = value.temp.toFixed(2);
                 if (max === undefined | max < value.temp) {
                     max = value.temp;
                 }
@@ -143,9 +144,6 @@
             var average = total / count;
             var last = chartData[count - 1].y;
             average = average.toFixed(2);
-            last = last.toFixed(2);
-            max = max.toFixed(2);
-            min = min.toFixed(2);
 
             return {
                 "chartData": chartData,
