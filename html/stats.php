@@ -136,13 +136,16 @@
                 total += value.temp;
                 chartData.push({
                     x: value.timestamp,
-                    y: value.temp.toFixed(2)
+                    y: value.temp
                 });
             });
 
             var average = total / count;
-            average = average.toFixed(2);
             var last = chartData[count - 1].y;
+            average = average.toFixed(2);
+            last = last.toFixed(2);
+            max = max.toFixed(2);
+            min = min.toFixed(2);
 
             return {
                 "chartData": chartData,
