@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     <li class="qp">
-                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Web Controls">
+                        <a class="qn" href="webcontrol.php" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Web Controls">
                             <span class="bv bgy"></span>
                             <small class="brt axz">Web Controls</small>
                         </a>
