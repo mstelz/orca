@@ -18,6 +18,8 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/toolkit-inverse.css">
     <link rel="stylesheet" href="css/application.css">
+    <!-- Glyphicons -->
+    <link rel="stylesheet" href="css/glyphicons.scss">
     <!-- My CSS -->
     <link rel="stylesheet" href="css/custom.css">
 
@@ -418,9 +420,6 @@
     </div>
     </div>
 
-
-    <!-- <script src="../js/jquery.min.js"></script> -->
-    <!-- <script src="js/chart.js"></script> -->
     <script src="js/tablesorter.min.js"></script>
     <script src="js/toolkit.js"></script>
     <script src="js/application.js"></script>
