@@ -42,201 +42,17 @@
     </style>
 
     <script>
-        var tempChart;
-
-        function populateChart(data) {
-            var config = {
-                type: 'line',
-                data: {
-                    datasets: [{
-                        label: "Temperature (F)",
-                        fill: true,
-                        backgroundColor: 'rgb(37,44,53)',
-                        borderColor: 'rgb(25, 151, 198)',
-                        pointBackgroundColor: 'rgb(25, 151, 198)',
-                        pointRadius: 0,
-                        data: data.chartData,
-                        cubicInterpolationMode: 'monotone'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        text: 'Evo 5 Gallon Temperature'
-                    },
-                    tooltips: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    hover: {
-                        mode: 'nearest',
-                        intersect: true
-                    },
-                    scales: {
-                        xAxes: [{
-                            type: 'time',
-                            time: {
-                                displayFormats: {
-                                    unit: 'minute'
-                                }
-                            },
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Time'
-                            }
-                        }],
-                        yAxes: [{
-                            display: true,
-                            scaleLabel: {
-                                display: true,
-                                labelString: 'Temperature (F)'
-                            }
-                        }]
-                    }
-                }
-            };
-            return config;
-        }
-
-        function retrieveTempData(interval) {
-            var oReq = new XMLHttpRequest();
-            var url = "retrieveTemps.php";
-            var paramName = "?int=";
-
-            if (interval != undefined) {
-                url = url + paramName + interval;
-            }
-
-            var tempData;
-            oReq.onload = function() {
-                tempData = this.responseText;
-            };
-            oReq.open("get", url, false);
-            oReq.send();
-
-            var json = JSON.parse(tempData);
-            var chartData = [];
-
-            // Stats
-            var max;
-            var min;
-            var count = 0;
-            var total = 0;
-            $.each(json, function(index, value) {
-                if (max === undefined | max < value.temp) {
-                    max = value.temp.toFixed(2);
-                }
-
-                if (min === undefined | min > value.temp) {
-                    min = value.temp.toFixed(2);
-                }
-
-                count++;
-                total += value.temp;
-                chartData.push({
-                    x: value.timestamp,
-                    y: value.temp
-                });
+        $(function() {
+            $(".btn-group > .btn:not(.auto)").click(function(){
+                $(this).addClass("active").siblings("button:not(.auto)").removeClass("active");
+                $(this).siblings(".auto").removeClass("active");
             });
-
-            var average = total / count;
-            average = average.toFixed(2);
-            var last = chartData[count - 1].y;
-
-            return {
-                "chartData": chartData,
-                "min": min,
-                "max": max,
-                "average": average,
-                "latest": last
-            };
-        }
-
-        function updateChart(data) {
-            tempChart.data.datasets[0].data = data;
-            tempChart.update();
-        }
-
-        function changeChartInterval(interval, button) {
-          //Change this to moment or bootstrap datepicker and use component
-          var d = new Date($('#dateRange').val());
-          if(interval == 168){
-            var index = d.getDay();
-            d.setDate(d.getDate() - index);
-            var endDate = new Date(d);
-            endDate.setDate(d.getDate() + 6);
-            var start_day = d.getDate();
-            var start_month = d.getMonth() + 1; //Months are zero based
-            var start_year = d.getFullYear();
-            var end_day = endDate.getDate();
-            var end_month = endDate.getMonth() + 1; //Months are zero based
-            var end_year = endDate.getFullYear();
-
-            $('#dateRange').val(start_month + "/" + start_day + "/" + start_year + " - " + end_month + "/" + end_day + "/" + end_year);
-          } else if(interval == 720){
-              if(d == "Invalid Date"){
-                var val = $('#dateRange').val();
-                val = val.split(" - ");
-                d = new Date(val[1]);
-              }
-              var firstDay = new Date(d.getFullYear(), d.getMonth(), 1);
-              var lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0);
-
-              var start_day = firstDay.getDate();
-              var start_month = firstDay.getMonth() + 1; //Months are zero based
-              var start_year = firstDay.getFullYear();
-              var end_day = lastDay.getDate();
-              var end_month = lastDay.getMonth() + 1; //Months are zero based
-              var end_year = lastDay.getFullYear();
-
-              $('#dateRange').val(start_month + "/" + start_day + "/" + start_year + " - " + end_month + "/" + end_day + "/" + end_year);
-          } else {
-            $('#dateRange').val($.fn.datepicker.DPGlobal.formatDate(new Date(), "mm/dd/yyyy"));
-          }
-          //console.log(jQuery.fn); //displaying prototyped jquery
-
-            // Update button and chart
-            $('button.time-int.active').removeClass('active');
-            $(button).addClass('active');
-            var data = retrieveTempData(interval);
-            updateChart(data.chartData);
-            setMinMaxAverageLast(data);
-        }
-
-        function setMinMaxAverageLast(data) {
-            $('#max').text(data.max);
-            $('#min').text(data.min);
-            $('#average').text(data.average);
-            $('#latest').text(data.latest);
-        }
-
+            $(".btn-group > .btn.auto").click(function(){
+                $(this).toggleClass("active");
+            });
+        })
         window.onload = function() {
-          // var today = new Date();
-          // var dd = today.getDate();
-          // var mm = today.getMonth() + 1; //January is 0!
-          // var yyyy = today.getFullYear();
-          //
-          // if (dd < 10) {
-          //     dd = '0' + dd
-          // }
-          //
-          // if (mm < 10) {
-          //     mm = '0' + mm
-          // }
-          //
-          // today = mm + '/' + dd + '/' + yyyy;
-          //
-          // $('#dateRange').val(today);
-          $('#dateRange').val($.fn.datepicker.DPGlobal.formatDate(new Date(), "mm/dd/yyyy"));
 
-          var ctx = document.getElementById("canvas").getContext("2d");
-          var data = retrieveTempData('24');
-
-          tempChart = new Chart(ctx, populateChart(data));
-
-          setMinMaxAverageLast(data);
         };
     </script>
 
@@ -309,7 +125,7 @@
             <div class="brv">
                 <div class="brw">
                     <h6 class="bry">Dashboards</h6>
-                    <h3 class="brx">Statistics</h3>
+                    <h3 class="brx">Module Controller</h3>
                 </div>
 
                 <div class="brz">
@@ -344,40 +160,31 @@
             <div class="qt">
                 <div role="tabpanel" class="qu" id="traffic" aria-expanded="false">
                     <div class="di awt bvh">
-                        <!-- <div class="en agn">
-              <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[230, 130]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas>
-              </div>
-              <strong class="axn">Traffic</strong>
-              <h4>New vs Returning</h4>
-            </div>
-            <div class="en agg">
-              <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[330,30]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas>
-              </div>
-              <strong class="axn">Revenue</strong>
-              <h4>New vs Restarting</h4>
-            </div>
-            <div class="en agn">
-              <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[100,260]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Referrals', 'Direct']" style="display: block; width: 235px; height: 235px;"></canvas>
-              </div>
-              <strong class="axn">Traffic</strong>
-              <h4>Direct vs Referrals</h4>
-            </div> -->
                     </div>
                 </div>
 
                 <div role="tabpanel" class="qu" id="sales" aria-expanded="false">
                     <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                        <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="line" data-dataset="[[2500, 3300, 2512, 2775, 2498, 3512, 2925, 4275, 3507, 3825, 3445, 3985]]" data-labels="['','Aug 29','','','Sept 5','','','Sept 12','','','Sept 19','']" data-dark="true" style="display: block; width: 1000px; height: 273px;"></canvas> -->
                     </div>
                 </div>
 
                 <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
                     <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
-                        <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="bar" data-dark="true" data-labels="['August','September','October','November','December','January','February']" data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]" data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]" style="display: block; width: 1000px; height: 273px;"></canvas> -->
-                        <canvas id="canvas"></canvas>
+                         <strong>Outlet #1: </strong>
+                         <div class="btn-group"> 
+                           <button type="button" class="btn btn-default active">
+                              <span class="glyphicon glyphicon-stop"></span>
+                              On
+                           </button>
+                           <button type="button" class="btn btn-default auto">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Auto
+                           </button>
+                           <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-stop"></span>
+                            Off
+                          </button>
+                        </div>
                     </div>
                 </div>
             </div>
