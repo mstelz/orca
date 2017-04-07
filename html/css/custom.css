@@ -18,6 +18,10 @@
   outline: none !important;
   box-shadow:none !important;
 }
+.btn-secondary.focus,.btn-secondary:active.focus,.btn-secondary.active.focus {
+  outline: none !important;
+  box-shadow:none !important;
+}
 
 button span {
   color: #E64759
