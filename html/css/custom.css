@@ -18,9 +18,8 @@
   outline: none !important;
   box-shadow:none !important;
 }
-.btn-secondary.focus,.btn-secondary:active.focus,.btn-secondary.active.focus {
+.btn:focus {
   outline: none !important;
-  box-shadow:none !important;
 }
 
 button span {
