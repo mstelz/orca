@@ -7,3 +7,29 @@
 .video:before {
   content: "\EB9D";
 }
+
+/* CODE FOR TOGGLE BUTTONS */
+.btn-default {
+    color: #333;
+    //background-color: rgb(217, 221, 226);
+    border-color: #ccc;
+}
+
+button span {
+  /* color: #ccc; */
+  color: red
+}
+
+button.auto span {
+  color: #ccc;
+  /* color: red */
+}
+
+button.active span {
+  color: rgb(36, 216, 51);
+}
+
+button.active.auto span {
+  color: black;
+}
+/* END CODE FOR TOGGLE */
