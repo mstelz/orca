@@ -9,24 +9,26 @@
 }
 
 /* CODE FOR TOGGLE BUTTONS */
-.btn-default {
+.btn-secondary {
     color: #333;
-    //background-color: rgb(217, 221, 226);
     border-color: #ccc;
 }
 
+.btn-secondary:focus,.btn-secondary:active:focus,.btn-secondary.active:focus {
+  outline: none !important;
+  box-shadow:none !important;
+}
+
 button span {
-  /* color: #ccc; */
-  color: red
+  color: #E64759
 }
 
 button.auto span {
   color: #ccc;
-  /* color: red */
 }
 
 button.active span {
-  color: rgb(36, 216, 51);
+  color: #1BC98E;
 }
 
 button.active.auto span {

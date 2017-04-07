@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="css/toolkit-inverse.css">
     <link rel="stylesheet" href="css/application.css">
     <!-- Glyphicons -->
-    <link rel="stylesheet" href="css/glyphicons.scss">
+    <link rel="stylesheet" href="css/glyphicons.css">
     <!-- My CSS -->
     <link rel="stylesheet" href="css/custom.css">
 
@@ -84,7 +84,7 @@
                         </a>
                     </li>
                     <li class="qp">
-                        <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Web Controls">
+                        <a class="qn active" href="webcontrol.php" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Web Controls">
                             <span class="bv bgy"></span>
                             <small class="brt axz">Web Controls</small>
                         </a>
@@ -96,7 +96,7 @@
                         </a>
                     </li>
                     <li class="qp">
-                        <a class="qn active" href="stats.php" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Statistics">
+                        <a class="qn" href="stats.php" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Statistics">
                             <span class="bv bau"></span>
                             <small class="brt axz">Statistics</small>
                         </a>
@@ -171,22 +171,75 @@
                 </div>
 
                 <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
-                    <div class="bvf agn"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+                    <div class="bvf agn">
+                      <div>
                          <strong>Outlet #1: </strong>
-                         <div class="btn-group"> 
-                           <button type="button" class="btn btn-default active">
+                         <div class="btn-group">
+                           <button type="button" class="btn btn-secondary active">
                               <span class="glyphicon glyphicon-stop"></span>
                               On
                            </button>
-                           <button type="button" class="btn btn-default auto">
+                           <button type="button" class="btn btn-secondary auto">
                                 <span class="glyphicon glyphicon-ok"></span>
                                 Auto
                            </button>
-                           <button type="button" class="btn btn-default">
+                           <button type="button" class="btn btn-secondary">
                             <span class="glyphicon glyphicon-stop"></span>
                             Off
                           </button>
                         </div>
+                      </div>
+                      <div>
+                         <strong>Outlet #2: </strong>
+                         <div class="btn-group">
+                           <button type="button" class="btn btn-secondary active">
+                              <span class="glyphicon glyphicon-stop"></span>
+                              On
+                           </button>
+                           <button type="button" class="btn btn-secondary auto">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Auto
+                           </button>
+                           <button type="button" class="btn btn-secondary">
+                            <span class="glyphicon glyphicon-stop"></span>
+                            Off
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                         <strong>Outlet #3: </strong>
+                         <div class="btn-group">
+                           <button type="button" class="btn btn-secondary active">
+                              <span class="glyphicon glyphicon-stop"></span>
+                              On
+                           </button>
+                           <button type="button" class="btn btn-secondary auto active">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Auto
+                           </button>
+                           <button type="button" class="btn btn-secondary">
+                            <span class="glyphicon glyphicon-stop"></span>
+                            Off
+                          </button>
+                        </div>
+                      </div>
+                      <div>
+                         <strong>Outlet #4: </strong>
+                         <div class="btn-group">
+                           <button type="button" class="btn btn-secondary">
+                              <span class="glyphicon glyphicon-stop"></span>
+                              On
+                           </button>
+                           <button type="button" class="btn btn-secondary auto">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                Auto
+                           </button>
+                           <button type="button" class="btn btn-secondary active">
+                            <span class="glyphicon glyphicon-stop"></span>
+                            Off
+                          </button>
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
