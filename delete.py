@@ -10,7 +10,7 @@ dbname='/var/www/templog.db'
 #main
 conn=sqlite3.connect(dbname)
 curs=conn.cursor()
-curs.execute("DELETE FROM temps WHERE temp > 80")
+curs.execute("DELETE FROM temps WHERE temp < 74")
 curs.execute("SELECT * FROM temps")
 conn.commit()
 rows=curs.fetchall()

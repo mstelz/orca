@@ -144,6 +144,7 @@
             var average = total / count;
             average = average.toFixed(2);
             var last = chartData[count - 1].y;
+	    last = last.toFixed(2);
 
             return {
                 "chartData": chartData,
