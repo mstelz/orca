@@ -14,13 +14,22 @@
     border-color: #ccc;
 }
 
-.btn-secondary:focus,.btn-secondary:active:focus,.btn-secondary.active:focus {
-  outline: none !important;
-  box-shadow:none !important;
+.btn-secondary {
+    color: #333;
+    border-color: #ccc;
 }
-.btn:focus {
+
+.btn:focus, .btn-secondary:focus,.btn-secondary:active:focus,.btn-secondary.active:focus {
   outline: none !important;
-  box-shadow:none !important;
+  /* box-shadow:none !important; */
+}
+
+.btn-secondary:active:focus {
+  background-color:#e6e6e6;
+}
+
+.btn:not(.active):focus {
+  background-color:#fff;
 }
 
 button span {
