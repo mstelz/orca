@@ -65,6 +65,9 @@
                         display: true,
                         text: 'Evo 5 Gallon Temperature'
                     },
+		    legend: {
+			display: false
+		    },
                     tooltips: {
                         mode: 'index',
                         intersect: false,
@@ -88,7 +91,7 @@
                             },
 			    ticks: {
 				autoSkip: true,
-				maxRotation: 90,
+				maxRotation: 60,
 				minRotation: 90
 			    }
                         }],
