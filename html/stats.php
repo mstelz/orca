@@ -87,7 +87,7 @@
                                 labelString: 'Time'
                             },
 			    ticks: {
-				autoSkip: false,
+				autoSkip: true,
 				maxRotation: 90,
 				minRotation: 90
 			    }
