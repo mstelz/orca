@@ -172,18 +172,19 @@
                 </div>
 
                 <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
-                  Outlet #1:
-                  <div class="switch-toggle switch-3 switch-candy" style="width: 20%"> <!-- Use bootstrap width instead of % -->
-                      <input id="on" name="state-d" type="radio" checked="">
-                      <label for="on" onclick="">ON</label>
+                  <div class="col-3">
+                    <div class="switch-toggle switch-3 switch-candy"> <!-- Use bootstrap width instead of % -->
+                        <input id="on" name="state-d" type="radio" checked="">
+                        <label for="on" onclick="">ON</label>
 
-                      <input id="na" name="state-d" type="radio" checked="checked">
-                      <label for="na" onclick="">Auto</label>
+                        <input id="na" name="state-d" type="radio" checked="checked">
+                        <label for="na" onclick="">Auto</label>
 
-                      <input id="off" name="state-d" type="radio">
-                      <label for="off" onclick="">OFF</label>
+                        <input id="off" name="state-d" type="radio">
+                        <label for="off" onclick="">OFF</label>
 
-                      <a></a>
+                        <a></a>
+                      </div>
                     </div>
                     <div class="bvf agn">
                       <div>
