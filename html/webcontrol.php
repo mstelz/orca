@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/glyphicons.css">
     <!-- My CSS -->
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/toggle.css">
 
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
@@ -171,6 +172,19 @@
                 </div>
 
                 <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
+                  Outlet #1:
+                  <div class="switch-toggle switch-3 switch-candy" style="width: 20%"> <!-- Use bootstrap width instead of % -->
+                      <input id="on" name="state-d" type="radio" checked="">
+                      <label for="on" onclick="">ON</label>
+
+                      <input id="na" name="state-d" type="radio" checked="checked">
+                      <label for="na" onclick="">Auto</label>
+
+                      <input id="off" name="state-d" type="radio">
+                      <label for="off" onclick="">OFF</label>
+
+                      <a></a>
+                    </div>
                     <div class="bvf agn">
                       <div>
                          <strong>Outlet #1: </strong>
