@@ -7291,6 +7291,13 @@ textarea {
   font-weight: normal;
   font-style: normal; }
 
+@font-face {
+  font-family: "glyphicon-regular";
+  src: url("../fonts/glyphicons-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .bv:before {
   position: relative;
   top: 2px;
@@ -7977,7 +7984,9 @@ textarea {
   content: "\EADA"; }
 
 .bik:before {
-  content: "\EADB"; }
+  font-family: "glyphicon-regular";
+  content: "\E255"; }
+/*content: "\EADB"; } */
 
 .bil:before {
   content: "\EADC"; }

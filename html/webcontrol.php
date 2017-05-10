@@ -172,7 +172,7 @@
                 </div>
 
                 <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
-                  <div class="col-3">
+                  <div class="col-6">
                     <div class="switch-toggle switch-3 switch-candy"> <!-- Use bootstrap width instead of % -->
                         <input id="on" name="state-d" type="radio" checked="">
                         <label for="on" onclick="">ON</label>
