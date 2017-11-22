@@ -3,7 +3,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'ember-opex',
+    modulePrefix: 'opex',
     environment,
     rootURL: '/',
     locationType: 'auto',

@@ -1,8 +1,8 @@
 {
-  "name": "opex",
+  "name: "opex",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for opex goes here",
+  "description": "Small description for ember-opex goes here",
   "license": "MIT",
   "author": "",
   "directories": {

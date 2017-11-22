@@ -1,0 +1,94 @@
+@import "toolkit-inverse.css";
+@import "glyphicons.css";
+
+@mixin font-face($name) {
+  @font-face {
+    font-family: $name;
+    src:  url("fonts/#{$name}.eot?") format("eot"),
+	  url("fonts/#{$name}.woff2") format("woff2"),
+	  url("fonts/#{$name}.woff") format("woff");
+  }
+}
+
+@include font-face('glyphicons-halflings-regular');
+
+
+/* global body padding */
+body {
+  padding-top:    20px;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top:    50px;
+    padding-bottom: 50px;
+  }
+}
+
+
+/* global spacing overrides */
+h1, h2, h3, h4, h5, h6,
+.a, .b, .c, .d, .e, .f {
+  margin-top: 0;
+}
+hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.g,
+.h {
+  border-bottom: 0;
+}
+
+.stream {
+  border: 2px solid;
+  border-color: rgb(67, 72, 87);
+  border-radius: 1%;
+}
+
+.video:before {
+  content: "\EB9D";
+}
+
+/* CODE FOR TOGGLE BUTTONS */
+.btn-secondary {
+    color: #333;
+    border-color: #ccc;
+}
+
+.btn-secondary {
+    color: #333;
+    border-color: #ccc;
+}
+
+.btn:focus, .btn-secondary:focus,.btn-secondary:active:focus,.btn-secondary.active:focus {
+  outline: none !important;
+  /* box-shadow:none !important; */
+}
+
+.btn-secondary:active:focus {
+  background-color:#e6e6e6;
+}
+
+.btn:not(.active):focus {
+  background-color:#fff;
+}
+
+button span {
+  color: #E64759
+}
+
+button.auto span {
+  color: #ccc;
+}
+
+button.active span {
+  color: #1BC98E;
+}
+
+button.active.auto span {
+  color: black;
+}
+/* END CODE FOR TOGGLE */
