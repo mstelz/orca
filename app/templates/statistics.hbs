@@ -1,0 +1,297 @@
+<div class="brv">
+   <div class="brw">
+      <h6 class="bry">Dashboards</h6>
+      <h3 class="brx">Statistics</h3>
+   </div>
+   <div class="brz">
+      <div class="brg bsb">
+         <!-- <input type="text" value="01/01/15 - 01/08/15" class="form-control" data-provide="datepicker"> -->
+         <input id="dateRange" type="text" value="today()" class="form-control" data-provide="datepicker">
+         <span class="bv bck"></span>
+      </div>
+      <span class="bsa axy"></span>
+      <div class="pz bsb bsd">
+         <button type="button" onclick="changeChartInterval('24', this);" class="time-int ce pi active">Day</button>
+         <button type="button" onclick="changeChartInterval('168', this);" class="time-int ce pi">Week</button>
+         <button type="button" onclick="changeChartInterval('720', this);" class="time-int ce pi">Month</button>
+      </div>
+   </div>
+</div>
+<ul class="nav azh age amq afe we" role="tablist">
+   <li class="qp" role="presentation">
+      <a href="#traffic" class="qn" role="tab" data-toggle="tab" aria-controls="traffic">PH</a>
+   </li>
+   <li class="qp" role="presentation">
+      <a href="#sales" class="qn" role="tab" data-toggle="tab" aria-controls="sales" aria-expanded="true">Salinity</a>
+   </li>
+   <li class="qp" role="presentation">
+      <a href="#support" class="qn active" role="tab" data-toggle="tab" aria-controls="support" aria-expanded="true">Temperature</a>
+   </li>
+</ul>
+<hr class="afc agn">
+<div class="qt">
+   <div role="tabpanel" class="qu" id="traffic" aria-expanded="false">
+      <div class="di awt bvh">
+         <!-- <div class="en agn">
+            <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+              <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[230, 130]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas>
+            </div>
+            <strong class="axn">Traffic</strong>
+            <h4>New vs Returning</h4>
+            </div>
+            <div class="en agg">
+            <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+              <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[330,30]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Returning', 'New']" style="display: block; width: 235px; height: 235px;"></canvas>
+            </div>
+            <strong class="axn">Revenue</strong>
+            <h4>New vs Restarting</h4>
+            </div>
+            <div class="en agn">
+            <div class="azy aim"><iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe>
+              <canvas class="bra js-chart-drawn" width="235" height="235" data-chart="doughnut" data-dataset="[100,260]" data-dataset-options="{ borderColor: '#252830', backgroundColor: ['#1ca8dd', '#1bc98e'] }" data-labels="['Referrals', 'Direct']" style="display: block; width: 235px; height: 235px;"></canvas>
+            </div>
+            <strong class="axn">Traffic</strong>
+            <h4>Direct vs Referrals</h4>
+            </div> -->
+      </div>
+   </div>
+   <div role="tabpanel" class="qu" id="sales" aria-expanded="false">
+      <div class="bvf agn">
+
+         <!-- <iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe> -->
+      </div>
+   </div>
+   <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
+      <div class="bvf agn">
+        {{chart-js}}
+         <!-- <iframe class="chartjs-hidden-iframe" tabindex="-1" style="display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;"></iframe> -->
+         <!-- <canvas class="brb js-chart-drawn" width="1000" height="273" data-chart="bar" data-dark="true" data-labels="['August','September','October','November','December','January','February']" data-dataset="[[65, 59, 80, 81, 56, 55, 40], [28, 48, 40, 19, 86, 27, 90]]" data-dataset-options="[{label: 'First dataset'}, {label: 'Second dataset'}]" style="display: block; width: 1000px; height: 273px;"></canvas> -->
+         <!-- <canvas id="canvas"></canvas> -->
+      </div>
+   </div>
+</div>
+<div class="brc agj">
+   <h3 class="brd bre">Quick stats</h3>
+</div>
+<div class="di bsl afx afz ayo awx">
+   <div class="dq em bsm agg">
+      <h3 id="max" class="bqp axp">
+         12,938
+         <small class="bqr bqs">5%</small>
+      </h3>
+      <span class="bqq">Maximum Temp</span>
+   </div>
+   <div class="dq em bsm agg">
+      <h3 id="min" class="bqp axs">
+         758
+         <small class="bqr bqt">1.3%</small>
+      </h3>
+      <span class="bqq">Minimum Temp</span>
+   </div>
+   <div class="dq em bsm agg">
+      <h3 id="average" class="bqp axp">
+         1,293
+         <small class="bqr bqs">6.75%</small>
+      </h3>
+      <span class="bqq">Average Temp</span>
+   </div>
+   <div class="dq em bsm agg">
+      <h3 id="latest" class="bqp axs">
+         ---
+         <small class="bqr bqt">-.-%</small>
+      </h3>
+      <span class="bqq">
+         Latest Temp<!-- Delta? -->
+      </span>
+   </div>
+</div>
+<hr class="agj">
+<!--
+   <div class="di">
+     <div class="fa agn">
+       <div class="by afz">
+         <h6 class="azi">
+           Countries
+         </h6>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 62.4%;"></span>
+             <span>United States</span>
+             <span class="axn">62.4%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 15.0%;"></span>
+             <span>India</span>
+             <span class="axn">15.0%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 5.0%;"></span>
+             <span>United Kingdom</span>
+             <span class="axn">5.0%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 5.0%;"></span>
+             <span>Canada</span>
+             <span class="axn">5.0%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 4.5%;"></span>
+             <span>Russia</span>
+             <span class="axn">4.5%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 2.3%;"></span>
+             <span>Mexico</span>
+             <span class="axn">2.3%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 1.7%;"></span>
+             <span>Spain</span>
+             <span class="axn">1.7%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 1.5%;"></span>
+             <span>France</span>
+             <span class="axn">1.5%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 1.4%;"></span>
+             <span>South Africa</span>
+             <span class="axn">1.4%</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span class="azj" style="width: 1.2%;"></span>
+             <span>Japan</span>
+             <span class="axn">1.2%</span>
+           </a>
+
+       </div>
+       <a href="#" class="ce pi ahr">All countries</a>
+     </div>
+     <div class="fa agn">
+       <div class="by afz">
+         <h6 class="azi">
+           Most visited pages
+         </h6>
+
+           <a class="rp tr yg" href="#">
+             <span>/ (Logged out)</span>
+             <span class="axn">3,929,481</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/ (Logged in)</span>
+             <span class="axn">1,143,393</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/tour</span>
+             <span class="axn">938,287</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/features/something</span>
+             <span class="axn">749,393</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/features/another-thing</span>
+             <span class="axn">695,912</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/users/username</span>
+             <span class="axn">501,938</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/page-title</span>
+             <span class="axn">392,842</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/some/page-slug</span>
+             <span class="axn">298,183</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/another/directory/and/page-title</span>
+             <span class="axn">193,129</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>/one-more/page/directory/file-name</span>
+             <span class="axn">93,382</span>
+           </a>
+
+       </div>
+       <a href="#" class="ce pi ahr">View all pages</a>
+     </div>
+     <div class="fa agn">
+       <div class="by afz">
+         <h6 class="azi">
+           Devices and resolutions
+         </h6>
+
+           <a class="rp tr yg" href="#">
+             <span>Desktop (1920x1080)</span>
+             <span class="axn">3,929,481</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Desktop (1366x768)</span>
+             <span class="axn">1,143,393</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Desktop (1440x900)</span>
+             <span class="axn">938,287</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Desktop (1280x800)</span>
+             <span class="axn">749,393</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Tablet (1024x768)</span>
+             <span class="axn">695,912</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Tablet (768x1024)</span>
+             <span class="axn">501,938</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Phone (320x480)</span>
+             <span class="axn">392,842</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Phone (720x450)</span>
+             <span class="axn">298,183</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Desktop (2560x1080)</span>
+             <span class="axn">193,129</span>
+           </a>
+
+           <a class="rp tr yg" href="#">
+             <span>Desktop (2560x1600)</span>
+             <span class="axn">93,382</span>
+           </a>
+
+       </div>
+       <a href="#" class="ce pi ahr">View all pages</a> -->
+{{outlet}}
