@@ -1,7 +1,17 @@
 # opex
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This README outlines the creation of my aquarium controller. It includes the website, code, and physical parts information.
+
+## Part List
+* [Raspberry-Pi Model 3B](https://www.amazon.com/gp/product/B01LPLPBS8/)
+* [Arduino Uno R3](https://www.amazon.com/gp/product/B01EWOE0UU/)
+* [DS18B20 Temperature Sensor](https://www.sparkfun.com/products/11050)
+* [Vertical Float Switches](https://www.amazon.com/gp/product/B00FHAEBIA)
+* [Aqueon QuietFlow Pump](https://www.amazon.com/gp/product/B008F40LFC)
+* [Sainsmart 4 Channel Relay](https://www.amazon.com/gp/product/B0057OC5O8)
+* Jumper Wires
+* Breadboards
+* [Resistors](https://www.amazon.com/gp/product/B016NXK6QK)
 
 ## Prerequisites
 
