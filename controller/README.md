@@ -11,3 +11,6 @@ This README is to explain how to put together the physical components of the con
 * Jumper Wires
 * Breadboards
 * [Resistors](https://www.amazon.com/gp/product/B016NXK6QK)
+
+### Temperature Sensor
+![DS18B20 Wiring Schematic](schematic/DS18B20_Schematic.png?raw=true "DS18B20 Wiring Schematic")
