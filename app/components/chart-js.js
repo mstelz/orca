@@ -1,50 +1,111 @@
 import Component from '@ember/component';
 import Chart from 'npm:chart.js';
+import moment from 'npm:moment';
 
 export default Component.extend({
-	// var myChart = new Chart(ctx, {...});
-
+	type: 'line',
+	datasets: [],
+	model: undefined,
+	temps: [],
+	didInsertElement() {
+		let t = this.get('model');
+		let temp = t.map(function(obj) {
+			var rObj = {};
+			rObj.x = new moment(obj._timestamp, 'YYYY-MM-DD hh:mm:ss');
+			rObj.y = obj.temperature;
+			return rObj;
+		});
+		this.set('temps', temp);
+	},
 	didRender() {
-		debugger;
-		console.log('hello');
+		let t = this.get('temps');
+
 		new Chart(document.getElementById("line-chart"), {
 			type: 'line',
 			data: {
-				labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
 				datasets: [{
-					data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-					label: "Africa",
-					borderColor: "#3e95cd",
-					fill: false
-				}, {
-					data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-					label: "Asia",
-					borderColor: "#8e5ea2",
-					fill: false
-				}, {
-					data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-					label: "Europe",
-					borderColor: "#3cba9f",
-					fill: false
-				}, {
-					data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-					label: "Latin America",
-					borderColor: "#e8c3b9",
-					fill: false
-				}, {
-					data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-					label: "North America",
-					borderColor: "#c45850",
-					fill: false
+					label: 'Living Room Reef',
+					data: t,
+					fill: true,
+					backgroundColor: 'rgb(37,44,53)',
+					borderColor: 'rgb(25, 151, 198)',
+					pointBackgroundColor: 'rgb(25, 151, 198)',
+					pointRadius: 0,
+					cubicInterpolationMode: 'monotone'
 				}]
 			},
 			options: {
-				title: {
-					display: true,
-					text: 'World population per region (in millions)'
+				scales: {
+					xAxes: [{
+						position: 'bottom',
+						type: 'time',
+						time: {
+							displayFormats: {
+								unit: 'minute'
+							}
+						},
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Time'
+						},
+						ticks: {
+							autoSkip: true,
+							maxRotation: 60,
+							minRotation: 90
+						}
+					}],
+					yAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Temperature (F)'
+						}
+					}]
 				}
 			}
 		});
+
+		// new Chart(document.getElementById("line-chart"), {
+		// 	type: 'line',
+		// 	data: {
+		// 		labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+		// 		datasets: [{
+		// 				data: [68, 69, 69, 70, 71, 73, 75, 75, 76, 77],
+		// 				label: "Office Planted",
+		// 				borderColor: "#3e95cd",
+		// 				fill: false
+		// 			}, {
+		// 				data: [70, 70, 73, 73, 76, 79, 79, 79, 79, 79],
+		// 				label: "Office Reef",
+		// 				borderColor: "#8e5ea2",
+		// 				fill: false
+		// 			}, {
+		// 				data: [69, 69, 69, 70, 72, 72, 73, 74, 76, 76],
+		// 				label: "Living Room Reef",
+		// 				borderColor: "#3cba9f",
+		// 				fill: false
+		// 			}
+		// 			// , {
+		// 			// 	data: [70, 69, 70, 70, 71, 70, 74, 74, 74, 72],
+		// 			// 	label: "Maggie's Office Freshwater",
+		// 			// 	borderColor: "#e8c3b9",
+		// 			// 	fill: false
+		// 			// }, {
+		// 			// 	data: [66, 73, 71, 71, 70, 73, 76, 77, 77, 73],
+		// 			// 	label: "Basement Freshwater",
+		// 			// 	borderColor: "#c45850",
+		// 			// 	fill: false
+		// 			// }
+		// 		]
+		// 	},
+		// 	options: {
+		// 		title: {
+		// 			display: true,
+		// 			text: ''
+		// 		}
+		// 	}
+		// });
 	},
 
 	// 	config: {

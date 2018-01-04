@@ -3,67 +3,16 @@
       <h6 class="bry">Dashboards</h6>
       <h3 class="brx">Overview</h3>
    </div>
-   <div class="brz">
-      <div class="brg bsb">
-         <input id="dateRange" type="text" value="today()" class="form-control" data-provide="datepicker">
-         <span class="bv bck"></span>
-      </div>
-      <span class="bsa axy"></span>
-      <div class="pz bsb bsd">
-         <button type="button" onclick="changeChartInterval('24', this);" class="time-int ce pi active">Day</button>
-         <button type="button" onclick="changeChartInterval('168', this);" class="time-int ce pi">Week</button>
-         <button type="button" onclick="changeChartInterval('720', this);" class="time-int ce pi">Month</button>
-      </div>
-   </div>
 </div>
 <hr class="afc agn">
 <div class="qt">
    <div role="tabpanel" class="qu active" id="support" aria-expanded="true">
       <div class="bvf agn">
          <div class="di bsl">
-            <div class="ep fm afz ang ate">
-               <div class="bsm bqv">
-                  <div class="ahm">
-                     <span class="bqq">Current Temperature</span>
-                     <h2 class="bqp">
-                        77.1
-                        <small class="bqr">°F</small>
-                     </h2>
-                  </div>
-               </div>
-            </div>
-            <div class="ep fm afz ang ate">
-               <div class="bsm bqy">
-                  <div class="ahm">
-                     <span class="bqq">PH</span>
-                     <h2 class="bqp">
-                        8.2
-                     </h2>
-                  </div>
-               </div>
-            </div>
-            <div class="ep fm afz ang ate">
-               <div class="bsm bqw">
-                  <div class="ahm">
-                     <span class="bqq">Salinity</span>
-                     <h2 class="bqp">
-                        1.025
-                        <small class="bqr bqs">SG</small>
-                     </h2>
-                  </div>
-               </div>
-            </div>
-            <div class="ep fm afz ang ate">
-               <div class="bsm bqx">
-                  <div class="ahm">
-                     <span class="bqq">ORP</span>
-                     <h2 class="bqp">
-                        0
-                        <small class="bqr bqt">1.3%</small>
-                     </h2>
-                  </div>
-               </div>
-            </div>
+           {{tab-panel color="bqv" title="Current Temperature" subtitle="°F" value=model.firstObject.temperature}}
+           {{tab-panel color="bqy" title="PH" subtitle="" value="8.2" decimals=1}}
+           {{tab-panel color="bqw" title="Salinity" subtitle="SG" value="1.025" decimals=3}}
+           {{tab-panel color="bqx" title="ORP" subtitle="1.3%" value="0" decimals=1}}
          </div>
       </div>
    </div>
