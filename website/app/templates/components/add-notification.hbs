@@ -8,8 +8,9 @@
   <div class="form-item">
     <label>Type</label>
     <select class="form-control">
-      <option>1</option>
-      <option>2</option>
+      {{#each model.types as |type|}}
+       <option>{{type.type}}</option>
+     {{/each}}
     </select>
   </div>
   <div class="form-item">
