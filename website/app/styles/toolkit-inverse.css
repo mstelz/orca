@@ -9260,6 +9260,9 @@ canvas {
         .brs > .qp + .qp > .qn {
           border-top: 1px solid #252830;
           border-right: 0; } }
+        .brs > .navLast {
+          border-bottom: 1px solid #252830;
+        }
   .brs > .qp > .qn > img {
     width: 26px;
     margin: 0 auto; }
