@@ -6,21 +6,24 @@ export default Component.extend({
 	type: 'line',
 	datasets: [],
 	model: undefined,
-	temps: [],
-	didInsertElement() {
-		let t = this.get('model');
-		let temp = t.map(function(obj) {
-			var rObj = {};
+	temps: Ember.computed('model', function() {
+		return this.get('model').map(function(obj) {
+			let rObj = {};
 			rObj.x = new moment(obj._timestamp, 'YYYY-MM-DD hh:mm:ss');
 			rObj.y = obj.temperature;
 			return rObj;
 		});
-		this.set('temps', temp);
+	}),
+	chart: undefined,
+	didUpdateAttrs() {
+		let tempChart = this.get('chart');
+		tempChart.data.datasets[0].data = this.get('temps');
+		tempChart.update();
 	},
 	didRender() {
 		let t = this.get('temps');
 
-		new Chart(document.getElementById("line-chart"), {
+		let chart = new Chart(document.getElementById("line-chart"), {
 			type: 'line',
 			data: {
 				datasets: [{
@@ -65,6 +68,8 @@ export default Component.extend({
 				}
 			}
 		});
+
+		this.set('chart', chart);
 
 		// new Chart(document.getElementById("line-chart"), {
 		// 	type: 'line',
