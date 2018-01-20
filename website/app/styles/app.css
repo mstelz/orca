@@ -1,5 +1,6 @@
 @import "toolkit-inverse.css";
 @import "glyphicons.css";
+/* @import "/node_modules/bootstrap/dist/css/boostrap.css"; */
 
 @mixin font-face($name) {
   @font-face {
@@ -12,6 +13,18 @@
 
 @include font-face('glyphicons-halflings-regular');
 
+.form-item {
+  padding: .3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+form label {
+  width: 40%;
+  vertical-align: middle;
+  margin-bottom: 0 !important;
+}
 
 /* global body padding */
 body {

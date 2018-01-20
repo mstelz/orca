@@ -18,4 +18,7 @@ export default Controller.extend({
 			return Number(total) + Number(amount);
 		}) / this.get('model').length;
 	}),
+	// actions: {
+	//
+	// }
 });
