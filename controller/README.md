@@ -30,7 +30,7 @@ This README is to explain how to put together the physical components of the con
  
 --- 
 
-## Power Strip (v2)
+## Wireless Power Strip (v2)
 ### Parts List
  * [Belkin 10-outlet Power Strip](https://www.amazon.com/gp/product/B000BVC0WO/ref=oh_aui_detailpage_o03_s00?ie=UTF8&psc=1)
  
@@ -48,5 +48,5 @@ This README is to explain how to put together the physical components of the con
 ### Parts List
  * [Raspberry Pi Camera V2](https://www.amazon.com/gp/product/B01ER2SKFS/ref=oh_aui_search_detailpage?ie=UTF8&psc=1)
  * [Camera Flex Cable 2 Meters](https://www.amazon.com/Adafruit-Flex-Cable-Raspberry-Camera/dp/B00XW2NCKS/ref=pd_sbs_147_2?_encoding=UTF8&pd_rd_i=B00XW2NCKS&pd_rd_r=T1REECBR3CZ4HXWPQH5S&pd_rd_w=iX93Y&pd_rd_wg=8EfAy&psc=1&refRID=T1REECBR3CZ4HXWPQH5S) (Use a length that works for you)
- * [Raspberry Pi Camera Case](https://www.amazon.com/gp/product/B00UEMHMZ0/ref=oh_aui_search_detailpage?ie=UTF8&psc=1)(Choose your own)
+ * [Raspberry Pi Camera Case](https://www.amazon.com/gp/product/B00UEMHMZ0/ref=oh_aui_search_detailpage?ie=UTF8&psc=1) (Choose your own)
 
