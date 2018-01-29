@@ -1,5 +1,5 @@
 # Controller
-This README is to explain how to put together the physical components of the controller
+This README is to explain how to put together the physical components of the controller. While in development I will be using breadboards and converting them into a soldered pera-board once I feel comfortable with the layout. 
 
 ## Part List
 * [Raspberry-Pi Model 3B](https://www.amazon.com/gp/product/B01LPLPBS8/)
