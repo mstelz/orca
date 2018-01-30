@@ -9,7 +9,8 @@
      <h3 class="brd bre">Current Notifications</h3>
   </div>
   <div class="di bsl afx afz ayo awx">
-    <table class="table table-striped" style="width: 100%; margin-left: 2%; margin-right: 2%;">
+    <!-- Need to style table still -->
+    <table class="table table-striped" style="width: 80%; margin-left: 10%; margin-right: 10%;">
     	<thead>
       	<tr>
         	<th />
@@ -21,9 +22,9 @@
       <tbody>
       	{{#each model.types as |t|}}
         	<tr>
-          	<td style="border: 1px solid black">{{t}}</td>
+          	<td style="border: 0.5px solid black; padding: 1%;">{{t}}</td>
             {{#each-in model.recent as |ts data|}}
-            	<td style="text-align: center; border: 1px solid black">{{get-property data t}}</td>
+            	<td style="text-align: center; border: 0.5px solid black">{{get-property data t}}</td>
             {{/each-in}}
           </tr>
         {{/each}}

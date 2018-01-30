@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
+import moment from 'npm:moment';
 
 export default Route.extend({
 	model() {
@@ -14,14 +15,14 @@ export default Route.extend({
 				let org = {};
 
 				Ember.$.map(data, (d) => {
-					if (!org[d._timestamp]) {
-						org[d._timestamp] = {};
+					let ts = new moment(d._timestamp, 'YYYY-MM-DD hh:mm:ss').format('MM/DD/YY');
+
+					if (!org[ts]) {
+						org[ts] = {};
 					}
 
-					let name = d.name;
-					let val = d.value;
-					org[d._timestamp] = { ...org[d._timestamp],
-						[name]: val
+					org[ts] = { ...org[ts],
+						[d.name]: d.value
 					};
 				});
 
