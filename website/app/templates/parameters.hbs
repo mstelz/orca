@@ -1,0 +1,34 @@
+<div class="bw">
+  <div class="brv">
+      <div class="brw">
+          <h6 class="bry">Dashboards</h6>
+          <h3 class="brx">Parameters</h3>
+      </div>
+  </div>
+  <div class="brc agj">
+     <h3 class="brd bre">Current Notifications</h3>
+  </div>
+  <div class="di bsl afx afz ayo awx">
+    <table class="table table-striped" style="width: 100%; margin-left: 2%; margin-right: 2%;">
+    	<thead>
+      	<tr>
+        	<th />
+          {{#each-in model.recent as |timestamp|}}
+          	<th scope="col" style="text-align:center">{{timestamp}}</th>
+         	{{/each-in}}
+       	</tr>
+      </thead>
+      <tbody>
+      	{{#each model.types as |t|}}
+        	<tr>
+          	<td style="border: 1px solid black">{{t}}</td>
+            {{#each-in model.recent as |ts data|}}
+            	<td style="text-align: center; border: 1px solid black">{{get-property data t}}</td>
+            {{/each-in}}
+          </tr>
+        {{/each}}
+      </tbody>
+     </table>
+  </div>
+</div>
+<hr class="agj" />

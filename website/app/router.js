@@ -11,7 +11,9 @@ Router.map(function() {
   this.route('video');
   this.route('admin', function() {
     this.route('notifications');
+    this.route('parameters');
   });
+  this.route('parameters');
 });
 
 export default Router;

@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import Component from '@ember/component';
 import Chart from 'npm:chart.js';
 import moment from 'npm:moment';
