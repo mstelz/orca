@@ -1,10 +1,8 @@
 # opex
 
-This README outlines the creation of my aquarium controller. It includes the website, code, and physical parts information.
+This README outlines specifics about the website for the aquarium controller. The purpose of the website is to act as a cloud controller / storage device to store data. Eventually the Raspberry-Pi will allow for full functionality without internet suppose once we choose to implement an LCD or local webhost for access.
 
-## [Controller Information](https://github.com/bhcmoney/opex/blob/ember/controller/README.md)
-
-## [Website Information]() 
+This README will walk you through getting the website up and running both locally and on shared hosting. Please visit the [Controller README](https://github.com/bhcmoney/opex/blob/ember/controller/README.md) for a detailed guide on the physical components of the controller.
 
 ### Prerequisites
 
