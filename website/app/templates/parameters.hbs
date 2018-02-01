@@ -26,6 +26,7 @@
             {{#each-in model.recent as |ts data|}}
             	<td style="text-align: center; border: 0.5px solid black">{{get-property data t}}</td>
             {{/each-in}}
+            <td style="width: 10%; text-align: center; border: 0.5px solid black;">{{{param-delta t model.recent}}}</td>
           </tr>
         {{/each}}
       </tbody>
