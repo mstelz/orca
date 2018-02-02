@@ -1,0 +1,79 @@
+<nav class="ch">
+      <a class="brq" href="/">
+      <span class="bv bik brr"></span>
+      </a>
+      <div class="bru">
+         <ul class="nav qq brs aaj">
+           {{#if admin}}
+              <li class="qp">
+                {{#link-to "index" class="qn"}}
+                <span class="bv bhn"></span>
+                <small class="brt axz">Overview</small>
+                {{/link-to}}
+              </li>
+              <li class="qp">
+                {{#link-to "index" class="qn"}}
+                  <span class="bv plug"></span>
+                  <small class="brt axz">Power Control</small>
+                {{/link-to}}
+              </li>
+              <li class="qp">
+                {{#link-to "index" class="qn"}}
+                  <span class="bv alerts"></span>
+                  <small class="brt axz">Alerts</small>
+                {{/link-to}}
+              </li>
+           {{else}}
+              <li class="qp">
+                {{#link-to "index" class="qn"}}
+                <span class="bv bhn"></span>
+                <small class="brt axz">Overview</small>
+                {{/link-to}}
+              </li>
+              <li class="qp">
+                {{#link-to "parameters" class="qn"}}
+                <span class="bv bnv"></span>
+                <small class="brt axz">History</small>
+                {{/link-to}}
+              </li>
+              <li class="qp">
+                {{#link-to "index" class="qn"}}
+                <span class="bv bgy"></span>
+                <small class="brt axz">Web Controls</small>
+                {{/link-to}}
+              </li>
+              <li class="qp">
+                {{#link-to "video" class="qn"}}
+                <span class="bv video"></span>
+                <small class="brt axz">Video</small>
+                {{/link-to}}
+              </li>
+              <li class="qp">
+                {{#link-to "statistics" class="qn"}}
+                <span class="bv bau"></span>
+                <small class="brt axz">Statistics</small>
+                {{/link-to}}
+              </li>
+              <li class="qp">
+                {{#link-to "index" class="qn"}}
+                  <span class="bv plug"></span>
+                  <small class="brt axz">Power Control</small>
+                {{/link-to}}
+              </li>
+              <li class="qp">
+                <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Documentation">
+                <span class="bv biv"></span>
+                <small class="brt axz">Documentation</small>
+                </a>
+              </li>
+              <li class="qp navLast">
+                <a class="qn" href="#" title="" data-toggle="tooltip" data-placement="right" data-container="body" data-original-title="Light Controller">
+                <span class="bv bgb"></span>
+                <small class="brt axz">Light Controller</small>
+                </a>
+              </li>
+           {{/if}}
+            
+         </ul>
+      </div>
+   </nav>

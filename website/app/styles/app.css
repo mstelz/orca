@@ -65,6 +65,14 @@ hr {
   content: "\EB9D";
 }
 
+.plug:before {
+  content: "\EB1E";
+}
+
+.alerts:before {
+  content: "\EB94";
+}
+
 /* CODE FOR TOGGLE BUTTONS */
 .btn-secondary {
     color: #333;
