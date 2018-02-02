@@ -14,18 +14,8 @@ $op = $_GET['op'];
 $sql = '';
 
 try{
-  if($op == 'types'){
-    $sql = "SELECT id, name FROM parameter ORDER BY name DESC";
-  } elseif ($op == 'recent'){
-    // Need to set a limit of 2 days worth. May need to do another query to inner select
-    $sql = "SELECT parameter.name, parameter.unit, pv.value, pv._timestamp
-              FROM parameter
-            INNER JOIN parameter_value AS pv
-              ON parameter.id = pv.parameter_id
-            JOIN 
-              (SELECT DISTINCT _timestamp FROM parameter_value AS b ORDER BY _timestamp DESC LIMIT 2) 
-              AS c ON pv._timestamp IN(c._timestamp)";
-
+  if($op == 'current'){
+    $sql = "SELECT common_name, latin_name, acquisition_date, count, alive, dead, missing, cost_per_unit, type FROM stock_list WHERE tank_id = 1 ORDER BY type";
   } else {
     throw new \Exception("Error Processing Request", 1);
   }
@@ -38,8 +28,6 @@ try{
         $rows[] = $r;
     }
 
-    
-
     $conn->close();
     print json_encode($rows);
   }
@@ -47,5 +35,5 @@ try{
 catch(Exception $e){
   $conn->close();
   print $e;
-}
+}   
 ?>
