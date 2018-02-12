@@ -13,7 +13,7 @@ $op = $_GET['op'];
 
 $sql = '';
 
-try{
+try {
   if($op == 'current'){
     $sql = "SELECT common_name, latin_name, acquisition_date, count, alive, dead, missing, cost_per_unit, type FROM stock_list WHERE tank_id = 1 ORDER BY type";
   } else {
