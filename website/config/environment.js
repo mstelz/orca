@@ -3,6 +3,17 @@
 
 module.exports = function(environment) {
 	let ENV = {
+		firebase: {
+			apiKey: "AIzaSyBmEBDOXXe3zFPoAvKhK_zDxxNSbZHKzO4",
+			authDomain: "opex-2480b.firebaseapp.com",
+			databaseURL: "https://opex-2480b.firebaseio.com",
+			projectId: "opex-2480b",
+			storageBucket: "opex-2480b.appspot.com",
+			messagingSenderId: "599836582610"
+		},
+		torii: {  
+			sessionServiceName: 'session'
+		},
 		modulePrefix: 'opex',
 		environment,
 		rootURL: '/',

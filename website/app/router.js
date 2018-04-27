@@ -16,6 +16,7 @@ Router.map(function() {
   });
   this.route('parameters');
   this.route('stock');
+  this.route('login');
 });
 
 export default Router;
