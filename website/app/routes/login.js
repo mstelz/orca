@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import Ember from 'ember';
 
 export default Route.extend({
   beforeModel(transition) {
@@ -8,13 +9,21 @@ export default Route.extend({
   },
   actions: {  
     signIn: function(provider) {
-      console.log($('#email').val())
+      var route = this;
       this.get('session').open('firebase', {
         provider: provider,
-        email: $('#email').val(),
-        password: $('#password').val(),
+        email: Ember.$('#email').val(),
+        password: Ember.$('#password').val(),
       }).then(function(data) {
-        console.log(data.currentUser);
+        route.transitionTo('admin.parameters')
+        // let appController = that.controllerFor('application');
+        // let previousTransition = appController.get('previousTransition'); 
+        // if (previousTransition) {
+        //   console.log(previousTransition);
+        //   appController.set('previousTransition', null);
+        //   that.transitionTo(previousTransition.targetName);
+        // }
+        // console.log(data.currentUser);
       });
     },
     signOut: function() {
