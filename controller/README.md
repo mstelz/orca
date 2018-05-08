@@ -6,6 +6,7 @@ This README is to explain how to put together the physical components of the con
 * [Arduino Uno R3](https://www.amazon.com/gp/product/B01EWOE0UU/)
 * Jumper Wires
 * Breadboards
+* Proto-boards
 * [Resistors](https://www.amazon.com/gp/product/B016NXK6QK)
 
 ---
@@ -13,6 +14,7 @@ This README is to explain how to put together the physical components of the con
 ## Temperature Sensor
 ### Parts List
 * [DS18B20 Temperature Sensor](https://www.sparkfun.com/products/11050)
+* 4.7k ohms resistor
 ### Information
  Integrate with the power strip to achieve heater control based on temperature. More information to come.
 ### Schematic
@@ -56,6 +58,9 @@ This README is to explain how to put together the physical components of the con
  * [Aqueon QuietFlow Pump](https://www.amazon.com/gp/product/B008F40LFC)
  * [Vertical Float Switches](https://www.amazon.com/gp/product/B00FHAEBIA)
  * [A container for ATO Water](https://www.walmart.com/ip/Aqua-Culture-Aquarium-10-gal/144433503)
+ * Small plastic tubing that fits into Pump head
+ * Acrylic Pieces for mounting floats (optional)
+ * Heat Gun for bending acrylic pieces (optional)
 
 ---- 
 
