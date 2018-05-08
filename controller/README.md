@@ -19,14 +19,15 @@ This README is to explain how to put together the physical components of the con
 ![DS18B20 Wiring Schematic](schematics/DS18B20_Schematic.png "DS18B20 Wiring Schematic")  
 ### Setup
 1. Enable 1-Wire Mode. 
-  a. Via Raspberry-Pi Configuration: Go to Raspberry-Pi Configuration -> Interfaces -> and Enable **1-Wire**
-  b. Manually: 
-    - `sudo apt-get update`
-	- `sudo apt-get upgrade`
-	- `sudo nano /boot/config.txt`
-	- Add `dtoverlay=w1-gpio` on the bottom line
-	- `CTRL-X` then `Y` then `RETURN`
-	- `sudo reboot`
+    1. Via Raspberry-Pi Configuration: 
+        - Go to Raspberry-Pi Configuration -> Interfaces -> and Enable **1-Wire**
+    2. Manually: 
+        - `sudo apt-get update`
+        - `sudo apt-get upgrade`
+        - `sudo nano /boot/config.txt`
+        - Add `dtoverlay=w1-gpio` on the bottom line
+        - `CTRL-X` then `Y` then `RETURN`
+        - `sudo reboot`
 2. Find your 1-Wire Device running `ls /sys/bus/w1/devices/` in shell	
 3. Copy /controller/rasperry-pi/piMonitor to your rasberry-pi
 4. Setup a cron task to automatically run at the time interval you want
