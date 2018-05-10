@@ -6,6 +6,7 @@ This README is to explain how to put together the physical components of the con
 * [Arduino Uno R3](https://www.amazon.com/gp/product/B01EWOE0UU/)
 * Jumper Wires
 * Breadboards
+* Proto-boards
 * [Resistors](https://www.amazon.com/gp/product/B016NXK6QK)
 
 ---
@@ -13,20 +14,22 @@ This README is to explain how to put together the physical components of the con
 ## Temperature Sensor
 ### Parts List
 * [DS18B20 Temperature Sensor](https://www.sparkfun.com/products/11050)
+* 4.7k ohms resistor
 ### Information
  Integrate with the power strip to achieve heater control based on temperature. More information to come.
 ### Schematic
 ![DS18B20 Wiring Schematic](schematics/DS18B20_Schematic.png "DS18B20 Wiring Schematic")  
 ### Setup
 1. Enable 1-Wire Mode. 
-  a. Via Raspberry-Pi Configuration: Go to Raspberry-Pi Configuration -> Interfaces -> and Enable **1-Wire**
-  b. Manually: 
-    - `sudo apt-get update`
-	- `sudo apt-get upgrade`
-	- `sudo nano /boot/config.txt`
-	- Add `dtoverlay=w1-gpio` on the bottom line
-	- `CTRL-X` then `Y` then `RETURN`
-	- `sudo reboot`
+    1. Via Raspberry-Pi Configuration: 
+        - Go to Raspberry-Pi Configuration -> Interfaces -> and Enable **1-Wire**
+    2. Manually: 
+        - `sudo apt-get update`
+        - `sudo apt-get upgrade`
+        - `sudo nano /boot/config.txt`
+        - Add `dtoverlay=w1-gpio` on the bottom line
+        - `CTRL-X` then `Y` then `RETURN`
+        - `sudo reboot`
 2. Find your 1-Wire Device running `ls /sys/bus/w1/devices/` in shell	
 3. Copy /controller/rasperry-pi/piMonitor to your rasberry-pi
 4. Setup a cron task to automatically run at the time interval you want
@@ -55,6 +58,9 @@ This README is to explain how to put together the physical components of the con
  * [Aqueon QuietFlow Pump](https://www.amazon.com/gp/product/B008F40LFC)
  * [Vertical Float Switches](https://www.amazon.com/gp/product/B00FHAEBIA)
  * [A container for ATO Water](https://www.walmart.com/ip/Aqua-Culture-Aquarium-10-gal/144433503)
+ * Small plastic tubing that fits into Pump head
+ * Acrylic Pieces for mounting floats (optional)
+ * Heat Gun for bending acrylic pieces (optional)
 
 ---- 
 
