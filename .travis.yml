@@ -2,8 +2,13 @@ language: node_js
 node_js:
   - "lts/*"
 
+cache:
+  yarn: true
+  directories:
+    - "node_modules"
+    
 install:
   - npm i -g yarn && yarn
   - cd controller/server
-  - npm install
-  - npm run build
+  - yarn install
+  - yarn run build
