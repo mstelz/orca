@@ -13,7 +13,7 @@
     "dev:server": "webpack-dev-server --mode development --open",
     "build:dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "test": "exit 0"
+    "test": "exit 0",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
