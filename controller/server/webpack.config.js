@@ -7,7 +7,7 @@ const htmlPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
-  entry: ['babel-polyfill', './ui/index.js'],
+  entry: ['@babel/polyfill', './ui/index.js'],
   output: {
     path: path.resolve('dist'),
     filename: 'index_bundle.js'
@@ -29,7 +29,7 @@ module.exports = {
           {
             loader: 'babel-loader',
             options: {
-              presets: ['es2015', 'stage-0', 'react']
+              presets: ["@babel/preset-env", "@babel/preset-react"]
             }
           }
         ],
