@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom'
+
+import './../css/toolkit-inverse.css';
 
 import logo from './../images/logo.svg';
 import './../css/App.css';
+import Nav from './Navigation/Nav';
+import Main from './Main/Main';
 
 class App extends Component {
   state = {
@@ -25,13 +30,24 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+      <div>
+        <header className="brp">
+          <Nav />
         </header>
-        <p className="App-intro">{this.state.response}</p>
+        <div className="bw">
+          <Main />
+        </div>
       </div>
+      // <div class="bw">
+      //   <Overview />
+      // </div>
+      // <div className="App">
+      //   <header className="App-header">
+      //     <img src={logo} className="App-logo" alt="logo" />
+      //     <h1 className="App-title">Welcome to React</h1>
+      //   </header>
+      //   <p className="App-intro">{this.state.response}</p>
+      // </div>
     );
   }
 }

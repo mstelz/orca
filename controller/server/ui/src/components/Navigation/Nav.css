@@ -29,7 +29,7 @@
   white-space: nowrap;
 }
 
-.brq {
+.first_nav_item {
   display: block;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -42,13 +42,13 @@
 }
 
 @media (min-width: 768px) {
-  .brq {
+  .first_nav_item {
     padding-top: 20px;
     padding-bottom: 20px;
   }
 }
 
-.brq:hover {
+.first_nav_item:hover {
   color: #cfd2da;
   text-decoration: none;
 }
