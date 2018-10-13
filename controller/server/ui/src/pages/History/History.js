@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PageTitle from "../PageTitle/PageTitle";
+import PageTitle from "../../components/PageTitle/PageTitle";
 import './../../css/toolkit-inverse.css';
 
 class History extends Component {

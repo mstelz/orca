@@ -602,30 +602,37 @@ pre {
   margin-left: auto;
   margin-right: auto;
   padding-right: 15px;
-  padding-left: 15px; }
+  padding-left: 15px;
+}
+
   @media (min-width: 576px) {
     .bw {
       padding-right: 15px;
-      padding-left: 15px; } }
+      padding-left: 15px; } 
+  }
   @media (min-width: 768px) {
     .bw {
       padding-right: 15px;
-      padding-left: 15px; } }
+      padding-left: 15px; }
+   }
   @media (min-width: 992px) {
     .bw {
       padding-right: 15px;
-      padding-left: 15px; } }
+      padding-left: 15px; }
+  }
   @media (min-width: 1200px) {
     .bw {
       padding-right: 15px;
-      padding-left: 15px; } }
+      padding-left: 15px; }
+  }
   @media (min-width: 768px) {
     .bw {
-      width: 880px;
+      /* width: 880px; */
+      width: 600px;
       max-width: 100%; } }
   @media (min-width: 992px) {
     .bw {
-      width: 950px;
+      /* width: 950px; */
       max-width: 100%; } }
   @media (min-width: 1200px) {
     .bw {

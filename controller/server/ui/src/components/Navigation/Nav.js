@@ -17,12 +17,12 @@ class Nav extends Component {
         <div className="bru">
           <ul className="nav qq brs aaj">
               <NavItem link="/" glyph="bhn" activeClassName="active" name="Overview" /> 
-              <NavItem link="parameters" glyph="bnv" activeClassName="active" name="History" />
-              <NavItem link="/" glyph="bgy" activeClassName="active" name="Web Controls" />
-              <NavItem link="video" glyph="video" activeClassName="active" name="Video" />
-              <NavItem link="statistics" glyph="bau" activeClassName="active" name="Statistics" />
-              <NavItem link="/" glyph="plug" activeClassName="active" name="Power Control" />
-              <NavItem link="/" glyph="biv" activeClassName="active" name="Documentation" />
+              <NavItem link="/parameters" glyph="bnv" activeClassName="active" name="History" />
+              <NavItem link="/controls" glyph="bgy" activeClassName="active" name="Web Controls" />
+              <NavItem link="/video" glyph="video" activeClassName="active" name="Video" />
+              <NavItem link="/statistics" glyph="bau" activeClassName="active" name="Statistics" />
+              <NavItem link="/power" glyph="plug" activeClassName="active" name="Power Control" />
+              <NavItem link="/docs" glyph="biv" activeClassName="active" name="Documentation" />
           </ul>
         </div>
       </nav>

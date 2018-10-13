@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 
-import Overview from './../Overview/Overview';
-import History from './../History/History';
+import Overview from './../../pages/Overview/Overview';
+import History from './../../pages/History/History';
 
 class Main extends Component {
   render() {
