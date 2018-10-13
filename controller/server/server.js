@@ -4,11 +4,21 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(
+  express.static(path.join(__dirname, 'dist')
+));
 
-app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
+
+app.use(require('./api'));
+
+// app.get('/api/temperature', (req, res) => {
+//   res.send({temperature: '79.43'});
+// })
 
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'dist/index.html')));
 

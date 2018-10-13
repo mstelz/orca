@@ -6,7 +6,7 @@ class NavItem extends Component {
   render() {
     return (
       <li className="qp">
-        <NavLink className="qn" to={this.props.link}>
+        <NavLink activeClassName="active" className="qn" to={this.props.link}>
           <Glyph icon={this.props.glyph} />
           <small className="brt axz">{this.props.name}</small>
         </NavLink>

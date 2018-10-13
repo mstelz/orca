@@ -1,6 +1,15 @@
 # Controller
 This README is to explain how to put together the physical components of the controller. While in development I will be using breadboards and converting them into a soldered pera-board once I feel comfortable with the layout. 
 
+## Upgrade NodeJS on Pi
+1. `sudo apt-get update`
+2. `sudo apt-get dist-upgrade`
+3. `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
+4. `sudo apt-get install -y nodejs`
+5. `node -v` to verify you have the correct version
+6. If you get `/usr/local/bin/node` not found:
+  - `ln -s /usr/bin/node /user/local/bin/node`
+
 ### Global Part List (Needed for all)
 * [Raspberry-Pi Model 3B](https://www.amazon.com/gp/product/B01LPLPBS8/)
 * [Arduino Uno R3](https://www.amazon.com/gp/product/B01EWOE0UU/)
