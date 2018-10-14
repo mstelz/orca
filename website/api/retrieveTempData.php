@@ -31,7 +31,7 @@ try{
     }
 
     $conn->close();
-    print json_encode($rows);
+    print json_encode($rows[0]);
   }
 }
 catch(Exception $e){
