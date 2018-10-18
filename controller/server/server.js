@@ -16,10 +16,6 @@ app.use(function(req, res, next) {
 
 app.use(require('./api'));
 
-// app.get('/api/temperature', (req, res) => {
-//   res.send({temperature: '79.43'});
-// })
-
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'dist/index.html')));
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
