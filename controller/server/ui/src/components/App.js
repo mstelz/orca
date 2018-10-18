@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './../css/toolkit-inverse.css';
 
 import logo from './../images/logo.svg';
-import './../css/App.css';
+import './../css/app.css';
 import Nav from './Navigation/Nav';
 import Main from './Main/Main';
 
