@@ -15,6 +15,6 @@ Opex is an opensource aquarium controller that uses affordable and easily access
 - Standalone and cloud based support
 - Fully customizable macros / configuration
 
-## [Controller Information](https://github.com/bhcmoney/opex/blob/ember/controller/README.md)
+## [Controller Information](/controller/README.md)
 
-## [Website Information](https://github.com/bhcmoney/opex/blob/ember/website/README.md) 
+## [Website Information](/website/README.md) 
