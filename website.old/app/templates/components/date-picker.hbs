@@ -1,0 +1,11 @@
+{{yield}}
+<div class="brg bsb">
+  <input id="dateRange" width="100" class="form-control" readonly />
+  <span class="bv bck"></span>
+</div>
+<span class="bsa axy"></span>
+<div class="pz bsb bsd">
+   <button id="24" type="button" {{action "changeChartInterval" '24' this}} class="time-int ce pi active">Day</button>
+   <button id="168" type="button" {{action "changeChartInterval" '168' this}} class="time-int ce pi">Week</button>
+   <button id="720" type="button" {{action "changeChartInterval" '720' this}} class="time-int ce pi">Month</button>
+</div>
