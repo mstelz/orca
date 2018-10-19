@@ -73,82 +73,86 @@ module.exports = {
   module: {
     rules: [
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-        loader: require.resolve('url-loader'),
-        options: {
-          // limit: 10000,
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
-      },
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: [
+        oneOf: [
           {
-            loader: 'babel-loader',
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            loader: require.resolve('url-loader'),
             options: {
-              ...JSON.parse(fs.readFileSync(path.resolve(__dirname, './.babelrc'))),
-              presets: ["@babel/preset-env", "@babel/preset-react"]
+              limit: 10000,
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          },
+          {
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules/,
+            use: [
+              {
+                loader: 'babel-loader',
+                options: {
+                  ...JSON.parse(fs.readFileSync(path.resolve(__dirname, './.babelrc'))),
+                  presets: ["@babel/preset-env", "@babel/preset-react"]
+                }
+              }
+            ],
+          },
+          {
+            test: /\.css$/,
+            exclude: /node_modules/,
+            use: getStyleLoaders({
+              importLoaders: 1,
+            }),
+          },
+          // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
+          // using the extension .module.css
+          {
+            test: cssModuleRegex,
+            use: getStyleLoaders({
+              importLoaders: 1,
+              modules: true,
+              getLocalIdent: getCSSModuleLocalIdent,
+            }),
+          },
+          // Opt-in support for SASS (using .scss or .sass extensions).
+          // Chains the sass-loader with the css-loader and the style-loader
+          // to immediately apply all styles to the DOM.
+          // By default we support SASS Modules with the
+          // extensions .module.scss or .module.sass
+          {
+            test: /\.(scss|sass)$/,
+            exclude: /node_modules/,
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader"
+            }, {
+                loader: "sass-loader",
+                options: {
+                    includePaths: ["absolute/path/a", "absolute/path/b"]
+                }
+            }]
+          },
+          // Adds support for CSS Modules, but using SASS
+          // using the extension .module.scss or .module.sass
+          {
+            test: sassModuleRegex,
+            use: getStyleLoaders(
+              {
+                importLoaders: 2,
+                modules: true,
+                getLocalIdent: getCSSModuleLocalIdent,
+              },
+              'sass-loader'
+            ),
+          },
+          {
+            exclude: [/\.(js|mjs|jsx)$/, /\.html$/, /\.json$/, /\.scss$/],
+            loader: require.resolve('file-loader'),
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
             }
           }
-        ],
-      },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: getStyleLoaders({
-          importLoaders: 1,
-        }),
-      },
-      // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-      // using the extension .module.css
-      {
-        test: cssModuleRegex,
-        use: getStyleLoaders({
-          importLoaders: 1,
-          modules: true,
-          getLocalIdent: getCSSModuleLocalIdent,
-        }),
-      },
-      // Opt-in support for SASS (using .scss or .sass extensions).
-      // Chains the sass-loader with the css-loader and the style-loader
-      // to immediately apply all styles to the DOM.
-      // By default we support SASS Modules with the
-      // extensions .module.scss or .module.sass
-      {
-        test: /\.(scss|sass)$/,
-        exclude: /node_modules/,
-        use: [{
-            loader: "style-loader"
-        }, {
-            loader: "css-loader"
-        }, {
-            loader: "sass-loader",
-            options: {
-                includePaths: ["absolute/path/a", "absolute/path/b"]
-            }
-        }]
-      },
-      // Adds support for CSS Modules, but using SASS
-      // using the extension .module.scss or .module.sass
-      {
-        test: sassModuleRegex,
-        use: getStyleLoaders(
-          {
-            importLoaders: 2,
-            modules: true,
-            getLocalIdent: getCSSModuleLocalIdent,
-          },
-          'sass-loader'
-        ),
-      },
-      {
-        exclude: [/\.(js|mjs|jsx)$/, /\.html$/, /\.json$/, /\.scss$/],
-        loader: require.resolve('file-loader'),
-        options: {
-          name: 'static/media/[name].[hash:8].[ext]',
-        }
-      },
+        ]
+      }
     ]
   },
   plugins: [
