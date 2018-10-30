@@ -59,11 +59,31 @@ This README is to explain how to put together the physical components of the con
 ## Wireless Power Strip (v2)
 ### Parts List
  * [Belkin 10-outlet Power Strip](https://www.amazon.com/gp/product/B000BVC0WO/ref=oh_aui_detailpage_o03_s00?ie=UTF8&psc=1)
+ * 14 gauge solid copper wire (black/red)
+ * 2x [Sainsmart 4 Channel Relay](https://www.amazon.com/gp/product/B0057OC5O8)
+ * [8-10 Screw Busbar](https://www.amazon.com/gp/product/B0091VHLW4/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
+ * Acrylic (optional)
+ 
+### Setup
+ 1. Open the power unit carefully by drilling out the rivets using a bit slightly larger than the hole in the rivet
+ 2. Remove the outlet on the far end from the power switch
+ 3. Remove the power switch board, reset, and protected LED carefully keeping the main wires in tact
+     * Be sure to cut the black and white wire as close to the board as possible
+ 4. Remove the black & white wire connections between each outlet (Save these pieces of wire)
+     * Leave all the green (ground) connections as is since they are nicely soldered already
+ 5. Unscrew the front of the outlets to allow you to move them around a little
+ 6. Use pliers to break the gold connection tab on the hot side. Leave the white side in tact
+ 7. Use a wire nut to connect the incoming white wire to a short piece of wire to reach the first outlet (white side)
+ 8. Cut 2 small pieces of acrylic to cover the missing outlet and power switch holes
+     * Glue in place using standard super glue
+ 9. 
  
 --- 
 
 ## Auto Top Off System
 ### Parts List
+ * [Arduino Uno](https://www.amazon.com/gp/product/B01EWOE0UU/ref=oh_aui_search_detailpage?ie=UTF8&psc=1) or similar
+     * Going to replace with the [ItsyBitsy 32uv 5V](https://www.adafruit.com/product/3677)
  * [Aqueon QuietFlow Pump](https://www.amazon.com/gp/product/B008F40LFC)
  * [Vertical Float Switches](https://www.amazon.com/gp/product/B00FHAEBIA)
  * [A container for ATO Water](https://www.walmart.com/ip/Aqua-Culture-Aquarium-10-gal/144433503)
