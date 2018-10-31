@@ -1,7 +1,7 @@
 # Controller
 This README is to explain how to put together the physical components of the controller. While in development I will be using breadboards and converting them into a soldered pera-board once I feel comfortable with the layout. 
 
-## Upgrade NodeJS on Pi
+### Upgrade NodeJS on Pi
 1. `sudo apt-get update`
 2. `sudo apt-get dist-upgrade`
 3. `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
@@ -44,7 +44,7 @@ This README is to explain how to put together the physical components of the con
 2. Find your 1-Wire Device running `ls /sys/bus/w1/devices/` in shell	
 3. Copy /controller/rasperry-pi/piMonitor to your rasberry-pi
 4. Setup a cron task to automatically run at the time interval you want
-  * \*/15 \* \* \* \* python /var/www/piMonitor.py (this runs every 15 minutes)
+    * \*/15 \* \* \* \* python /var/www/piMonitor.py (this runs every 15 minutes)
 
 ---
 
@@ -67,10 +67,8 @@ This README is to explain how to put together the physical components of the con
       2. Power the EZO Circuit (GND, +5V)
       3. Wait for LED to change from green to blue (UART->I2C) or from blue to green (I2C->UART). 
       4. Remove the jumper wire from the PGND (or PRB respectively) pin to the TX pin
-      5. Remove power (GND, 5V)
-
+      5. Remove power (GND, 5V)  
 2. #### [Calibrate your sensor](https://www.atlas-scientific.com/_files/_datasheets/_circuit/EC_EZO_Datasheet.pdf)
-
 3. #### [Setup your PI](https://www.whiteboxes.ch/docs/tentacle/t3/#/quickstart)
     1. Do not plugin your Tentacle T3 to the PI yet, boot the PI
     2. `sudo raspi-config`
@@ -85,6 +83,8 @@ This README is to explain how to put together the physical components of the con
 ---
 
 ## Power Strip (v1)
+### Information
+  This is a simple arduino controlled power box. Right now being run independently to drive the ATO temperatures. There are 2 normally on outlets and 2 normally off outlets
 ### Parts List
  * [Two-Gang Deep Wallbox](https://www.homedepot.com/p/RACO-Two-Gang-Drawn-Handy-Box-2-1-8-in-Deep-with-1-2-and-3-4-in-KO-s-10-Pack-683SP/204855678)
  * [Two-Gang Wallplate](https://www.homedepot.com/p/Leviton-2-Gang-Midway-Duplex-Outlet-Nylon-Wall-Plate-White-R52-0PJ82-00W/202059881)
