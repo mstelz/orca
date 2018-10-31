@@ -10,6 +10,8 @@ This README is to explain how to put together the physical components of the con
 6. If you get `/usr/local/bin/node` not found:
   - `ln -s /usr/bin/node /user/local/bin/node`
 
+----
+
 ### Global Part List (Needed for all)
 * [Raspberry-Pi Model 3B](https://www.amazon.com/gp/product/B01LPLPBS8/)
 * [Arduino Uno R3](https://www.amazon.com/gp/product/B01EWOE0UU/)
@@ -21,11 +23,11 @@ This README is to explain how to put together the physical components of the con
 ---
 
 ## Temperature Sensor
+### Information
+ Integrate with the power strip to achieve heater control based on temperature. More information to come.
 ### Parts List
 * [DS18B20 Temperature Sensor](https://www.sparkfun.com/products/11050)
 * 4.7k ohms resistor
-### Information
- Integrate with the power strip to achieve heater control based on temperature. More information to come.
 ### Schematic
 ![DS18B20 Wiring Schematic](schematics/DS18B20_Schematic.png "DS18B20 Wiring Schematic")  
 ### Setup
@@ -46,6 +48,13 @@ This README is to explain how to put together the physical components of the con
 
 ---
 
+## Atlas Scientific ORP Sensor
+### Parts List
+
+### Setup
+
+---
+
 ## Power Strip (v1)
 ### Parts List
  * [Two-Gang Deep Wallbox](https://www.homedepot.com/p/RACO-Two-Gang-Drawn-Handy-Box-2-1-8-in-Deep-with-1-2-and-3-4-in-KO-s-10-Pack-683SP/204855678)
@@ -57,13 +66,15 @@ This README is to explain how to put together the physical components of the con
 --- 
 
 ## Wireless Power Strip (v2)
+### Information
+ The purpose of this powerstrip is to increase the number of controllable outlets and to incorporate all of the components necessary for control within a standard looking powerstrip. This will be controlled via Bluetooth Low Energy or WIFI
 ### Parts List
  * [Belkin 10-outlet Power Strip](https://www.amazon.com/gp/product/B000BVC0WO/ref=oh_aui_detailpage_o03_s00?ie=UTF8&psc=1)
- * 14 gauge solid copper wire (black/red)
  * 2x [Sainsmart 4 Channel Relay](https://www.amazon.com/gp/product/B0057OC5O8)
  * [8-10 Screw Busbar](https://www.amazon.com/gp/product/B0091VHLW4/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
+ * [Adafruit Feather 32u4 Bluefruit LE](https://www.adafruit.com/product/2829) to control via Bluetooth Low Energy
+ * 14 gauge solid copper wire (black/red)
  * Acrylic (optional)
- 
 ### Setup
  1. Open the power unit carefully by drilling out the rivets using a bit slightly larger than the hole in the rivet
  2. Remove the outlet on the far end from the power switch
@@ -76,14 +87,19 @@ This README is to explain how to put together the physical components of the con
  7. Use a wire nut to connect the incoming white wire to a short piece of wire to reach the first outlet (white side)
  8. Cut 2 small pieces of acrylic to cover the missing outlet and power switch holes
      * Glue in place using standard super glue
- 9. 
+ 9. Mount the busbar where ever you think it will best fit
+ 10 . 
  
 --- 
 
 ## Auto Top Off System
+### Information
+  - The ATO has two water sensors (my setup uses 2 float valves) one in the ATO resevior and one in the sump
+  - The ATO pump will only run for a maximum of 60 seconds before pausing for 30 minutes (Just a simple failsafe)
 ### Parts List
  * [Arduino Uno](https://www.amazon.com/gp/product/B01EWOE0UU/ref=oh_aui_search_detailpage?ie=UTF8&psc=1) or similar
-     * Going to replace with the [ItsyBitsy 32uv 5V](https://www.adafruit.com/product/3677)
+     * Going to replace with the [ItsyBitsy 32uv 5V](https://www.adafruit.com/product/3677) to control over serial
+     * or [Adafruit Feather 32u4 Bluefruit LE](https://www.adafruit.com/product/2829) to control via Bluetooth Low Energy
  * [Aqueon QuietFlow Pump](https://www.amazon.com/gp/product/B008F40LFC)
  * [Vertical Float Switches](https://www.amazon.com/gp/product/B00FHAEBIA)
  * [A container for ATO Water](https://www.walmart.com/ip/Aqua-Culture-Aquarium-10-gal/144433503)
