@@ -48,10 +48,39 @@ This README is to explain how to put together the physical components of the con
 
 ---
 
-## Atlas Scientific ORP Sensor
+## Atlas Scientific Conductivity Sensor
 ### Parts List
-
+ * [Tentacle T3 for Raspberry Pi](https://www.atlas-scientific.com/product_pages/components/tentacle-t3.html)
+ * [EZO E.C. Circuit](https://www.atlas-scientific.com/product_pages/circuits/ezo_ec.html)
+ * [E.C. K 1.0 Probe](https://www.atlas-scientific.com/product_pages/probes/ec_k1-0.html)
 ### Setup
+ 1. #### Change EZO Circuit from UART to I2C
+     This procedure toggles the protocol between UART and I2C. If the EZO Circuit is in UART mode, this procedure will switch it to I2C. If it is in I2C mode, it will switch it to UART.
+       - If Circuit is blinking `Green` and `Cyan` then the circuit is configured in UART mode
+       - If Circuit is blinking `Blue` and `Cyan` then the circuit is configured in I2C mode  
+     _Before starting the procedure, remove the EZO Circuit from the Tentacle (or other carrier boards). Remove power and all connections._
+
+    This procedure is easiest using a breadboard and a set of jumper wires
+
+      1. Connect (shortcut) these two pins:
+        * PGND pin to the TX pin
+      2. Power the EZO Circuit (GND, +5V)
+      3. Wait for LED to change from green to blue (UART->I2C) or from blue to green (I2C->UART). 
+      4. Remove the jumper wire from the PGND (or PRB respectively) pin to the TX pin
+      5. Remove power (GND, 5V)
+
+2. #### [Calibrate your sensor](https://www.atlas-scientific.com/_files/_datasheets/_circuit/EC_EZO_Datasheet.pdf)
+
+3. #### [Setup your PI](https://www.whiteboxes.ch/docs/tentacle/t3/#/quickstart)
+    1. Do not plugin your Tentacle T3 to the PI yet, boot the PI
+    2. `sudo raspi-config`
+    3. Enable `I2C`
+    4. Reboot your PI
+    5. Upgrade PI with `sudo apt-get update` & `sudo apt-get upgrade`
+    6. Install I2C Tools with `sudo apt-get install python-smbus` & `sudo apt-get install i2c-tools`
+    7. Reboot the PI
+    8. Test I2C `sudo i2cdetect -y 1`
+    9. You should see `64` in the table
 
 ---
 
