@@ -98,7 +98,7 @@ This README is to explain how to put together the physical components of the con
 ### Information
  The purpose of this powerstrip is to increase the number of controllable outlets and to incorporate all of the components necessary for control within a standard looking powerstrip. This will be controlled via Bluetooth Low Energy or WIFI
 ### Parts List
- * [Belkin 10-outlet Power Strip](https://www.amazon.com/gp/product/B000BVC0WO/ref=oh_aui_detailpage_o03_s00?ie=UTF8&psc=1)
+ * [Wago Lever Nuts](https://www.amazon.com/Wago-221-415-LEVER-NUTS-Conductor-Connectors/dp/B06XH47DC2/ie=UTF8&qid=1541423396&sr=sr-1&keywords=Wago+221-415+LEVER-NUTS+5+Conductor+Compact+Connectors+10+PK)
  * 2x [Sainsmart 4 Channel Relay](https://www.amazon.com/gp/product/B0057OC5O8)
  * [8-10 Screw Busbar](https://www.amazon.com/gp/product/B0091VHLW4/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
  * [Adafruit Feather 32u4 Bluefruit LE](https://www.adafruit.com/product/2829) to control via Bluetooth Low Energy
