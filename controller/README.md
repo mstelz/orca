@@ -100,7 +100,8 @@ This README is to explain how to put together the physical components of the con
 ### Parts List
  * [Wago Lever Nuts](https://www.amazon.com/Wago-221-415-LEVER-NUTS-Conductor-Connectors/dp/B06XH47DC2/ie=UTF8&qid=1541423396&sr=sr-1&keywords=Wago+221-415+LEVER-NUTS+5+Conductor+Compact+Connectors+10+PK)
  * 2x [Sainsmart 4 Channel Relay](https://www.amazon.com/gp/product/B0057OC5O8)
- * [8-10 Screw Busbar](https://www.amazon.com/gp/product/B0091VHLW4/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
+ * [AC / DC 85~240V TO 5V/1.2A Isolated Switching Power Supply Converter Module](https://www.amazon.com/gp/product/B01FA0KJFA/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1)
+ * [USB Type A female connector](https://www.amazon.com/gp/product/B0094DXENY/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
  * [Adafruit Feather 32u4 Bluefruit LE](https://www.adafruit.com/product/2829) to control via Bluetooth Low Energy
  * 14 gauge solid copper wire (black/red)
  * Acrylic (optional)
@@ -114,10 +115,9 @@ This README is to explain how to put together the physical components of the con
  5. Unscrew the front of the outlets to allow you to move them around a little
  6. Use pliers to break the gold connection tab on the hot side. Leave the white side in tact
  7. Use a wire nut to connect the incoming white wire to a short piece of wire to reach the first outlet (white side)
- 8. Cut 2 small pieces of acrylic to cover the missing outlet and power switch holes
+ 8. Cut 3 small pieces of acrylic to cover the missing outlet, power switch holes, and reset button hole
      * Glue in place using standard super glue
- 9. Mount the busbar where ever you think it will best fit
- 10 . 
+ 9. 
  
 --- 
 
