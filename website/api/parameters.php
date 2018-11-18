@@ -1,5 +1,5 @@
 <?php
-  header('Access-Control-Allow-Origin: http://localhost:4200');
+  header('Access-Control-Allow-Origin: *');
   require('creds/sql.php');
 
 // Create connection
