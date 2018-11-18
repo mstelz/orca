@@ -9,9 +9,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "node admin/scripts/start.js",
     "start:dev": "concurrently --kill-others-on-fail \"yarn run dev:server\" \"nodemon server.js\"",
-    "dev:server": "webpack-dev-server --mode development --open",
+    "dev:server": "webpack-dev-server --mode development --open --port 80",
     "build:dev": "webpack --mode development",
     "build": "webpack --mode production",
     "test": "exit 0",

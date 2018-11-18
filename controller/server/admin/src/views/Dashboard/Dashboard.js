@@ -533,19 +533,6 @@ class Dashboard extends Component {
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
-                <ButtonGroup className="float-right">
-                  <ButtonDropdown id='card1' isOpen={this.state.card1} toggle={() => { this.setState({ card1: !this.state.card1 }); }}>
-                    <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
-                    </DropdownToggle>
-                    <DropdownMenu right>
-                      <DropdownItem>Action</DropdownItem>
-                      <DropdownItem>Another action</DropdownItem>
-                      <DropdownItem disabled>Disabled action</DropdownItem>
-                      <DropdownItem>Something else here</DropdownItem>
-                    </DropdownMenu>
-                  </ButtonDropdown>
-                </ButtonGroup>
                 <div className="text-value">
                   {this.round(this.state.latestTemp, 2)}<span style={{ fontSize: '0.75em' }}> °F</span>
                 </div>
@@ -572,8 +559,8 @@ class Dashboard extends Component {
                     </DropdownMenu>
                   </Dropdown>
                 </ButtonGroup>
-                <div className="text-value">9.823</div>
-                <div>Members online</div>
+                <div className="text-value">8.2</div>
+                <div>PH</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Line data={cardChartData1} options={cardChartOpts1} height={70} />
@@ -596,8 +583,8 @@ class Dashboard extends Component {
                     </DropdownMenu>
                   </Dropdown>
                 </ButtonGroup>
-                <div className="text-value">9.823</div>
-                <div>Members online</div>
+                <div className="text-value">1.025</div>
+                <div>SG</div>
               </CardBody>
               <div className="chart-wrapper" style={{ height: '70px' }}>
                 <Line data={cardChartData3} options={cardChartOpts3} height={70} />
@@ -620,12 +607,29 @@ class Dashboard extends Component {
                     </DropdownMenu>
                   </ButtonDropdown>
                 </ButtonGroup>
-                <div className="text-value">9.823</div>
-                <div>Members online</div>
+                <div className="text-value">0.0</div>
+                <div>ORP</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
                 <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
               </div>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs="12" sm="12" lg="6">
+            <Card>
+              <CardBody>
+                <Row>
+                  <Col sm="5">
+                    <CardTitle className="mb-0">Video</CardTitle>
+                    <div className="small text-muted">November 2015</div>
+                  </Col>
+                </Row>
+                <div className="chart-wrapper" style={{ marginTop: 30 + 'px' }}>
+                  <img alt="video" className="rounded img-fluid" style={{width: '100%'}} src="http://69.245.219.195:8080/stream/video.mjpeg" />
+                </div>
+              </CardBody>
             </Card>
           </Col>
         </Row>
