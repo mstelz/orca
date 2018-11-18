@@ -6,8 +6,8 @@ const fs = require('fs');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./admin/public/index.html",
-  filename: "./index.html"
+  template: "./public/index.html",
+  favicon: "./public/favicon.ico"
 });
 
 const cssModuleRegex = /\.module\.css$/;
@@ -56,13 +56,15 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 };
 
 module.exports = {
-  entry: ['@babel/polyfill', './admin/index.js'],
+  entry: ['@babel/polyfill', './src/client/index.js'],
   output: {
-    path: path.resolve('dist'),
+    path: path.join(__dirname, "dist"),
     filename: 'index_bundle.js'
   },
   devServer: {
     historyApiFallback: true,
+    port: 8080,
+    open: true,
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
