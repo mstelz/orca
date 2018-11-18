@@ -31,7 +31,11 @@ try{
     }
 
     $conn->close();
-    print json_encode($rows);
+    if($interval == 'last'){
+      print json_encode($rows[0]);
+    } else {
+      print json_encode($rows);
+    }
   }
 }
 catch(Exception $e){

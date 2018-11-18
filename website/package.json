@@ -1,56 +1,72 @@
 {
-  "name": "opex",
-  "version": "0.0.0",
-  "private": true,
-  "description": "Small description for opex goes here",
+  "name": "opex-controller",
+  "version": "1.0.0",
+  "description": "The standalone controller for the Opex System",
+  "author": {
+    "name": "Mike S.",
+    "email": "",
+    "url": "https://mikesfishtank.com"
+  },
   "license": "MIT",
-  "author": "",
-  "directories": {
-    "doc": "doc",
-    "test": "tests"
-  },
-  "repository": "",
   "scripts": {
-    "build": "ember build",
-    "start": "ember server",
-    "test": "ember test"
-  },
-  "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "broccoli-asset-rev": "^2.4.5",
-    "ember-ajax": "^3.0.0",
-    "ember-browserify": "^1.2.0",
-    "ember-cli": "^2.16.2",
-    "ember-cli-app-version": "^3.0.0",
-    "ember-cli-babel": "^6.8.2",
-    "ember-cli-cors": "0.0.2",
-    "ember-cli-dependency-checker": "^2.0.0",
-    "ember-cli-eslint": "^4.0.0",
-    "ember-cli-htmlbars": "^2.0.1",
-    "ember-cli-htmlbars-inline-precompile": "^1.0.0",
-    "ember-cli-inject-live-reload": "^1.4.1",
-    "ember-cli-moment-shim": "^3.5.0",
-    "ember-cli-qunit": "^4.0.0",
-    "ember-cli-shims": "^1.1.0",
-    "ember-cli-sri": "^2.1.0",
-    "ember-cli-uglify": "^2.0.0",
-    "ember-data": "~2.16.2",
-    "ember-export-application-global": "^2.0.0",
-    "ember-load-initializers": "^1.0.0",
-    "ember-pikaday": "^2.2.3",
-    "ember-resolver": "^4.0.0",
-    "ember-source": "~2.16.0",
-    "ember-welcome-page": "^3.0.0",
-    "emberfire": "^2.0.10",
-    "loader.js": "^4.2.3",
-    "moment": "^2.19.4",
-    "torii": "^0.10.1"
-  },
-  "engines": {
-    "node": "^4.5 || 6.* || >= 7.*"
+    "start": "concurrently --kill-others-on-fail \"yarn run dev:server\"",
+    "dev:server": "webpack-dev-server --mode development --open",
+    "build:dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "test": "exit 0"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "chart.js": "^2.7.1"
-  }
+    "dotenv": "^6.1.0",
+    "express": "^4.16.3",
+    "html-webpack-plugin": "^3.2.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-do-expressions": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-react-svg": "^2.1.0",
+    "concurrently": "^4.0.1",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "proxy": "http://localhost:3000/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bhcmoney/opex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bhcmoney/opex/issues"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "react",
+    "aquarium",
+    "raspberry-pi"
+  ]
 }
