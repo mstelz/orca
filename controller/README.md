@@ -1,7 +1,7 @@
 # Controller
 This README is to explain how to put together the physical components of the controller. While in development I will be using breadboards and converting them into a soldered pera-board once I feel comfortable with the layout. 
 
-## Upgrade NodeJS on Pi
+### Upgrade NodeJS on Pi
 1. `sudo apt-get update`
 2. `sudo apt-get dist-upgrade`
 3. `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
@@ -9,6 +9,8 @@ This README is to explain how to put together the physical components of the con
 5. `node -v` to verify you have the correct version
 6. If you get `/usr/local/bin/node` not found:
   - `ln -s /usr/bin/node /user/local/bin/node`
+
+----
 
 ### Global Part List (Needed for all)
 * [Raspberry-Pi Model 3B](https://www.amazon.com/gp/product/B01LPLPBS8/)
@@ -21,11 +23,11 @@ This README is to explain how to put together the physical components of the con
 ---
 
 ## Temperature Sensor
+### Information
+ Integrate with the power strip to achieve heater control based on temperature. More information to come.
 ### Parts List
 * [DS18B20 Temperature Sensor](https://www.sparkfun.com/products/11050)
 * 4.7k ohms resistor
-### Information
- Integrate with the power strip to achieve heater control based on temperature. More information to come.
 ### Schematic
 ![DS18B20 Wiring Schematic](schematics/DS18B20_Schematic.png "DS18B20 Wiring Schematic")  
 ### Setup
@@ -42,11 +44,47 @@ This README is to explain how to put together the physical components of the con
 2. Find your 1-Wire Device running `ls /sys/bus/w1/devices/` in shell	
 3. Copy /controller/rasperry-pi/piMonitor to your rasberry-pi
 4. Setup a cron task to automatically run at the time interval you want
-  * \*/15 \* \* \* \* python /var/www/piMonitor.py (this runs every 15 minutes)
+    * \*/15 \* \* \* \* python /var/www/piMonitor.py (this runs every 15 minutes)
+
+---
+
+## Atlas Scientific Conductivity Sensor
+### Parts List
+ * [Tentacle T3 for Raspberry Pi](https://www.atlas-scientific.com/product_pages/components/tentacle-t3.html)
+ * [EZO E.C. Circuit](https://www.atlas-scientific.com/product_pages/circuits/ezo_ec.html)
+ * [E.C. K 1.0 Probe](https://www.atlas-scientific.com/product_pages/probes/ec_k1-0.html)
+### Setup
+ 1. #### Change EZO Circuit from UART to I2C
+     This procedure toggles the protocol between UART and I2C. If the EZO Circuit is in UART mode, this procedure will switch it to I2C. If it is in I2C mode, it will switch it to UART.
+       - If Circuit is blinking `Green` and `Cyan` then the circuit is configured in UART mode
+       - If Circuit is blinking `Blue` and `Cyan` then the circuit is configured in I2C mode  
+     _Before starting the procedure, remove the EZO Circuit from the Tentacle (or other carrier boards). Remove power and all connections._
+
+    This procedure is easiest using a breadboard and a set of jumper wires
+
+      1. Connect (shortcut) these two pins:
+        * PGND pin to the TX pin
+      2. Power the EZO Circuit (GND, +5V)
+      3. Wait for LED to change from green to blue (UART->I2C) or from blue to green (I2C->UART). 
+      4. Remove the jumper wire from the PGND (or PRB respectively) pin to the TX pin
+      5. Remove power (GND, 5V)  
+2. #### [Calibrate your sensor](https://www.atlas-scientific.com/_files/_datasheets/_circuit/EC_EZO_Datasheet.pdf)
+3. #### [Setup your PI](https://www.whiteboxes.ch/docs/tentacle/t3/#/quickstart)
+    1. Do not plugin your Tentacle T3 to the PI yet, boot the PI
+    2. `sudo raspi-config`
+    3. Enable `I2C`
+    4. Reboot your PI
+    5. Upgrade PI with `sudo apt-get update` & `sudo apt-get upgrade`
+    6. Install I2C Tools with `sudo apt-get install python-smbus` & `sudo apt-get install i2c-tools`
+    7. Reboot the PI
+    8. Test I2C `sudo i2cdetect -y 1`
+    9. You should see `64` in the table
 
 ---
 
 ## Power Strip (v1)
+### Information
+  This is a simple arduino controlled power box. Right now being run independently to drive the ATO temperatures. There are 2 normally on outlets and 2 normally off outlets
 ### Parts List
  * [Two-Gang Deep Wallbox](https://www.homedepot.com/p/RACO-Two-Gang-Drawn-Handy-Box-2-1-8-in-Deep-with-1-2-and-3-4-in-KO-s-10-Pack-683SP/204855678)
  * [Two-Gang Wallplate](https://www.homedepot.com/p/Leviton-2-Gang-Midway-Duplex-Outlet-Nylon-Wall-Plate-White-R52-0PJ82-00W/202059881)
@@ -57,13 +95,41 @@ This README is to explain how to put together the physical components of the con
 --- 
 
 ## Wireless Power Strip (v2)
+### Information
+ The purpose of this powerstrip is to increase the number of controllable outlets and to incorporate all of the components necessary for control within a standard looking powerstrip. This will be controlled via Bluetooth Low Energy or WIFI
 ### Parts List
- * [Belkin 10-outlet Power Strip](https://www.amazon.com/gp/product/B000BVC0WO/ref=oh_aui_detailpage_o03_s00?ie=UTF8&psc=1)
+ * [Belkin Metal Power Strip Surge Protector](https://www.amazon.com/gp/product/B000BVC0WO/ref=oh_aui_detailpage_o04_s00?ie=UTF8&th=1)
+ * [Wago Lever Nuts](https://www.amazon.com/Wago-221-415-LEVER-NUTS-Conductor-Connectors/dp/B06XH47DC2/ie=UTF8&qid=1541423396&sr=sr-1&keywords=Wago+221-415+LEVER-NUTS+5+Conductor+Compact+Connectors+10+PK)
+ * 2x [Sainsmart 4 Channel Relay](https://www.amazon.com/gp/product/B0057OC5O8)
+ * [AC / DC 85~240V TO 5V/1.2A Isolated Switching Power Supply Converter Module](https://www.amazon.com/gp/product/B01FA0KJFA/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1) or [5W Apple USB Power Adapter](https://www.apple.com/shop/product/MD810LL/A/apple-5w-usb-power-adapter)
+ * [USB Type A female connector](https://www.amazon.com/gp/product/B0094DXENY/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
+ * [Adafruit Feather 32u4 Bluefruit LE](https://www.adafruit.com/product/2829) to control via Bluetooth Low Energy
+ * 14 gauge solid copper wire (black/red)
+ * Acrylic (optional)
+### Setup
+ 1. Open the power unit carefully by drilling out the rivets using a bit slightly larger than the hole in the rivet
+ 2. Remove the outlet on the far end from the power switch
+ 3. Remove the power switch board, reset, and protected LED carefully keeping the main wires in tact
+     * Be sure to cut the black and white wire as close to the board as possible
+ 4. Remove the black & white wire connections between each outlet (Save these pieces of wire)
+     * Leave all the green (ground) connections as is since they are nicely soldered already
+ 5. Unscrew the front of the outlets to allow you to move them around a little
+ 6. Use pliers to break the gold connection tab on the hot side. Leave the white side in tact
+ 7. Use a wire nut to connect the incoming white wire to a short piece of wire to reach the first outlet (white side)
+ 8. Cut 3 small pieces of acrylic to cover the missing outlet, power switch holes, and reset button hole
+     * Glue in place using standard super glue
+ 9. 
  
 --- 
 
 ## Auto Top Off System
+### Information
+  - The ATO has two water sensors (my setup uses 2 float valves) one in the ATO resevior and one in the sump
+  - The ATO pump will only run for a maximum of 60 seconds before pausing for 30 minutes (Just a simple failsafe)
 ### Parts List
+ * [Arduino Uno](https://www.amazon.com/gp/product/B01EWOE0UU/ref=oh_aui_search_detailpage?ie=UTF8&psc=1) or similar
+     * Going to replace with the [ItsyBitsy 32uv 5V](https://www.adafruit.com/product/3677) to control over serial
+     * or [Adafruit Feather 32u4 Bluefruit LE](https://www.adafruit.com/product/2829) to control via Bluetooth Low Energy
  * [Aqueon QuietFlow Pump](https://www.amazon.com/gp/product/B008F40LFC)
  * [Vertical Float Switches](https://www.amazon.com/gp/product/B00FHAEBIA)
  * [A container for ATO Water](https://www.walmart.com/ip/Aqua-Culture-Aquarium-10-gal/144433503)
