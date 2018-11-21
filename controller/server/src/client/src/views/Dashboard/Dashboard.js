@@ -21,9 +21,9 @@ import {
   Row,
   Table,
 } from 'reactstrap';
-import Widget03 from '../../views/Widgets/Widget03'
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import Widget03 from '../../views/Widgets/Widget03';
+import CustomTooltips from '../../components/CustomTooltips';
+import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 
 const brandPrimary = getStyle('--primary')
 const brandSuccess = getStyle('--success')

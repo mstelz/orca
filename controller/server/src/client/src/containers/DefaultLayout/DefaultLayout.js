@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
-import {
-  AppAside,
-  AppSidebarForm
-} from '@coreui/react';
-
+import SidebarForm from '../../components/SidebarForm';
+import Aside from '../../components/Aside';
 import SidebarNav from '../../components/SideNavBar';
 // sidebar nav config
 import navigation from '../../_nav';
@@ -34,7 +31,7 @@ class DefaultLayout extends Component {
         <div className="app-body">
           <Sidebar fixed display="lg">
             <SidebarHeader />
-            <AppSidebarForm />
+            <SidebarForm />
             <SidebarNav navConfig={navigation} {...this.props} />
             <SidebarFooter />
             <SidebarMinimizer />
@@ -54,9 +51,9 @@ class DefaultLayout extends Component {
               </Switch>
             </Container>
           </main>
-          <AppAside fixed>
+          <Aside fixed>
             <DefaultAside />
-          </AppAside>
+          </Aside>
         </div>
         <Footer>
           <DefaultFooter />
