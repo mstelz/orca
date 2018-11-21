@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Badge, Card, CardBody, CardFooter, CardHeader, Col, Row, Collapse, Fade } from 'reactstrap';
-import { AppSwitch } from '@coreui/react'
+import Switch from '../../../components/Switch';
 
 class Cards extends Component {
   constructor(props) {
@@ -65,7 +65,7 @@ class Cards extends Component {
             <Card>
               <CardHeader>
                 Card with switch
-                <AppSwitch className={'float-right mb-0'} label color={'info'} defaultChecked size={'sm'}/>
+                <Switch className={'float-right mb-0'} label color={'info'} defaultChecked size={'sm'}/>
               </CardHeader>
               <CardBody>
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut

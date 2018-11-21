@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Nav, NavItem, NavLink, Progress, TabContent, TabPane, ListGroup, ListGroupItem } from 'reactstrap';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { AppSwitch } from '@coreui/react'
+import Switch from '../../components/Switch';
 
 // import img7 from 'images/7.jpg'
 
@@ -242,7 +242,7 @@ class DefaultAside extends Component {
             <div className="aside-options">
               <div className="clearfix mt-4">
                 <small><b>Option 1</b></small>
-                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'}/>
+                <Switch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'}/>
               </div>
               <div>
                 <small className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -254,7 +254,7 @@ class DefaultAside extends Component {
             <div className="aside-options">
               <div className="clearfix mt-3">
                 <small><b>Option 2</b></small>
-                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} size={'sm'}/>
+                <Switch className={'float-right'} variant={'pill'} label color={'success'} size={'sm'}/>
               </div>
               <div>
                 <small className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -266,7 +266,7 @@ class DefaultAside extends Component {
             <div className="aside-options">
               <div className="clearfix mt-3">
                 <small><b>Option 3</b></small>
-                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'} disabled/>
+                <Switch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'} disabled/>
                 <div>
                   <small className="text-muted">Option disabled.</small>
                 </div>
@@ -276,7 +276,7 @@ class DefaultAside extends Component {
             <div className="aside-options">
               <div className="clearfix mt-3">
                 <small><b>Option 4</b></small>
-                <AppSwitch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'} />
+                <Switch className={'float-right'} variant={'pill'} label color={'success'} defaultChecked size={'sm'} />
               </div>
             </div>
 

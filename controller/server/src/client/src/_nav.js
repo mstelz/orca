@@ -19,14 +19,14 @@ export default {
       class: ''             // optional class names space delimited list for title item ex: "text-center"
     },
     {
-      name: 'Colors',
+      name: 'Configuration',
       url: '/theme/colors',
-      icon: 'icon-drop',
+      icon: 'fa fa-cogs',
     },
     {
-      name: 'Typography',
+      name: 'Event Log',
       url: '/theme/typography',
-      icon: 'icon-pencil',
+      icon: 'fa fa-files-o',
     },
     {
       title: true,
@@ -42,9 +42,9 @@ export default {
       icon: 'icon-puzzle',
       children: [
         {
-          name: 'Breadcrumbs',
+          name: 'Temperature',
           url: '/base/breadcrumbs',
-          icon: 'icon-puzzle',
+          icon: 'fa fa-thermometer-three-quarters',
         },
         {
           name: 'Cards',
@@ -57,9 +57,9 @@ export default {
           icon: 'icon-puzzle',
         },
         {
-          name: 'Collapses',
+          name: 'Doser',
           url: '/base/collapses',
-          icon: 'icon-puzzle',
+          icon: 'fa fa-eyedropper',
         },
         {
           name: 'Dropdowns',
@@ -124,9 +124,9 @@ export default {
       ],
     },
     {
-      name: 'Buttons',
+      name: 'Statistics',
       url: '/buttons',
-      icon: 'icon-cursor',
+      icon: 'fa fa-bar-chart',
       children: [
         {
           name: 'Buttons',
@@ -151,14 +151,14 @@ export default {
       ],
     },
     {
-      name: 'Charts',
+      name: 'Macros',
       url: '/charts',
-      icon: 'icon-pie-chart',
+      icon: 'fa fa-code',
     },
     {
-      name: 'Icons',
+      name: 'Reminders',
       url: '/icons',
-      icon: 'icon-star',
+      icon: 'fa fa-clock-o',
       children: [
         {
           name: 'CoreUI Icons',
@@ -193,7 +193,7 @@ export default {
     {
       name: 'Notifications',
       url: '/notifications',
-      icon: 'icon-bell',
+      icon: 'fa fa-warning',
       children: [
         {
           name: 'Alerts',
@@ -229,9 +229,9 @@ export default {
       name: 'Extras',
     },
     {
-      name: 'Pages',
+      name: 'Video',
       url: '/pages',
-      icon: 'icon-star',
+      icon: 'fa fa-video-camera',
       children: [
         {
           name: 'Login',

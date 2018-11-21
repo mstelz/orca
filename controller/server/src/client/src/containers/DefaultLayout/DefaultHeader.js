@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from '../../assets/img/brand/logo.svg';
+import NavbarBrand from '../../components/NavbarBrand';
+import HeaderDropdown from '../../components/HeaderDropdown';
+import SidebarToggler from '../../components/SidebarToggler';
+import AsideToggler from '../../components/AsideToggler';
+// import logo from '../../assets/img/brand/logo.svg';
+import logo from '../../assets/img/brand/clown-fish.svg';
 import sygnet from '../../assets/img/brand/sygnet.svg';
 import avatar6 from '../../../public/assets/img/avatars/6.jpg';
 
@@ -21,12 +25,12 @@ class DefaultHeader extends Component {
 
     return (
       <React.Fragment>
-        <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <AppNavbarBrand
+        <SidebarToggler className="d-lg-none" display="md" mobile />
+        <NavbarBrand
           full={{ src: logo, width: 89, height: 25, alt: 'CoreUI Logo' }}
           minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
         />
-        <AppSidebarToggler className="d-md-down-none" display="lg" />
+        <SidebarToggler className="d-md-down-none" display="lg" />
 
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
@@ -46,7 +50,7 @@ class DefaultHeader extends Component {
           <NavItem className="d-md-down-none">
             <NavLink href="#"><i className="icon-location-pin"></i></NavLink>
           </NavItem>
-          <AppHeaderDropdown direction="down">
+          <HeaderDropdown direction="down">
             <DropdownToggle nav>
               <img src={avatar6} className="img-avatar" alt="admin@bootstrapmaster.com" />
             </DropdownToggle>
@@ -65,10 +69,10 @@ class DefaultHeader extends Component {
               <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
               <DropdownItem><i className="fa fa-lock"></i> Logout</DropdownItem>
             </DropdownMenu>
-          </AppHeaderDropdown>
+          </HeaderDropdown>
         </Nav>
-        <AppAsideToggler className="d-md-down-none" />
-        {/*<AppAsideToggler className="d-lg-none" mobile />*/}
+        <AsideToggler className="d-md-down-none" />
+        {/*<AsideToggler className="d-lg-none" mobile />*/}
       </React.Fragment>
     );
   }
