@@ -20,8 +20,20 @@ export default {
     },
     {
       name: 'Configuration',
-      url: '/theme/colors',
       icon: 'fa fa-cogs',
+      url: 'config',
+      children: [
+        {
+          name: 'Bluetooth',
+          url: '/config/bluetooth',
+          icon: 'fa fa-bluetooth-b'
+        },
+        {
+          name: 'Settings',
+          url: '/config/settings',
+          icon: 'fa fa-cog'
+        }
+      ]
     },
     {
       name: 'Event Log',
@@ -213,8 +225,17 @@ export default {
       ],
     },
     {
-      name: 'Outlets',
+      name: 'Equipment',
       url: '/widgets',
+      icon: 'fa fa-industry',
+      badge: {
+        variant: 'info',
+        text: 'NEW',
+      },
+    },
+    {
+      name: 'Outlets',
+      url: '/outlets',
       icon: 'fa fa-plug',
       badge: {
         variant: 'info',
@@ -254,6 +275,27 @@ export default {
           icon: 'icon-star',
         },
       ],
+    },
+    {
+      name: 'Help',
+      url: '#',
+      icon: 'fa fa-question',
+      children: [
+        {
+          name: 'Colors',
+          url: '/theme/colors',
+          icon: 'fa fa-cogs',
+        }, 
+        {
+          name: 'Widgets',
+          url: '/widgets',
+          icon: 'fa fa-plug',
+          badge: {
+            variant: 'info',
+            text: 'NEW',
+          },
+        },
+      ]
     }
   ],
 };

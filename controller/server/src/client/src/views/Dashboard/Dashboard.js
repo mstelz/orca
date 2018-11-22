@@ -611,7 +611,8 @@ class Dashboard extends Component {
                 <div>ORP</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
+                <Line data={cardChartData4} options={cardChartOpts3} height={70} />
+                {/* <Bar data={cardChartData4} options={cardChartOpts4} height={70} /> */}
               </div>
             </Card>
           </Col>

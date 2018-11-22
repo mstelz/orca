@@ -182,12 +182,30 @@ const User = Loadable({
   loading: Loading,
 });
 
+// ADDED 
 
+const Bluetooth = Loadable({
+  loader: () => import('./views/Config/Bluetooth'),
+  loading: Loading,
+})
+
+const Settings = Loadable({
+  loader: () => import('./views/Config/Settings'),
+  loading: Loading,
+})
+
+const Outlets = Loadable({
+  loader: () => import('./views/Outlets'),
+  loading: Loading,
+})
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/config/bluetooth', name: 'Bluetooth', component: Bluetooth },
+  { path: '/config/settings', name: 'Settings', component: Settings },
+  { path: '/outlets', name: 'Outlets', component: Outlets },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },

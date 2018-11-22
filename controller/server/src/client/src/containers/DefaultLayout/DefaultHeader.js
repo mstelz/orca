@@ -6,10 +6,9 @@ import NavbarBrand from '../../components/NavbarBrand';
 import HeaderDropdown from '../../components/HeaderDropdown';
 import SidebarToggler from '../../components/SidebarToggler';
 import AsideToggler from '../../components/AsideToggler';
-// import logo from '../../assets/img/brand/logo.svg';
 import logo from '../../assets/img/brand/clown-fish.svg';
 import sygnet from '../../assets/img/brand/sygnet.svg';
-import avatar6 from '../../../public/assets/img/avatars/6.jpg';
+import avatar from '../../../public/assets/img/avatars/monopoly-run.png';
 
 const propTypes = {
   children: PropTypes.node,
@@ -52,7 +51,7 @@ class DefaultHeader extends Component {
           </NavItem>
           <HeaderDropdown direction="down">
             <DropdownToggle nav>
-              <img src={avatar6} className="img-avatar" alt="admin@bootstrapmaster.com" />
+              <img src={avatar} className="img-avatar" alt="admin@bootstrapmaster.com" />
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>
