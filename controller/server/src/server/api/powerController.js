@@ -18,7 +18,10 @@ noble.on('stateChange', function(state) {
 
 		getDevices().then((d) => {
 			devices = d;
-			noble.startScanning();
+
+			if(devices.length > 0) {
+				noble.startScanning();
+			}
 		});
 	}
 });
@@ -50,12 +53,8 @@ noble.on('discover', function(device) {
 				if(customService) {			
 					customService.discoverCharacteristics(null, function(error, chars) {
 						if(error) { console.log(error); }
-						let outlet1;
-						for(var i in chars) {
-							console.log(' ' + i + ' uuid: ' + chars[i].uuid);
-							
-							serviceChars[chars[i].uuid] = chars[i];
-						}				
+						
+						connectedDevices.find(d => d === device).services.characteristics == chars;		
 					});	
 				}
 			});
@@ -83,31 +82,75 @@ process.on('SIGINT', function() {
 		Promise.all(promises).then(process.exit(0));
 });
 
-function toggle(num, state) { 
-	let buffer;
-	
+function toggle(deviceId, serviceId, charId, state) { 	
 	if(state == 'on') {
-		write(num, Buffer.from([0x01]));
+		write(deviceId, serviceId, charId, Buffer.from([0x01]));
 	} else if(state == 'off') {
-		write(num, Buffer.from([0x00]));
+		write(deviceId, serviceId, charId, Buffer.from([0x00]));
 	} else {
-		serviceChars[num].read(function(error, data) {
+		// FIXME: remove serviceChars
+		serviceChars[charId].read(function(error, data) {
 			if(data.toString('hex') == '01') {
-				write(num, Buffer.from([0x00]));
+				write(deviceId, serviceId, charId, Buffer.from([0x00]));
 			} else {
-				write(num, Buffer.from([0x01]));
+				write(deviceId, serviceId, charId, Buffer.from([0x01]));
 			}
 		});
 	}
 }
 
-function write(num, buffer) {
-	serviceChars[num].write(buffer, true, function (error) {
-		console.log('Wrote ' + buffer.toString('hex') + ' to ' + serviceChars[num].uuid);
-	  if (error) {
-		console.log(error);
-	  }
-    });
+function write(deviceAddress, serviceUuid, charUuid, buffer) {
+	getChar(deviceAddress, serviceUuid, charUuid).catch(err => console.log(err)).then((char) => {
+		console.log(char);
+
+		if(char) {		
+			char.write(buffer, true, function (error) {
+				console.log('Wrote ' + buffer.toString('hex') + ' to ' + char.uuid);
+				if (error) {
+					console.log(error);
+				}
+			});
+		}
+	});
+}
+
+// TODO: Should most likely make this an async call
+function read(deviceAddress, serviceUuid, charUuid) {
+	getChar(deviceAddress, serviceUuid, charUuid).catch(err => console.log(err)).then((char) => {
+		console.log(char);
+
+		if(char) {		
+			char.read(function(error, data) {
+				console.log(data.toString('hex'));
+			});
+		}
+	});
+}
+
+async function getChar(deviceAddress, serviceUuid, charUuid) {
+	return await new Promise((resolve, reject) => {
+		let char; 
+
+		connectedDevices.forEach((d) => {
+			if(d.address.toUpperCase() == deviceAddress.toUpperCase()) {
+				d.services.forEach((s) => {
+					if(s.uuid.toUpperCase() == serviceUuid.toUpperCase()) {
+						s.characteristics.forEach((c) => {
+							if(c.uuid.toUpperCase() == charUuid.toUpperCase()){
+								char = c;
+							}
+						})
+					}
+				})
+			}
+		})
+
+		if(char) {
+			resolve(char);
+		} else {
+			reject('No Characteristic Found');
+		}
+	});
 }
 
 async function getDevices() {
@@ -129,14 +172,15 @@ async function disconnect(device) {
 				console.log(err);
 				reject(err);
 			} else {
+				console.log('Disconnecting: ' + device.uuid);
 				resolve(true);
 			}
 		})
 	})
 }
 
-router.get('/api/power/:charId', function(req, res, next) {
-  toggle(req.params.charId, req.query.state);
+router.get('/api/ble/toggle/:deviceId/:serviceId/:charId', function(req, res, next) {
+  toggle(req.params.deviceId, req.params.serviceId, req.params.charId, req.query.state);
   res.send(req.params.charId);
 });
 
