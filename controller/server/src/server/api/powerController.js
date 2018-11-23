@@ -1,27 +1,36 @@
-var express = require('express');
-var router = express.Router();
-var noble = require('noble');
+const express = require('express');
+const router = express.Router();
+const noble = require('noble');
+const db = require('../config/database');
 
+// TODO: NEED TO ADD MULTI DEVICE SERVICE SUPPORT
+// And refactor class to separate power controller out from 
+// basic Bluetooth low energy functionality
 var customService;
-var powerDevice;
+var connectedDevices = [];
 var serviceChars = {};
+var devices = [];
 
+// On statechange get registered devices from db then start scanning
 noble.on('stateChange', function(state) {
 	if (state === 'poweredOn') {
 		console.log('Powered on!');
-		noble.startScanning();
+
+		getDevices().then((d) => {
+			devices = d;
+			noble.startScanning();
+		});
 	}
 });
 
 noble.on('discover', function(device) {
 	console.log('Found device: ' + device.address);
-	//console.log(device);
 	
 	device.disconnect((error) => {});
 	
-	if (device.address.toUpperCase() === 'EF:04:6F:54:36:A9') {
-		console.log('Found it!');
-		powerDevice = device;
+	if(devices.some((d) => { return d.auto_connect == 1 && d.device_uuid == device.address.toUpperCase() })) {
+		console.log('Found matching device...');
+		connectedDevices.push(device);
 		connect(device);
 		
 		//device.once('connect', function() {
@@ -30,8 +39,9 @@ noble.on('discover', function(device) {
 		//});
 		
 		device.once('connect', () => {
-			console.log('Scanning for services');
+			console.log('Scanning for services...');
 
+			//TODO: Refactor for multi service support based on database entry
 			device.discoverServices(['8000'], function(error, services) {
 				if(error) {console.log(error);}
 				customService = services[0];
@@ -40,7 +50,7 @@ noble.on('discover', function(device) {
 				if(customService) {			
 					customService.discoverCharacteristics(null, function(error, chars) {
 						if(error) { console.log(error); }
-						var outlet1;
+						let outlet1;
 						for(var i in chars) {
 							console.log(' ' + i + ' uuid: ' + chars[i].uuid);
 							
@@ -51,6 +61,7 @@ noble.on('discover', function(device) {
 			});
 		});
 		
+		// TODO: Refactor to be more friendly to multiple devices
 		setTimeout(() => {
 			device.on('disconnect', function() {
 				console.log('Device ' + device.uuid + ' disconnected');
@@ -60,8 +71,20 @@ noble.on('discover', function(device) {
 	}
 });
 
+// On Control-C (Interupt Signal) disconnect devices before exit
+process.on('SIGINT', function() {
+    console.log("Caught interrupt signal");
+
+		const promises = [];
+		connectedDevices.forEach((device) => {
+			promises.push(disconnect(device));
+		});
+
+		Promise.all(promises).then(process.exit(0));
+});
+
 function toggle(num, state) { 
-	var buffer;
+	let buffer;
 	
 	if(state == 'on') {
 		write(num, Buffer.from([0x01]));
@@ -87,22 +110,29 @@ function write(num, buffer) {
     });
 }
 
-process.on('SIGINT', function() {
-    console.log("Caught interrupt signal");
-
-    powerDevice.disconnect((error) => {
-			console.log(error);
-			console.log('Disconnected ' + powerDevice);
-			
-			process.exit(0);
-		});
-});
+async function getDevices() {
+	return await db.all('SELECT * FROM bt_devices');
+}
 
 function connect(device) {
 	device.connect(function(error) {
-		console.log(error);
+		if(error) { console.log(error) };
 		console.log('Connected to: ' + device.uuid);		
 	});
+}
+
+async function disconnect(device) {
+	return new Promise((resolve, reject) => {
+		device.disconnect((err) => {
+			if (err) {
+				console.log('Error disconnecting: ' + device.uuid);
+				console.log(err);
+				reject(err);
+			} else {
+				resolve(true);
+			}
+		})
+	})
 }
 
 router.get('/api/power/:charId', function(req, res, next) {

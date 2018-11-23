@@ -7,7 +7,6 @@ const port = process.env.PORT || 3000;
 
 //END TEST ZONE
 
-
 app.use(
   express.static(path.join(__dirname, 'dist')
 ));
