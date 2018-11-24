@@ -18,7 +18,7 @@ router.get('/api/bluetooth/devices/:deviceId', async (req, res, next) => {
                 services.service_uuid, 
                 services.name as service_name,
                 group_concat(chars.char_uuid) AS characteristics,
-                group_concat(chars.name) AS char_names
+                group_concat(chars.name) AS charNames
               FROM bt_devices AS devices
               INNER JOIN bt_services AS services 
                 ON devices.device_uuid = services.device_uuid 
@@ -27,17 +27,17 @@ router.get('/api/bluetooth/devices/:deviceId', async (req, res, next) => {
                 WHERE devices.device_uuid = ?
               GROUP BY devices.device_uuid, services.service_uuid`;
   try {
-    var deviceInfo = await db.all(sql, req.params.deviceId);
+    const deviceInfo = await db.all(sql, req.params.deviceId);
     console.log(deviceInfo);
     deviceInfo.map((service) => {
-      var char_uuids = service.characteristics.split(",");
-      var char_names = service.char_names.split(",");
+      const charUuids = service.characteristics.split(',');
+      const charNames = service.charNames.split(',');
 
-      var chars = [];
-      char_uuids.forEach((val, index) => {
+      const chars = [];
+      charUuids.forEach((val, index) => {
         chars.push({
           char_uuid: val,
-          char_name: char_names[index]
+          char_name: charNames[index]
         });
       });
 

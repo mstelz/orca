@@ -6,9 +6,10 @@ const db = require('../config/database');
 // TODO: NEED TO ADD MULTI DEVICE SERVICE SUPPORT
 // And refactor class to separate power controller out from 
 // basic Bluetooth low energy functionality
+
+// Have a true power controller wrap the usage of this more generic ble class
 var customService;
 var connectedDevices = [];
-var serviceChars = {};
 var devices = [];
 
 // On statechange get registered devices from db then start scanning
@@ -88,19 +89,21 @@ function toggle(deviceId, serviceId, charId, state) {
 	} else if(state == 'off') {
 		write(deviceId, serviceId, charId, Buffer.from([0x00]));
 	} else {
-		// FIXME: remove serviceChars
-		serviceChars[charId].read(function(error, data) {
+		read(deviceId, serviceId, charId).then((data) => { 
 			if(data.toString('hex') == '01') {
-				write(deviceId, serviceId, charId, Buffer.from([0x00]));
+		 		write(deviceId, serviceId, charId, Buffer.from([0x00]));
 			} else {
-				write(deviceId, serviceId, charId, Buffer.from([0x01]));
-			}
+		 		write(deviceId, serviceId, charId, Buffer.from([0x01]));
+		 	}
 		});
 	}
 }
 
+// TODO: Need to add a catch for the promise rejections
+// I think write doesnt need to be blocking but may want to make it async to allow 
+// actions after the promise completes
 function write(deviceAddress, serviceUuid, charUuid, buffer) {
-	getChar(deviceAddress, serviceUuid, charUuid).catch(err => console.log(err)).then((char) => {
+	getChar(deviceAddress, serviceUuid, charUuid).then((char) => {
 		console.log(char);
 
 		if(char) {		
@@ -115,16 +118,19 @@ function write(deviceAddress, serviceUuid, charUuid, buffer) {
 }
 
 // TODO: Should most likely make this an async call
-function read(deviceAddress, serviceUuid, charUuid) {
-	getChar(deviceAddress, serviceUuid, charUuid).catch(err => console.log(err)).then((char) => {
-		console.log(char);
-
+async function read(deviceAddress, serviceUuid, charUuid, callback) {
+	return await getChar(deviceAddress, serviceUuid, charUuid).then(function(char) {
 		if(char) {		
-			char.read(function(error, data) {
-				console.log(data.toString('hex'));
-			});
+			return new Promise((resolve, reject) => {
+				char.read(function(error, data) {
+					if(error) { console.log(error); }
+					resolve(data);
+				});
+			})
 		}
-	});
+	}).then(d => new Promise(function(resolve, reject) {
+		resolve(d);
+	}));
 }
 
 async function getChar(deviceAddress, serviceUuid, charUuid) {
@@ -150,7 +156,7 @@ async function getChar(deviceAddress, serviceUuid, charUuid) {
 		} else {
 			reject('No Characteristic Found');
 		}
-	});
+	}).catch(err => console.log(err));
 }
 
 async function getDevices() {
@@ -179,7 +185,7 @@ async function disconnect(device) {
 	})
 }
 
-router.get('/api/ble/toggle/:deviceId/:serviceId/:charId', function(req, res, next) {
+router.get('/api/ble/toggle/:deviceId/:serviceId/:charId', (req, res, next) => {
   toggle(req.params.deviceId, req.params.serviceId, req.params.charId, req.query.state);
   res.send(req.params.charId);
 });

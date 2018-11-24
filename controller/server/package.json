@@ -113,6 +113,7 @@
     "babel-plugin-react-svg": "^2.1.0",
     "concurrently": "^4.0.1",
     "css-loader": "^1.0.0",
+    "eslint-config-airbnb": "^17.1.0",
     "file-loader": "^2.0.0",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.2",
