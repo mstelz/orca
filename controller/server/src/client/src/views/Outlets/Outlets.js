@@ -30,17 +30,33 @@ class Outlets extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.changeSelect = this.changeSelect.bind(this);
     this.resetForm = this.resetForm.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
       confirm_modal: false,
       add_modal: true,
+      outlets: [],
       outlet_type: '',
       selected_device: '',
       selected_service: '',
+      selected_char: '',
     };
   }
 
+  handleErrors(response) {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    }
+    return response;
+  }
+
   componentDidMount() {
+    fetch('/api/outlets')
+      .then(res => res.json())
+      .then(result => {
+        this.setState({ outlets: result });
+      });
+
     fetch('/api/bluetooth/devices')
       .then(res => res.json())
       .then(
@@ -79,6 +95,7 @@ class Outlets extends Component {
     this.setState({ [modal]: !modalVal });
   }
 
+  // TODO: REFACTOR THESE FORM SELECT CHANGES TO USE ON CHANGE HANDLER
   resetForm() {
     this.setState({
       outlet_type: '',
@@ -93,6 +110,49 @@ class Outlets extends Component {
     }
   }
 
+  // Submit the form
+  // TODO: REFACTOR THE DATA AND FORM CREATION
+  handleSubmit() {
+    event.preventDefault();
+
+    let data = {
+      name: event.target.outlet_name.value,
+      default_state: event.target.default_state.value,
+      type: event.target.type.value,
+    };
+
+    if (data.type === 'GPIO') {
+      data = { ...data, ...{ pin: event.target.pin.value } };
+    } else {
+      console.log();
+      data = {
+        ...data,
+        ...{
+          deviceUuid: this.state.devices[this.state.selected_device]
+            .device_uuid,
+          serviceUuid: this.state.devices[this.state.selected_device].services[
+            this.state.selected_service
+          ].service_uuid,
+          charUuid: this.state.devices[this.state.selected_device].services[
+            this.state.selected_service
+          ].characteristics[this.state.selected_char].char_uuid,
+        },
+      };
+    }
+    // TODO: Update table after this post, and fix error handling
+    fetch('/api/outlets', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+      .then(this.handleErrors)
+      .then(response => this.toggleModal('add_modal'))
+      .catch(err => alert(`Adding outlet failed: ${err}`));
+  }
+
   renderTypeOptions() {
     if (this.state.outlet_type === 'Bluetooth') {
       return (
@@ -104,14 +164,15 @@ class Outlets extends Component {
             <Col xs="12" md="9">
               <Input
                 type="select"
-                name="select"
+                name="device_uuid"
                 id="select"
-                defaultValue="default"
+                defaultValue=""
                 onChange={select =>
                   this.changeSelect(select, 'selected_device')
                 }
+                required
               >
-                <option value="default" disabled>
+                <option value="" disabled>
                   Please Select
                 </option>
                 {this.state.devices.map((val, i) => (
@@ -131,14 +192,15 @@ class Outlets extends Component {
               <Col xs="12" md="9">
                 <Input
                   type="select"
-                  name="select"
+                  name="service_uuid"
                   id="select"
-                  defaultValue="default"
+                  defaultValue=""
                   onChange={select =>
                     this.changeSelect(select, 'selected_service')
                   }
+                  required
                 >
-                  <option value="default" disabled>
+                  <option value="" disabled>
                     Please Select
                   </option>
                   {this.state.devices[this.state.selected_device].services.map(
@@ -160,14 +222,15 @@ class Outlets extends Component {
               <Col xs="12" md="9">
                 <Input
                   type="select"
-                  name="select"
+                  name="char_uuid"
                   id="select"
-                  defaultValue="default"
+                  defaultValue=""
                   onChange={select =>
                     this.changeSelect(select, 'selected_char')
                   }
+                  required
                 >
-                  <option value="default" disabled>
+                  <option value="" disabled>
                     Please Select
                   </option>
                   {this.state.devices[this.state.selected_device].services[
@@ -214,6 +277,8 @@ class Outlets extends Component {
   }
 
   render() {
+    const { outlets } = this.state;
+
     return (
       <div className="animated fadeIn">
         <Row>
@@ -234,6 +299,29 @@ class Outlets extends Component {
                     </tr>
                   </thead>
                   <tbody>
+                    {outlets.map((val, i) => (
+                      <tr>
+                        <td>{val.name}</td>
+                        <td>{val.type}</td>
+                        <td>
+                          <Badge color="danger">Off</Badge>
+                        </td>
+                        <td>
+                          <Badge color="success">On</Badge>
+                        </td>
+                        <td>
+                          <div
+                            style={{
+                              color: '#f86c6b',
+                              cursor: 'pointer',
+                            }}
+                            onClick={() => this.toggleModal('confirm_modal')}
+                            className="fa fa-trash fa-lg"
+                            id="1"
+                          />
+                        </td>
+                      </tr>
+                    ))}
                     <tr>
                       <td>BT - Power bar 1</td>
                       <td>Bluetooth</td>
@@ -252,22 +340,6 @@ class Outlets extends Component {
                           onClick={() => this.toggleModal('confirm_modal')}
                           className="fa fa-trash fa-lg"
                           id="1"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>BT - Power bar 2</td>
-                      <td>Bluetooth</td>
-                      <td>
-                        <Badge color="danger">Off</Badge>
-                      </td>
-                      <td>
-                        <Badge color="success">On</Badge>
-                      </td>
-                      <td>
-                        <i
-                          style={{ color: '#f86c6b' }}
-                          className="fa fa-trash fa-lg danger"
                         />
                       </td>
                     </tr>
@@ -324,9 +396,8 @@ class Outlets extends Component {
           </ModalHeader>
           <ModalBody>
             <Form
-              action=""
-              method="post"
-              encType="multipart/form-data"
+              onSubmit={this.handleSubmit}
+              id="addOutletForm"
               className="form-horizontal"
             >
               <FormGroup row>
@@ -339,6 +410,7 @@ class Outlets extends Component {
                     id="text-input"
                     name="outlet_name"
                     placeholder="Name"
+                    required
                   />
                   <FormText color="muted">Diplay text of your outlet</FormText>
                 </Col>
@@ -353,8 +425,8 @@ class Outlets extends Component {
                       className="form-check-input"
                       type="radio"
                       id="inline-radio1"
-                      name="inline-radios"
-                      value="on"
+                      name="default_state"
+                      value="1"
                     />
                     <Label
                       className="form-check-label"
@@ -369,8 +441,8 @@ class Outlets extends Component {
                       className="form-check-input"
                       type="radio"
                       id="inline-radio2"
-                      name="inline-radios"
-                      value="off"
+                      name="default_state"
+                      value="0"
                       defaultChecked
                     />
                     <Label
@@ -390,14 +462,15 @@ class Outlets extends Component {
                 <Col xs="12" md="9">
                   <Input
                     type="select"
-                    name="select"
+                    name="type"
                     id="select"
-                    defaultValue="default"
+                    defaultValue=""
                     onChange={select =>
                       this.changeSelect(select, 'outlet_type')
                     }
+                    required
                   >
-                    <option value="default" disabled>
+                    <option value="" disabled>
                       Please Select
                     </option>
                     <option value="GPIO">GPIO</option>
@@ -416,13 +489,12 @@ class Outlets extends Component {
             >
               Cancel
             </Button>{' '}
-            <Button
-              color="success"
-              size="lg"
-              onClick={() => this.toggleModal('add_modal')}
-            >
-              Add
-            </Button>
+            <input
+              type="submit"
+              form="addOutletForm"
+              value="Add"
+              className="btn btn-lg btn-success"
+            />
           </ModalFooter>
         </Modal>
       </div>
