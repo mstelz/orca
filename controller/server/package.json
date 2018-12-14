@@ -126,10 +126,10 @@
   "proxy": "http://localhost:3000/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bhcmoney/opex.git"
+    "url": "https://github.com/bhcmoney/orca.git"
   },
   "bugs": {
-    "url": "https://github.com/bhcmoney/opex/issues"
+    "url": "https://github.com/bhcmoney/orca/issues"
   },
   "keywords": [
     "node",
