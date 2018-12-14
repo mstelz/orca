@@ -1,7 +1,7 @@
 {
-  "name": "opex-controller",
+  "name": "orca-controller",
   "version": "1.0.0",
-  "description": "The standalone controller for the Opex System",
+  "description": "The standalone controller for the Orca System",
   "author": {
     "name": "Mike S.",
     "email": "",
@@ -114,7 +114,10 @@
     "concurrently": "^4.0.1",
     "css-loader": "^1.0.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.0",
     "file-loader": "^2.0.0",
+    "prettier": "^1.15.2",
     "style-loader": "^0.23.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",

@@ -12,28 +12,29 @@ export default {
     {
       title: true,
       name: 'Information',
-      wrapper: {            // optional wrapper object
-        element: '',        // required valid HTML5 element tag
-        attributes: {}        // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
+      wrapper: {
+        // optional wrapper object
+        element: '', // required valid HTML5 element tag
+        attributes: {}, // optional valid JS object with JS API naming ex: { className: "my-class", style: { fontFamily: "Verdana" }, id: "my-id"}
       },
-      class: ''             // optional class names space delimited list for title item ex: "text-center"
+      class: '', // optional class names space delimited list for title item ex: "text-center"
     },
     {
       name: 'Configuration',
       icon: 'fa fa-cogs',
-      url: 'config',
+      url: '/config',
       children: [
         {
           name: 'Bluetooth',
           url: '/config/bluetooth',
-          icon: 'fa fa-bluetooth-b'
+          icon: 'fa fa-bluetooth-b',
         },
         {
           name: 'Settings',
           url: '/config/settings',
-          icon: 'fa fa-cog'
-        }
-      ]
+          icon: 'fa fa-cog',
+        },
+      ],
     },
     {
       name: 'Event Log',
@@ -282,10 +283,15 @@ export default {
       icon: 'fa fa-question',
       children: [
         {
+          name: 'Breadcrumbs',
+          url: '/base/breadcrumbs',
+          icon: 'fa fa-thermometer-three-quarters',
+        },
+        {
           name: 'Colors',
           url: '/theme/colors',
           icon: 'fa fa-cogs',
-        }, 
+        },
         {
           name: 'Widgets',
           url: '/widgets',
@@ -295,7 +301,7 @@ export default {
             text: 'NEW',
           },
         },
-      ]
-    }
+      ],
+    },
   ],
 };
