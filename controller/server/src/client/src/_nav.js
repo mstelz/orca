@@ -183,7 +183,6 @@ export default {
           icon: 'icon-star',
           badge: {
             variant: 'info',
-            text: 'NEW',
           },
         },
         {
@@ -301,7 +300,6 @@ export default {
           icon: 'fa fa-plug',
           badge: {
             variant: 'info',
-            text: 'NEW',
           },
         },
       ],

@@ -12,6 +12,27 @@ This README is to explain how to put together the physical components of the con
 
 ----
 
+### Install and Enable BlueZ (BLE Support)
+1. `cd ~`
+2. `wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz`
+3. `tar xvf bluez-5.50.tar.xz`
+4. `cd bluez-5.50`
+5. `sudo apt-get update`
+6. `sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev`
+7. `./configure`
+8. `make`
+9. `sudo make install`
+10. `sudo systemctl start bluetooth`
+11. `systemctl status bluetooth` Should see Active status
+12. `sudo systemctl enable bluetooth`
+13. Reboot the pi
+14. `sudo nano /lib/systemd/system/bluetooth.service`
+    - Add ` --experimental` to the end of `ExecStart` line
+15. `sudo systemctl daemon-reload`
+16. `sudo systemctl restart bluetooth`
+
+----
+
 ### Global Part List (Needed for all)
 * [Raspberry-Pi Model 3B](https://www.amazon.com/gp/product/B01LPLPBS8/)
 * [Arduino Uno R3](https://www.amazon.com/gp/product/B01EWOE0UU/)

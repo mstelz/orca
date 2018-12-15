@@ -1,7 +1,7 @@
 {
-  "name": "opex-controller",
+  "name": "Orca-controller",
   "version": "1.0.0",
-  "description": "The standalone controller for the Opex System",
+  "description": "The standalone controller for the Orca System",
   "author": {
     "name": "Mike S.",
     "email": "",
@@ -57,10 +57,10 @@
   "proxy": "http://localhost:3000/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bhcmoney/opex.git"
+    "url": "https://github.com/bhcmoney/orca.git"
   },
   "bugs": {
-    "url": "https://github.com/bhcmoney/opex/issues"
+    "url": "https://github.com/bhcmoney/orca/issues"
   },
   "keywords": [
     "node",

@@ -1,4 +1,4 @@
-# opex
+# Orca
 
 This README outlines specifics about the website for the aquarium controller. The purpose of the website is to act as a cloud controller / storage device to store data. Eventually the Raspberry-Pi will allow for full functionality without internet support once we choose to implement an LCD or local webhost for access.
 
@@ -23,7 +23,7 @@ You will need the following things properly installed on your computer.
 >### Installation
 >
 >* `git clone <repository-url>` this repository
->* `cd opex`
+>* `cd orca`
 >* `npm install` or `yarn install`
 >
 >### Running / Development
