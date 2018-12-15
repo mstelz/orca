@@ -34,9 +34,10 @@ class Database {
     return new Promise((resolve, reject) => {
       this.db.get(sql, params, (err, result) => {
         if (err) {
-          console.log(`Error running sql: ${sql}`);
-          console.log(err);
-          reject(err);
+          // console.log(`Error running sql: ${sql}`);
+          // console.log(err);
+          // reject(err);
+          throw new Error(err);
         } else {
           resolve(result);
         }
@@ -52,7 +53,6 @@ class Database {
           console.log(err);
           reject(err);
         } else {
-          console.log({ id: this.lastID });
           resolve({ id: this.lastID });
         }
       });

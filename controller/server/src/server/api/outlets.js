@@ -12,13 +12,29 @@ router.get('/api/outlets', async (req, res, next) => {
 });
 
 router.post('/api/outlets', (req, res, next) => {
-  res.sendStatus(500);
-  // addOutlet(req.body)
-  //   .then(res.sendStatus(200))
-  //   .catch(err => {
-  //     console.log(err);
-  //     res.sendStatus(500);
-  //   });
+  addOutlet(req.body)
+    .then(response => {
+      console.log(response);
+      res.set('Content-Type', 'application/json');
+      res.status(200).json(response);
+      // res.sendStatus(200);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+// right now cascade delete is setup but should prolly clean up otherwise
+router.delete('/api/outlets', (req, res, next) => {
+  const sql = 'DELETE FROM outlets WHERE outlet_id = ?';
+  const delGpioSql = 'DELETE FROM outlet_gpio WHERE outlet_id = ?';
+  const delBtSql = 'DELETE FROM outlet_bt WHERE outlet_id = ?';
+  db.run(sql, [req.query.id]);
+  db.run(delGpioSql, [req.query.id]);
+  db.run(delBtSql, [req.query.id]);
+
+  res.sendStatus(200);
 });
 
 // TODO: need to look at adding transactions
@@ -44,6 +60,8 @@ const addOutlet = async outlet => {
       outlet.charUuid,
     ]);
   }
+
+  return lastRow;
 };
 
 // router.get('/api/oulets', async (req, res, next) => {

@@ -28,6 +28,10 @@ export default {
           name: 'Bluetooth',
           url: '/config/bluetooth',
           icon: 'fa fa-bluetooth-b',
+          badge: {
+            variant: 'info',
+            text: 'NEW',
+          },
         },
         {
           name: 'Settings',
@@ -231,7 +235,6 @@ export default {
       icon: 'fa fa-industry',
       badge: {
         variant: 'info',
-        text: 'NEW',
       },
     },
     {

@@ -31,10 +31,11 @@ class Outlets extends Component {
     this.changeSelect = this.changeSelect.bind(this);
     this.resetForm = this.resetForm.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.deleteOutlet = this.deleteOutlet.bind(this);
 
     this.state = {
       confirm_modal: false,
-      add_modal: true,
+      add_modal: false,
       outlets: [],
       outlet_type: '',
       selected_device: '',
@@ -114,11 +115,13 @@ class Outlets extends Component {
   // TODO: REFACTOR THE DATA AND FORM CREATION
   handleSubmit() {
     event.preventDefault();
-
+    const name = event.target.outlet_name.value;
+    const type = event.target.type.value;
+    const default_state = event.target.default_state.value;
     let data = {
-      name: event.target.outlet_name.value,
-      default_state: event.target.default_state.value,
-      type: event.target.type.value,
+      name,
+      default_state,
+      type,
     };
 
     if (data.type === 'GPIO') {
@@ -139,7 +142,7 @@ class Outlets extends Component {
         },
       };
     }
-    // TODO: Update table after this post, and fix error handling
+    // TODO: fix error handling
     fetch('/api/outlets', {
       headers: {
         Accept: 'application/json',
@@ -149,7 +152,37 @@ class Outlets extends Component {
       body: JSON.stringify(data),
     })
       .then(this.handleErrors)
-      .then(response => this.toggleModal('add_modal'))
+      .then(res => res.json())
+      .then(response => {
+        this.setState({
+          outlets: [
+            ...this.state.outlets,
+            {
+              outlet_id: response.id,
+              name,
+              default_state,
+              type,
+            },
+          ],
+        });
+        this.toggleModal('add_modal');
+      })
+      .catch(err => alert(`Adding outlet failed: ${err}`));
+  }
+
+  // TODO: fix error handling
+  deleteOutlet() {
+    fetch(`/api/outlets?id=${this.state.selected_outlet}`, {
+      method: 'DELETE',
+    })
+      .then(this.handleErrors)
+      .then(response => {
+        const updateOutlets = this.state.outlets.filter(
+          outlet => outlet.outlet_id != this.state.selected_outlet
+        );
+        this.setState({ selected_outlet: null, outlets: updateOutlets });
+        this.toggleModal('confirm_modal');
+      })
       .catch(err => alert(`Adding outlet failed: ${err}`));
   }
 
@@ -276,6 +309,13 @@ class Outlets extends Component {
     );
   }
 
+  renderState(state) {
+    if (state === 1) {
+      return <Badge color="success">On</Badge>;
+    }
+    return <Badge color="danger">Off</Badge>;
+  }
+
   render() {
     const { outlets } = this.state;
 
@@ -299,55 +339,41 @@ class Outlets extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {outlets.map((val, i) => (
+                    {outlets.length > 0 ? (
+                      outlets.map((val, i) => (
+                        <tr key={i}>
+                          <td>{val.name}</td>
+                          <td>{val.type}</td>
+                          <td>{this.renderState(val.default_state)}</td>
+                          <td>{this.renderState(val.state)}</td>
+                          <td>
+                            <div
+                              style={{
+                                color: '#f86c6b',
+                                cursor: 'pointer',
+                              }}
+                              onClick={() => {
+                                this.setState({
+                                  selected_outlet: val.outlet_id,
+                                });
+                                this.toggleModal('confirm_modal');
+                              }}
+                              className="fa fa-trash fa-lg"
+                              id="1"
+                            />
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
                       <tr>
-                        <td>{val.name}</td>
-                        <td>{val.type}</td>
-                        <td>
-                          <Badge color="danger">Off</Badge>
-                        </td>
-                        <td>
-                          <Badge color="success">On</Badge>
-                        </td>
-                        <td>
-                          <div
-                            style={{
-                              color: '#f86c6b',
-                              cursor: 'pointer',
-                            }}
-                            onClick={() => this.toggleModal('confirm_modal')}
-                            className="fa fa-trash fa-lg"
-                            id="1"
-                          />
-                        </td>
+                        <td colSpan="5">No outlets configured</td>
                       </tr>
-                    ))}
-                    <tr>
-                      <td>BT - Power bar 1</td>
-                      <td>Bluetooth</td>
-                      <td>
-                        <Badge color="danger">Off</Badge>
-                      </td>
-                      <td>
-                        <Badge color="success">On</Badge>
-                      </td>
-                      <td>
-                        <div
-                          style={{
-                            color: '#f86c6b',
-                            cursor: 'pointer',
-                          }}
-                          onClick={() => this.toggleModal('confirm_modal')}
-                          className="fa fa-trash fa-lg"
-                          id="1"
-                        />
-                      </td>
-                    </tr>
+                    )}
                   </tbody>
                 </Table>
                 <Button
                   color="primary"
-                  onClick={() => this.toggleModal('add_modal')}
+                  onClick={j => this.toggleModal('add_modal', j)}
                 >
                   Add Outlet
                 </Button>
@@ -378,7 +404,7 @@ class Outlets extends Component {
             <Button
               color="danger"
               size="lg"
-              onClick={() => this.toggleModal('confirm_modal')}
+              onClick={() => this.deleteOutlet()}
             >
               Delete
             </Button>
