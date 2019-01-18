@@ -55,88 +55,18 @@ export default {
     },
     {
       name: 'Modules',
-      url: '/base',
+      url: '/modules',
       icon: 'icon-puzzle',
       children: [
         {
           name: 'Temperature',
-          url: '/base/breadcrumbs',
+          url: '/modules/temperature',
           icon: 'fa fa-thermometer-three-quarters',
         },
         {
-          name: 'Cards',
-          url: '/base/cards',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Carousels',
-          url: '/base/carousels',
-          icon: 'icon-puzzle',
-        },
-        {
           name: 'Doser',
-          url: '/base/collapses',
+          url: '/modules/collapses',
           icon: 'fa fa-eyedropper',
-        },
-        {
-          name: 'Dropdowns',
-          url: '/base/dropdowns',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Forms',
-          url: '/base/forms',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Jumbotrons',
-          url: '/base/jumbotrons',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'List groups',
-          url: '/base/list-groups',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Navs',
-          url: '/base/navs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Paginations',
-          url: '/base/paginations',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Popovers',
-          url: '/base/popovers',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Progress Bar',
-          url: '/base/progress-bar',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Switches',
-          url: '/base/switches',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tables',
-          url: '/base/tables',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tabs',
-          url: '/base/tabs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tooltips',
-          url: '/base/tooltips',
-          icon: 'icon-puzzle',
         },
       ],
     },
@@ -288,6 +218,81 @@ export default {
           name: 'Breadcrumbs',
           url: '/base/breadcrumbs',
           icon: 'fa fa-thermometer-three-quarters',
+        },
+        {
+          name: 'Cards',
+          url: '/base/cards',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Carousels',
+          url: '/base/carousels',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Doser',
+          url: '/base/collapses',
+          icon: 'fa fa-eyedropper',
+        },
+        {
+          name: 'Dropdowns',
+          url: '/base/dropdowns',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Forms',
+          url: '/base/forms',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Jumbotrons',
+          url: '/base/jumbotrons',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'List groups',
+          url: '/base/list-groups',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Navs',
+          url: '/base/navs',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Paginations',
+          url: '/base/paginations',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Popovers',
+          url: '/base/popovers',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Progress Bar',
+          url: '/base/progress-bar',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Switches',
+          url: '/base/switches',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Tables',
+          url: '/base/tables',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Tabs',
+          url: '/base/tabs',
+          icon: 'icon-puzzle',
+        },
+        {
+          name: 'Tooltips',
+          url: '/base/tooltips',
+          icon: 'icon-puzzle',
         },
         {
           name: 'Colors',
