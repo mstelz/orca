@@ -57,11 +57,19 @@ export default {
       name: 'Modules',
       url: '/modules',
       icon: 'icon-puzzle',
+      badge: {
+        variant: 'info',
+        text: 'NEW',
+      },
       children: [
         {
           name: 'Temperature',
           url: '/modules/temperature',
           icon: 'fa fa-thermometer-three-quarters',
+          badge: {
+            variant: 'info',
+            text: 'NEW',
+          },
         },
         {
           name: 'Doser',

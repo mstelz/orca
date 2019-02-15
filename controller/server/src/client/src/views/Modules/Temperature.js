@@ -18,6 +18,8 @@ import {
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import CustomTooltips from '../../components/CustomTooltips';
 
+// TODO: Add Celcius Support Eventually
+
 const brandInfo = getStyle('--info');
 
 const mainChartOpts = {
@@ -149,7 +151,8 @@ class Temperature extends Component {
               {
                 // backgroundColor: brandInfo,
                 // borderColor: 'rgba(255,255,255,.55)',
-                backgroundColor: 'rgba(32,168,216,.55)',
+                // backgroundColor: 'rgba(32,168,216,.55)',
+                backgroundColor: 'rgba(200, 206, 211,.50)',
                 borderColor: 'rgba(27,33,48,.55)',
                 pointBackgroundColor: 'rgb(25, 151, 198)',
                 data: temps,

@@ -548,7 +548,10 @@ class Dashboard extends Component {
         result => {
           const temps = result.map(obj => {
             const rObj = {};
-            rObj.x = moment(obj._timestamp).format('YYYY-MM-DD HH:MM:SS');
+            rObj.x = moment
+              .utc(obj._timestamp)
+              .local()
+              .format('YYYY-MM-DD HH:mm:ss');
             rObj.y = obj.temperature;
             // return {'x': moment(obj._timestamp).format('YYYY-MM-DD hh:mm:ss'), 'y': obj.temperature}
             return rObj;
