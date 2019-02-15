@@ -1,19 +1,19 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const dotenv = require('dotenv');
-const path = require("path");
+const path = require('path');
 const fs = require('fs');
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./public/index.html",
-  favicon: "./public/favicon.ico"
+  template: './public/index.html',
+  favicon: './public/favicon.ico',
 });
 
 const cssModuleRegex = /\.module\.css$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 const env = dotenv.config().parsed;
-  
+
 // reduce it to a nice object, the same as before
 const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(env[next]);
@@ -58,8 +58,8 @@ const getStyleLoaders = (cssOptions, preProcessor) => {
 module.exports = {
   entry: ['@babel/polyfill', './src/client/index.js'],
   output: {
-    path: path.join(__dirname, "dist"),
-    filename: 'index_bundle.js'
+    path: path.join(__dirname, 'dist'),
+    filename: 'index_bundle.js',
   },
   devServer: {
     historyApiFallback: true,
@@ -68,9 +68,9 @@ module.exports = {
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
-        secure: false
-      }
-    }
+        secure: false,
+      },
+    },
   },
   module: {
     rules: [
@@ -89,12 +89,14 @@ module.exports = {
             exclude: /node_modules/,
             use: [
               {
-                loader: 'babel-loader',
+                loader: require.resolve('babel-loader'),
                 options: {
-                  ...JSON.parse(fs.readFileSync(path.resolve(__dirname, './.babelrc'))),
-                  presets: ["@babel/preset-env", "@babel/preset-react"]
-                }
-              }
+                  ...JSON.parse(
+                    fs.readFileSync(path.resolve(__dirname, './.babelrc'))
+                  ),
+                  presets: ['@babel/preset-env', '@babel/preset-react'],
+                },
+              },
             ],
           },
           {
@@ -122,16 +124,20 @@ module.exports = {
           {
             test: /\.(scss|sass)$/,
             exclude: /node_modules/,
-            use: [{
-                loader: "style-loader"
-            }, {
-                loader: "css-loader"
-            }, {
-                loader: "sass-loader",
+            use: [
+              {
+                loader: 'style-loader',
+              },
+              {
+                loader: 'css-loader',
+              },
+              {
+                loader: 'sass-loader',
                 options: {
-                    includePaths: ["absolute/path/a", "absolute/path/b"]
-                }
-            }]
+                  includePaths: ['absolute/path/a', 'absolute/path/b'],
+                },
+              },
+            ],
           },
           // Adds support for CSS Modules, but using SASS
           // using the extension .module.scss or .module.sass
@@ -151,14 +157,11 @@ module.exports = {
             loader: require.resolve('file-loader'),
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
-            }
-          }
-        ]
-      }
-    ]
+            },
+          },
+        ],
+      },
+    ],
   },
-  plugins: [
-    htmlPlugin, 
-    new webpack.DefinePlugin(envKeys)
-  ]
+  plugins: [htmlPlugin, new webpack.DefinePlugin(envKeys)],
 };
