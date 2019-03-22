@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Chart, Bar, Line } from 'react-chartjs-2';
+import { NavLink } from 'reactstrap';
 import moment from 'moment';
 import {
   Badge,
@@ -21,15 +22,15 @@ import {
   Row,
   Table,
 } from 'reactstrap';
-import Widget03 from '../../views/Widgets/Widget03';
-import CustomTooltips from '../../components/CustomTooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
+import Widget03 from '../Widgets/Widget03';
+import CustomTooltips from '../../components/CustomTooltips';
 
-const brandPrimary = getStyle('--primary')
-const brandSuccess = getStyle('--success')
-const brandInfo = getStyle('--info')
-const brandWarning = getStyle('--warning')
-const brandDanger = getStyle('--danger')
+const brandPrimary = getStyle('--primary');
+const brandSuccess = getStyle('--success');
+const brandInfo = getStyle('--info');
+const brandWarning = getStyle('--warning');
+const brandDanger = getStyle('--danger');
 
 // Card Chart 1
 const cardChartData1 = {
@@ -47,7 +48,7 @@ const cardChartData1 = {
 const cardChartOpts1 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   maintainAspectRatio: false,
   legend: {
@@ -64,17 +65,18 @@ const cardChartOpts1 = {
           fontSize: 2,
           fontColor: 'transparent',
         },
-
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
         ticks: {
           display: false,
-          min: Math.min.apply(Math, cardChartData1.datasets[0].data) - 5,
-          max: Math.max.apply(Math, cardChartData1.datasets[0].data) + 5,
+          min: Math.min(...cardChartData1.datasets[0].data) - 5,
+          max: Math.max(...cardChartData1.datasets[0].data) + 5,
         },
-      }],
+      },
+    ],
   },
   elements: {
     line: {
@@ -85,11 +87,27 @@ const cardChartOpts1 = {
       hitRadius: 10,
       hoverRadius: 4,
     },
-  }
-}
+  },
+};
 
-const chartTempData = [{"x":"2018-10-16T18:00:04.000Z","y":"79.1366"},{"x":"2018-10-16T18:15:04.000Z","y":"79.25"},{"x":"2018-10-16T18:30:04.000Z","y":"79.3616"},{"x":"2018-10-16T18:45:04.000Z","y":"78.9116"},{"x":"2018-10-16T19:00:03.000Z","y":"78.8"},{"x":"2018-10-16T19:15:04.000Z","y":"78.575"},{"x":"2018-10-16T19:30:04.000Z","y":"78.6866"},{"x":"2018-10-16T19:45:04.000Z","y":"78.9116"},{"x":"2018-10-16T20:00:04.000Z","y":"79.025"},{"x":"2018-10-16T20:15:04.000Z","y":"78.9116"},{"x":"2018-10-16T20:30:04.000Z","y":"78.6866"},{"x":"2018-10-16T20:45:04.000Z","y":"78.575"},{"x":"2018-10-16T21:00:04.000Z","y":"78.9116"},{"x":"2018-10-16T21:15:04.000Z","y":"79.025"},{"x":"2018-10-16T21:30:05.000Z","y":"79.25"},{"x":"2018-10-16T21:45:03.000Z","y":"78.9116"}];
-
+const chartTempData = [
+  { x: '2018-10-16T18:00:04.000Z', y: '79.1366' },
+  { x: '2018-10-16T18:15:04.000Z', y: '79.25' },
+  { x: '2018-10-16T18:30:04.000Z', y: '79.3616' },
+  { x: '2018-10-16T18:45:04.000Z', y: '78.9116' },
+  { x: '2018-10-16T19:00:03.000Z', y: '78.8' },
+  { x: '2018-10-16T19:15:04.000Z', y: '78.575' },
+  { x: '2018-10-16T19:30:04.000Z', y: '78.6866' },
+  { x: '2018-10-16T19:45:04.000Z', y: '78.9116' },
+  { x: '2018-10-16T20:00:04.000Z', y: '79.025' },
+  { x: '2018-10-16T20:15:04.000Z', y: '78.9116' },
+  { x: '2018-10-16T20:30:04.000Z', y: '78.6866' },
+  { x: '2018-10-16T20:45:04.000Z', y: '78.575' },
+  { x: '2018-10-16T21:00:04.000Z', y: '78.9116' },
+  { x: '2018-10-16T21:15:04.000Z', y: '79.025' },
+  { x: '2018-10-16T21:30:05.000Z', y: '79.25' },
+  { x: '2018-10-16T21:45:03.000Z', y: '78.9116' },
+];
 
 // Card Chart 2
 const cardChartData2 = {
@@ -105,34 +123,38 @@ const cardChartData2 = {
 const cardChartOpts2 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   maintainAspectRatio: false,
   legend: {
     display: false,
   },
   scales: {
-    xAxes: [{
-      position: 'bottom',
-      type: 'time',
-      time: {
-        displayFormats: {
-          unit: 'minute'
-        }
+    xAxes: [
+      {
+        position: 'bottom',
+        type: 'time',
+        time: {
+          displayFormats: {
+            unit: 'minute',
+          },
+        },
+        display: false,
+        ticks: {
+          autoSkip: true,
+          maxRotation: 60,
+          minRotation: 90,
+        },
       },
-      display: false,
-      ticks: {
-        autoSkip: true,
-        maxRotation: 60,
-        minRotation: 90
-      }
-    }],
-    yAxes: [{
-      display: false,
-      ticks: {
-        padding: 5
-      }
-    }]
+    ],
+    yAxes: [
+      {
+        display: false,
+        ticks: {
+          padding: 5,
+        },
+      },
+    ],
   },
   elements: {
     line: {
@@ -141,7 +163,7 @@ const cardChartOpts2 = {
     },
     point: {
       radius: 3,
-      hitRadius:  10,
+      hitRadius: 10,
       hoverRadius: 4,
     },
   },
@@ -163,7 +185,7 @@ const cardChartData3 = {
 const cardChartOpts3 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   maintainAspectRatio: false,
   legend: {
@@ -173,11 +195,13 @@ const cardChartOpts3 = {
     xAxes: [
       {
         display: false,
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
-      }],
+      },
+    ],
   },
   elements: {
     line: {
@@ -207,7 +231,7 @@ const cardChartData4 = {
 const cardChartOpts4 = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   maintainAspectRatio: false,
   legend: {
@@ -218,11 +242,13 @@ const cardChartOpts4 = {
       {
         display: false,
         barPercentage: 0.6,
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
-      }],
+      },
+    ],
   },
 };
 
@@ -234,7 +260,7 @@ const socialBoxData = [
   { data: [35, 23, 56, 22, 97, 23, 64], label: 'google' },
 ];
 
-const makeSocialBoxData = (dataSetNo) => {
+const makeSocialBoxData = dataSetNo => {
   const dataset = socialBoxData[dataSetNo];
   const data = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -255,7 +281,7 @@ const makeSocialBoxData = (dataSetNo) => {
 const socialChartOpts = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   responsive: true,
   maintainAspectRatio: false,
@@ -266,11 +292,13 @@ const socialChartOpts = {
     xAxes: [
       {
         display: false,
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
-      }],
+      },
+    ],
   },
   elements: {
     point: {
@@ -313,11 +341,19 @@ const sparkLineChartData = [
 const makeSparkLineData = (dataSetNo, variant) => {
   const dataset = sparkLineChartData[dataSetNo];
   const data = {
-    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    labels: [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ],
     datasets: [
       {
         backgroundColor: 'transparent',
-        borderColor: variant ? variant : '#c2cfd6',
+        borderColor: variant || '#c2cfd6',
         data: dataset.data,
         label: dataset.label,
       },
@@ -329,7 +365,7 @@ const makeSparkLineData = (dataSetNo, variant) => {
 const sparklineChartOpts = {
   tooltips: {
     enabled: false,
-    custom: CustomTooltips
+    custom: CustomTooltips,
   },
   responsive: true,
   maintainAspectRatio: true,
@@ -337,11 +373,13 @@ const sparklineChartOpts = {
     xAxes: [
       {
         display: false,
-      }],
+      },
+    ],
     yAxes: [
       {
         display: false,
-      }],
+      },
+    ],
   },
   elements: {
     line: {
@@ -361,24 +399,53 @@ const sparklineChartOpts = {
 
 // Main Chart
 
-//Random Numbers
+// Random Numbers
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-var elements = 27;
-var data1 = [];
-var data2 = [];
-var data3 = [];
+const elements = 27;
+const data1 = [];
+const data2 = [];
+const data3 = [];
 
-for (var i = 0; i <= elements; i++) {
+for (let i = 0; i <= elements; i++) {
   data1.push(random(50, 200));
   data2.push(random(80, 100));
   data3.push(65);
 }
 
 const mainChart = {
-  labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+  labels: [
+    'Mo',
+    'Tu',
+    'We',
+    'Th',
+    'Fr',
+    'Sa',
+    'Su',
+    'Mo',
+    'Tu',
+    'We',
+    'Th',
+    'Fr',
+    'Sa',
+    'Su',
+    'Mo',
+    'Tu',
+    'We',
+    'Th',
+    'Fr',
+    'Sa',
+    'Su',
+    'Mo',
+    'Tu',
+    'We',
+    'Th',
+    'Fr',
+    'Sa',
+    'Su',
+  ],
   datasets: [
     {
       label: 'My First dataset',
@@ -416,10 +483,13 @@ const mainChartOpts = {
     mode: 'index',
     position: 'nearest',
     callbacks: {
-      labelColor: function(tooltipItem, chart) {
-        return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor }
-      }
-    }
+      labelColor(tooltipItem, chart) {
+        return {
+          backgroundColor:
+            chart.data.datasets[tooltipItem.datasetIndex].borderColor,
+        };
+      },
+    },
   },
   maintainAspectRatio: false,
   legend: {
@@ -431,7 +501,8 @@ const mainChartOpts = {
         gridLines: {
           drawOnChartArea: false,
         },
-      }],
+      },
+    ],
     yAxes: [
       {
         ticks: {
@@ -440,7 +511,8 @@ const mainChartOpts = {
           stepSize: Math.ceil(250 / 5),
           max: 250,
         },
-      }],
+      },
+    ],
   },
   elements: {
     point: {
@@ -464,8 +536,8 @@ class Dashboard extends Component {
     this.state = {
       dropdownOpen: false,
       radioSelected: 2,
-      tempData: {}, 
-      latestTemp: undefined
+      tempData: {},
+      latestTemp: undefined,
     };
   }
 
@@ -473,10 +545,13 @@ class Dashboard extends Component {
     fetch('http://www.mikesfishtank.com/api/retrieveTempData.php?interval=4')
       .then(res => res.json())
       .then(
-        (result) => {
-          const temps = result.map(function(obj) {
-            let rObj = {};
-            rObj.x = moment(obj._timestamp).format('YYYY-MM-DD hh:mm:ss');
+        result => {
+          const temps = result.map(obj => {
+            const rObj = {};
+            rObj.x = moment
+              .utc(obj._timestamp)
+              .local()
+              .format('YYYY-MM-DD HH:mm:ss');
             rObj.y = obj.temperature;
             // return {'x': moment(obj._timestamp).format('YYYY-MM-DD hh:mm:ss'), 'y': obj.temperature}
             return rObj;
@@ -493,21 +568,21 @@ class Dashboard extends Component {
           };
           this.setState({
             tempData: dataset,
-            latestTemp: latestTemp
+            latestTemp,
           });
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
-        (error) => {
+        error => {
           this.setState({
             isLoaded: true,
-            error
+            error,
           });
         }
-      )
+      );
   }
- 
+
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
@@ -516,30 +591,52 @@ class Dashboard extends Component {
 
   onRadioBtnClick(radioSelected) {
     this.setState({
-      radioSelected: radioSelected,
+      radioSelected,
     });
   }
 
   round(number, decimals) {
-    if(number)
-      return parseFloat(number).toFixed(decimals);
+    if (number) return parseFloat(number).toFixed(decimals);
   }
 
   render() {
-
     return (
       <div className="animated fadeIn">
         <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
+                <ButtonGroup className="float-right">
+                  <Dropdown
+                    id="card3"
+                    isOpen={this.state.card1}
+                    toggle={() => {
+                      this.setState({ card1: !this.state.card1 });
+                    }}
+                  >
+                    <DropdownToggle caret className="p-0" color="transparent">
+                      <i className="icon-settings" />
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                      <DropdownItem href="/#/base/breadcrumbs">
+                        More Details
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                </ButtonGroup>
                 <div className="text-value">
-                  {this.round(this.state.latestTemp, 2)}<span style={{ fontSize: '0.75em' }}> °F</span>
+                  {this.round(this.state.latestTemp, 2)}
+                  <span style={{ fontSize: '0.75em' }}> °F</span>
                 </div>
                 <div>Last 4 hours</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Line ref={this.myRef} data={this.state.tempData} options={cardChartOpts2} height={70} />
+                <Line
+                  ref={this.myRef}
+                  data={this.state.tempData}
+                  options={cardChartOpts2}
+                  height={70}
+                />
               </div>
             </Card>
           </Col>
@@ -548,9 +645,15 @@ class Dashboard extends Component {
             <Card className="text-white bg-primary">
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
-                  <Dropdown id='card2' isOpen={this.state.card2} toggle={() => { this.setState({ card2: !this.state.card2 }); }}>
+                  <Dropdown
+                    id="card2"
+                    isOpen={this.state.card2}
+                    toggle={() => {
+                      this.setState({ card2: !this.state.card2 });
+                    }}
+                  >
                     <DropdownToggle className="p-0" color="transparent">
-                      <i className="icon-location-pin"></i>
+                      <i className="icon-location-pin" />
                     </DropdownToggle>
                     <DropdownMenu right>
                       <DropdownItem>Action</DropdownItem>
@@ -563,7 +666,11 @@ class Dashboard extends Component {
                 <div>PH</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Line data={cardChartData1} options={cardChartOpts1} height={70} />
+                <Line
+                  data={cardChartData1}
+                  options={cardChartOpts1}
+                  height={70}
+                />
               </div>
             </Card>
           </Col>
@@ -572,9 +679,15 @@ class Dashboard extends Component {
             <Card className="text-white bg-warning">
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
-                  <Dropdown id='card3' isOpen={this.state.card3} toggle={() => { this.setState({ card3: !this.state.card3 }); }}>
+                  <Dropdown
+                    id="card3"
+                    isOpen={this.state.card3}
+                    toggle={() => {
+                      this.setState({ card3: !this.state.card3 });
+                    }}
+                  >
                     <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
+                      <i className="icon-settings" />
                     </DropdownToggle>
                     <DropdownMenu right>
                       <DropdownItem>Action</DropdownItem>
@@ -587,7 +700,11 @@ class Dashboard extends Component {
                 <div>SG</div>
               </CardBody>
               <div className="chart-wrapper" style={{ height: '70px' }}>
-                <Line data={cardChartData3} options={cardChartOpts3} height={70} />
+                <Line
+                  data={cardChartData3}
+                  options={cardChartOpts3}
+                  height={70}
+                />
               </div>
             </Card>
           </Col>
@@ -596,9 +713,15 @@ class Dashboard extends Component {
             <Card className="text-white bg-danger">
               <CardBody className="pb-0">
                 <ButtonGroup className="float-right">
-                  <ButtonDropdown id='card4' isOpen={this.state.card4} toggle={() => { this.setState({ card4: !this.state.card4 }); }}>
+                  <ButtonDropdown
+                    id="card4"
+                    isOpen={this.state.card4}
+                    toggle={() => {
+                      this.setState({ card4: !this.state.card4 });
+                    }}
+                  >
                     <DropdownToggle caret className="p-0" color="transparent">
-                      <i className="icon-settings"></i>
+                      <i className="icon-settings" />
                     </DropdownToggle>
                     <DropdownMenu right>
                       <DropdownItem>Action</DropdownItem>
@@ -611,7 +734,12 @@ class Dashboard extends Component {
                 <div>ORP</div>
               </CardBody>
               <div className="chart-wrapper mx-3" style={{ height: '70px' }}>
-                <Bar data={cardChartData4} options={cardChartOpts4} height={70} />
+                <Line
+                  data={cardChartData4}
+                  options={cardChartOpts3}
+                  height={70}
+                />
+                {/* <Bar data={cardChartData4} options={cardChartOpts4} height={70} /> */}
               </div>
             </Card>
           </Col>
@@ -626,8 +754,13 @@ class Dashboard extends Component {
                     <div className="small text-muted">November 2015</div>
                   </Col>
                 </Row>
-                <div className="chart-wrapper" style={{ marginTop: 30 + 'px' }}>
-                  <img alt="video" className="rounded img-fluid" style={{width: '100%'}} src="http://69.245.219.195:8080/stream/video.mjpeg" />
+                <div className="chart-wrapper" style={{ marginTop: `${30}px` }}>
+                  <img
+                    alt="video"
+                    className="rounded img-fluid"
+                    style={{ width: '100%' }}
+                    src="http://69.245.219.195:8080/stream/video.mjpeg"
+                  />
                 </div>
               </CardBody>
             </Card>
@@ -643,17 +776,43 @@ class Dashboard extends Component {
                     <div className="small text-muted">November 2015</div>
                   </Col>
                   <Col sm="7" className="d-none d-sm-inline-block">
-                    <Button color="primary" className="float-right"><i className="icon-cloud-download"></i></Button>
-                    <ButtonToolbar className="float-right" aria-label="Toolbar with button groups">
+                    <Button color="primary" className="float-right">
+                      <i className="icon-cloud-download" />
+                    </Button>
+                    <ButtonToolbar
+                      className="float-right"
+                      aria-label="Toolbar with button groups"
+                    >
                       <ButtonGroup className="mr-3" aria-label="First group">
-                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(1)} active={this.state.radioSelected === 1}>Day</Button>
-                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(2)} active={this.state.radioSelected === 2}>Month</Button>
-                        <Button color="outline-secondary" onClick={() => this.onRadioBtnClick(3)} active={this.state.radioSelected === 3}>Year</Button>
+                        <Button
+                          color="outline-secondary"
+                          onClick={() => this.onRadioBtnClick(1)}
+                          active={this.state.radioSelected === 1}
+                        >
+                          Day
+                        </Button>
+                        <Button
+                          color="outline-secondary"
+                          onClick={() => this.onRadioBtnClick(2)}
+                          active={this.state.radioSelected === 2}
+                        >
+                          Month
+                        </Button>
+                        <Button
+                          color="outline-secondary"
+                          onClick={() => this.onRadioBtnClick(3)}
+                          active={this.state.radioSelected === 3}
+                        >
+                          Year
+                        </Button>
                       </ButtonGroup>
                     </ButtonToolbar>
                   </Col>
                 </Row>
-                <div className="chart-wrapper" style={{ height: 300 + 'px', marginTop: 40 + 'px' }}>
+                <div
+                  className="chart-wrapper"
+                  style={{ height: `${300}px`, marginTop: `${40}px` }}
+                >
                   <Line data={mainChart} options={mainChartOpts} height={300} />
                 </div>
               </CardBody>
@@ -662,27 +821,47 @@ class Dashboard extends Component {
                   <Col sm={12} md className="mb-sm-2 mb-0">
                     <div className="text-muted">Visits</div>
                     <strong>29.703 Users (40%)</strong>
-                    <Progress className="progress-xs mt-2" color="success" value="40" />
+                    <Progress
+                      className="progress-xs mt-2"
+                      color="success"
+                      value="40"
+                    />
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0 d-md-down-none">
                     <div className="text-muted">Unique</div>
                     <strong>24.093 Users (20%)</strong>
-                    <Progress className="progress-xs mt-2" color="info" value="20" />
+                    <Progress
+                      className="progress-xs mt-2"
+                      color="info"
+                      value="20"
+                    />
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0">
                     <div className="text-muted">Pageviews</div>
                     <strong>78.706 Views (60%)</strong>
-                    <Progress className="progress-xs mt-2" color="warning" value="60" />
+                    <Progress
+                      className="progress-xs mt-2"
+                      color="warning"
+                      value="60"
+                    />
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0">
                     <div className="text-muted">New Users</div>
                     <strong>22.123 Users (80%)</strong>
-                    <Progress className="progress-xs mt-2" color="danger" value="80" />
+                    <Progress
+                      className="progress-xs mt-2"
+                      color="danger"
+                      value="80"
+                    />
                   </Col>
                   <Col sm={12} md className="mb-sm-2 mb-0 d-md-down-none">
                     <div className="text-muted">Bounce Rate</div>
                     <strong>Average Rate (40.15%)</strong>
-                    <Progress className="progress-xs mt-2" color="primary" value="40" />
+                    <Progress
+                      className="progress-xs mt-2"
+                      color="primary"
+                      value="40"
+                    />
                   </Col>
                 </Row>
               </CardFooter>
@@ -692,9 +871,19 @@ class Dashboard extends Component {
 
         <Row>
           <Col xs="6" sm="6" lg="3">
-            <Widget03 dataBox={() => ({ variant: 'facebook', friends: '89k', feeds: '459' })} >
+            <Widget03
+              dataBox={() => ({
+                variant: 'facebook',
+                friends: '89k',
+                feeds: '459',
+              })}
+            >
               <div className="chart-wrapper">
-                <Line data={makeSocialBoxData(0)} options={socialChartOpts} height={90} />
+                <Line
+                  data={makeSocialBoxData(0)}
+                  options={socialChartOpts}
+                  height={90}
+                />
               </div>
             </Widget03>
           </Col>
@@ -702,15 +891,21 @@ class Dashboard extends Component {
           <Col xs="6" sm="6" lg="3">
             <div className="brand-card">
               <div className="brand-card-header bg-twitter">
-                <i className="fa fa-twitter"></i>
+                <i className="fa fa-twitter" />
                 <div className="chart-wrapper">
-                  <Line data={makeSocialBoxData(1)} options={socialChartOpts} height={90} />
+                  <Line
+                    data={makeSocialBoxData(1)}
+                    options={socialChartOpts}
+                    height={90}
+                  />
                 </div>
               </div>
               <div className="brand-card-body">
                 <div>
                   <div className="text-value">973k</div>
-                  <div className="text-uppercase text-muted small">followers</div>
+                  <div className="text-uppercase text-muted small">
+                    followers
+                  </div>
                 </div>
                 <div>
                   <div className="text-value">1.792</div>
@@ -723,15 +918,21 @@ class Dashboard extends Component {
           <Col xs="6" sm="6" lg="3">
             <div className="brand-card">
               <div className="brand-card-header bg-linkedin">
-                <i className="fa fa-linkedin"></i>
+                <i className="fa fa-linkedin" />
                 <div className="chart-wrapper">
-                  <Line data={makeSocialBoxData(2)} options={socialChartOpts} height={90} />
+                  <Line
+                    data={makeSocialBoxData(2)}
+                    options={socialChartOpts}
+                    height={90}
+                  />
                 </div>
               </div>
               <div className="brand-card-body">
                 <div>
                   <div className="text-value">500+</div>
-                  <div className="text-uppercase text-muted small">contacts</div>
+                  <div className="text-uppercase text-muted small">
+                    contacts
+                  </div>
                 </div>
                 <div>
                   <div className="text-value">292</div>
@@ -744,15 +945,21 @@ class Dashboard extends Component {
           <Col xs="6" sm="6" lg="3">
             <div className="brand-card">
               <div className="brand-card-header bg-google-plus">
-                <i className="fa fa-google-plus"></i>
+                <i className="fa fa-google-plus" />
                 <div className="chart-wrapper">
-                  <Line data={makeSocialBoxData(3)} options={socialChartOpts} height={90} />
+                  <Line
+                    data={makeSocialBoxData(3)}
+                    options={socialChartOpts}
+                    height={90}
+                  />
                 </div>
               </div>
               <div className="brand-card-body">
                 <div>
                   <div className="text-value">894</div>
-                  <div className="text-uppercase text-muted small">followers</div>
+                  <div className="text-uppercase text-muted small">
+                    followers
+                  </div>
                 </div>
                 <div>
                   <div className="text-value">92</div>
@@ -766,9 +973,7 @@ class Dashboard extends Component {
         <Row>
           <Col>
             <Card>
-              <CardHeader>
-                Traffic {' & '} Sales
-              </CardHeader>
+              <CardHeader>Traffic {' & '} Sales</CardHeader>
               <CardBody>
                 <Row>
                   <Col xs="12" md="6" xl="6">
@@ -779,17 +984,29 @@ class Dashboard extends Component {
                           <br />
                           <strong className="h4">9,123</strong>
                           <div className="chart-wrapper">
-                            <Line data={makeSparkLineData(0, brandPrimary)} options={sparklineChartOpts} width={100} height={30} />
+                            <Line
+                              data={makeSparkLineData(0, brandPrimary)}
+                              options={sparklineChartOpts}
+                              width={100}
+                              height={30}
+                            />
                           </div>
                         </div>
                       </Col>
                       <Col sm="6">
                         <div className="callout callout-danger">
-                          <small className="text-muted">Recurring Clients</small>
+                          <small className="text-muted">
+                            Recurring Clients
+                          </small>
                           <br />
                           <strong className="h4">22,643</strong>
                           <div className="chart-wrapper">
-                            <Line data={makeSparkLineData(1, brandDanger)} options={sparklineChartOpts} width={100} height={30} />
+                            <Line
+                              data={makeSparkLineData(1, brandDanger)}
+                              options={sparklineChartOpts}
+                              width={100}
+                              height={30}
+                            />
                           </div>
                         </div>
                       </Col>
@@ -797,87 +1014,136 @@ class Dashboard extends Component {
                     <hr className="mt-0" />
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                          Monday
-                        </span>
+                        <span className="progress-group-text">Monday</span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="34" />
-                        <Progress className="progress-xs" color="danger" value="78" />
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="34"
+                        />
+                        <Progress
+                          className="progress-xs"
+                          color="danger"
+                          value="78"
+                        />
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Tuesday
-                        </span>
+                        <span className="progress-group-text">Tuesday</span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="56" />
-                        <Progress className="progress-xs" color="danger" value="94" />
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="56"
+                        />
+                        <Progress
+                          className="progress-xs"
+                          color="danger"
+                          value="94"
+                        />
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Wednesday
-                        </span>
+                        <span className="progress-group-text">Wednesday</span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="12" />
-                        <Progress className="progress-xs" color="danger" value="67" />
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="12"
+                        />
+                        <Progress
+                          className="progress-xs"
+                          color="danger"
+                          value="67"
+                        />
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Thursday
-                        </span>
+                        <span className="progress-group-text">Thursday</span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="43" />
-                        <Progress className="progress-xs" color="danger" value="91" />
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="43"
+                        />
+                        <Progress
+                          className="progress-xs"
+                          color="danger"
+                          value="91"
+                        />
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Friday
-                        </span>
+                        <span className="progress-group-text">Friday</span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="22" />
-                        <Progress className="progress-xs" color="danger" value="73" />
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="22"
+                        />
+                        <Progress
+                          className="progress-xs"
+                          color="danger"
+                          value="73"
+                        />
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Saturday
-                        </span>
+                        <span className="progress-group-text">Saturday</span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="53" />
-                        <Progress className="progress-xs" color="danger" value="82" />
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="53"
+                        />
+                        <Progress
+                          className="progress-xs"
+                          color="danger"
+                          value="82"
+                        />
                       </div>
                     </div>
                     <div className="progress-group mb-4">
                       <div className="progress-group-prepend">
-                        <span className="progress-group-text">
-                        Sunday
-                        </span>
+                        <span className="progress-group-text">Sunday</span>
                       </div>
                       <div className="progress-group-bars">
-                        <Progress className="progress-xs" color="info" value="9" />
-                        <Progress className="progress-xs" color="danger" value="69" />
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="9"
+                        />
+                        <Progress
+                          className="progress-xs"
+                          color="danger"
+                          value="69"
+                        />
                       </div>
                     </div>
                     <div className="legend text-center">
                       <small>
-                        <sup className="px-1"><Badge pill color="info">&nbsp;</Badge></sup>
-                        New clients
-                        &nbsp;
-                        <sup className="px-1"><Badge pill color="danger">&nbsp;</Badge></sup>
+                        <sup className="px-1">
+                          <Badge pill color="info">
+                            &nbsp;
+                          </Badge>
+                        </sup>
+                        New clients &nbsp;
+                        <sup className="px-1">
+                          <Badge pill color="danger">
+                            &nbsp;
+                          </Badge>
+                        </sup>
                         Recurring clients
                       </small>
                     </div>
@@ -890,7 +1156,12 @@ class Dashboard extends Component {
                           <br />
                           <strong className="h4">78,623</strong>
                           <div className="chart-wrapper">
-                            <Line data={makeSparkLineData(2, brandWarning)} options={sparklineChartOpts} width={100} height={30} />
+                            <Line
+                              data={makeSparkLineData(2, brandWarning)}
+                              options={sparklineChartOpts}
+                              width={100}
+                              height={30}
+                            />
                           </div>
                         </div>
                       </Col>
@@ -900,7 +1171,12 @@ class Dashboard extends Component {
                           <br />
                           <strong className="h4">49,123</strong>
                           <div className="chart-wrapper">
-                            <Line data={makeSparkLineData(3, brandSuccess)} options={sparklineChartOpts} width={100} height={30} />
+                            <Line
+                              data={makeSparkLineData(3, brandSuccess)}
+                              options={sparklineChartOpts}
+                              width={100}
+                              height={30}
+                            />
                           </div>
                         </div>
                       </Col>
@@ -909,295 +1185,447 @@ class Dashboard extends Component {
                     <ul>
                       <div className="progress-group">
                         <div className="progress-group-header">
-                          <i className="icon-user progress-group-icon"></i>
+                          <i className="icon-user progress-group-icon" />
                           <span className="title">Male</span>
                           <span className="ml-auto font-weight-bold">43%</span>
                         </div>
                         <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="warning" value="43" />
+                          <Progress
+                            className="progress-xs"
+                            color="warning"
+                            value="43"
+                          />
                         </div>
                       </div>
                       <div className="progress-group mb-5">
                         <div className="progress-group-header">
-                          <i className="icon-user-female progress-group-icon"></i>
+                          <i className="icon-user-female progress-group-icon" />
                           <span className="title">Female</span>
                           <span className="ml-auto font-weight-bold">37%</span>
                         </div>
                         <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="warning" value="37" />
+                          <Progress
+                            className="progress-xs"
+                            color="warning"
+                            value="37"
+                          />
                         </div>
                       </div>
                       <div className="progress-group">
                         <div className="progress-group-header">
-                          <i className="icon-globe progress-group-icon"></i>
+                          <i className="icon-globe progress-group-icon" />
                           <span className="title">Organic Search</span>
-                          <span className="ml-auto font-weight-bold">191,235 <span className="text-muted small">(56%)</span></span>
+                          <span className="ml-auto font-weight-bold">
+                            191,235{' '}
+                            <span className="text-muted small">(56%)</span>
+                          </span>
                         </div>
                         <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="success" value="56" />
+                          <Progress
+                            className="progress-xs"
+                            color="success"
+                            value="56"
+                          />
                         </div>
                       </div>
                       <div className="progress-group">
                         <div className="progress-group-header">
-                          <i className="icon-social-facebook progress-group-icon"></i>
+                          <i className="icon-social-facebook progress-group-icon" />
                           <span className="title">Facebook</span>
-                          <span className="ml-auto font-weight-bold">51,223 <span className="text-muted small">(15%)</span></span>
+                          <span className="ml-auto font-weight-bold">
+                            51,223{' '}
+                            <span className="text-muted small">(15%)</span>
+                          </span>
                         </div>
                         <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="success" value="15" />
+                          <Progress
+                            className="progress-xs"
+                            color="success"
+                            value="15"
+                          />
                         </div>
                       </div>
                       <div className="progress-group">
                         <div className="progress-group-header">
-                          <i className="icon-social-twitter progress-group-icon"></i>
+                          <i className="icon-social-twitter progress-group-icon" />
                           <span className="title">Twitter</span>
-                          <span className="ml-auto font-weight-bold">37,564 <span className="text-muted small">(11%)</span></span>
+                          <span className="ml-auto font-weight-bold">
+                            37,564{' '}
+                            <span className="text-muted small">(11%)</span>
+                          </span>
                         </div>
                         <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="success" value="11" />
+                          <Progress
+                            className="progress-xs"
+                            color="success"
+                            value="11"
+                          />
                         </div>
                       </div>
                       <div className="progress-group">
                         <div className="progress-group-header">
-                          <i className="icon-social-linkedin progress-group-icon"></i>
+                          <i className="icon-social-linkedin progress-group-icon" />
                           <span className="title">LinkedIn</span>
-                          <span className="ml-auto font-weight-bold">27,319 <span className="text-muted small">(8%)</span></span>
+                          <span className="ml-auto font-weight-bold">
+                            27,319{' '}
+                            <span className="text-muted small">(8%)</span>
+                          </span>
                         </div>
                         <div className="progress-group-bars">
-                          <Progress className="progress-xs" color="success" value="8" />
+                          <Progress
+                            className="progress-xs"
+                            color="success"
+                            value="8"
+                          />
                         </div>
                       </div>
                       <div className="divider text-center">
-                        <Button color="link" size="sm" className="text-muted" data-toggle="tooltip" data-placement="top"
-                                title="" data-original-title="show more"><i className="icon-options"></i></Button>
+                        <Button
+                          color="link"
+                          size="sm"
+                          className="text-muted"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title=""
+                          data-original-title="show more"
+                        >
+                          <i className="icon-options" />
+                        </Button>
                       </div>
                     </ul>
                   </Col>
                 </Row>
                 <br />
-                <Table hover responsive className="table-outline mb-0 d-none d-sm-table">
+                <Table
+                  hover
+                  responsive
+                  className="table-outline mb-0 d-none d-sm-table"
+                >
                   <thead className="thead-light">
-                  <tr>
-                    <th className="text-center"><i className="icon-people"></i></th>
-                    <th>User</th>
-                    <th className="text-center">Country</th>
-                    <th>Usage</th>
-                    <th className="text-center">Payment Method</th>
-                    <th>Activity</th>
-                  </tr>
+                    <tr>
+                      <th className="text-center">
+                        <i className="icon-people" />
+                      </th>
+                      <th>User</th>
+                      <th className="text-center">Country</th>
+                      <th>Usage</th>
+                      <th className="text-center">Payment Method</th>
+                      <th>Activity</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td className="text-center">
-                      <div className="avatar">
-                        <img src={require('../../../public/assets/img/avatars/1.jpg')} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                        <span className="avatar-status badge-success"></span>
-                      </div>
-                    </td>
-                    <td>
-                      <div>Yiorgos Avraamu</div>
-                      <div className="small text-muted">
-                        <span>New</span> | Registered: Jan 1, 2015
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <i className="flag-icon flag-icon-us h4 mb-0" title="us" id="us"></i>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-left">
-                          <strong>50%</strong>
+                    <tr>
+                      <td className="text-center">
+                        <div className="avatar">
+                          <img
+                            src={require('../../../public/assets/img/avatars/1.jpg')}
+                            className="img-avatar"
+                            alt="admin@bootstrapmaster.com"
+                          />
+                          <span className="avatar-status badge-success" />
                         </div>
-                        <div className="float-right">
-                          <small className="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                      </td>
+                      <td>
+                        <div>Yiorgos Avraamu</div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
                         </div>
-                      </div>
-                      <Progress className="progress-xs" color="success" value="50" />
-                    </td>
-                    <td className="text-center">
-                      <i className="fa fa-cc-mastercard" style={{ fontSize: 24 + 'px' }}></i>
-                    </td>
-                    <td>
-                      <div className="small text-muted">Last login</div>
-                      <strong>10 sec ago</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-center">
-                      <div className="avatar">
-                        <img src={require('../../../public/assets/img/avatars/2.jpg')} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                        <span className="avatar-status badge-danger"></span>
-                      </div>
-                    </td>
-                    <td>
-                      <div>Avram Tarasios</div>
-                      <div className="small text-muted">
-
-                        <span>Recurring</span> | Registered: Jan 1, 2015
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <i className="flag-icon flag-icon-br h4 mb-0" title="br" id="br"></i>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-left">
-                          <strong>10%</strong>
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="flag-icon flag-icon-us h4 mb-0"
+                          title="us"
+                          id="us"
+                        />
+                      </td>
+                      <td>
+                        <div className="clearfix">
+                          <div className="float-left">
+                            <strong>50%</strong>
+                          </div>
+                          <div className="float-right">
+                            <small className="text-muted">
+                              Jun 11, 2015 - Jul 10, 2015
+                            </small>
+                          </div>
                         </div>
-                        <div className="float-right">
-                          <small className="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                        <Progress
+                          className="progress-xs"
+                          color="success"
+                          value="50"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="fa fa-cc-mastercard"
+                          style={{ fontSize: `${24}px` }}
+                        />
+                      </td>
+                      <td>
+                        <div className="small text-muted">Last login</div>
+                        <strong>10 sec ago</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-center">
+                        <div className="avatar">
+                          <img
+                            src={require('../../../public/assets/img/avatars/2.jpg')}
+                            className="img-avatar"
+                            alt="admin@bootstrapmaster.com"
+                          />
+                          <span className="avatar-status badge-danger" />
                         </div>
-                      </div>
-                      <Progress className="progress-xs" color="info" value="10" />
-                    </td>
-                    <td className="text-center">
-                      <i className="fa fa-cc-visa" style={{ fontSize: 24 + 'px' }}></i>
-                    </td>
-                    <td>
-                      <div className="small text-muted">Last login</div>
-                      <strong>5 minutes ago</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-center">
-                      <div className="avatar">
-                        <img src={require('../../../public/assets/img/avatars/3.jpg')} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                        <span className="avatar-status badge-warning"></span>
-                      </div>
-                    </td>
-                    <td>
-                      <div>Quintin Ed</div>
-                      <div className="small text-muted">
-                        <span>New</span> | Registered: Jan 1, 2015
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <i className="flag-icon flag-icon-in h4 mb-0" title="in" id="in"></i>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-left">
-                          <strong>74%</strong>
+                      </td>
+                      <td>
+                        <div>Avram Tarasios</div>
+                        <div className="small text-muted">
+                          <span>Recurring</span> | Registered: Jan 1, 2015
                         </div>
-                        <div className="float-right">
-                          <small className="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="flag-icon flag-icon-br h4 mb-0"
+                          title="br"
+                          id="br"
+                        />
+                      </td>
+                      <td>
+                        <div className="clearfix">
+                          <div className="float-left">
+                            <strong>10%</strong>
+                          </div>
+                          <div className="float-right">
+                            <small className="text-muted">
+                              Jun 11, 2015 - Jul 10, 2015
+                            </small>
+                          </div>
                         </div>
-                      </div>
-                      <Progress className="progress-xs" color="warning" value="74" />
-                    </td>
-                    <td className="text-center">
-                      <i className="fa fa-cc-stripe" style={{ fontSize: 24 + 'px' }}></i>
-                    </td>
-                    <td>
-                      <div className="small text-muted">Last login</div>
-                      <strong>1 hour ago</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-center">
-                      <div className="avatar">
-                        <img src={require('../../../public/assets/img/avatars/4.jpg')} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                        <span className="avatar-status badge-secondary"></span>
-                      </div>
-                    </td>
-                    <td>
-                      <div>Enéas Kwadwo</div>
-                      <div className="small text-muted">
-                        <span>New</span> | Registered: Jan 1, 2015
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <i className="flag-icon flag-icon-fr h4 mb-0" title="fr" id="fr"></i>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-left">
-                          <strong>98%</strong>
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="10"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="fa fa-cc-visa"
+                          style={{ fontSize: `${24}px` }}
+                        />
+                      </td>
+                      <td>
+                        <div className="small text-muted">Last login</div>
+                        <strong>5 minutes ago</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-center">
+                        <div className="avatar">
+                          <img
+                            src={require('../../../public/assets/img/avatars/3.jpg')}
+                            className="img-avatar"
+                            alt="admin@bootstrapmaster.com"
+                          />
+                          <span className="avatar-status badge-warning" />
                         </div>
-                        <div className="float-right">
-                          <small className="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                      </td>
+                      <td>
+                        <div>Quintin Ed</div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
                         </div>
-                      </div>
-                      <Progress className="progress-xs" color="danger" value="98" />
-                    </td>
-                    <td className="text-center">
-                      <i className="fa fa-paypal" style={{ fontSize: 24 + 'px' }}></i>
-                    </td>
-                    <td>
-                      <div className="small text-muted">Last login</div>
-                      <strong>Last month</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-center">
-                      <div className="avatar">
-                        <img src={require('../../../public/assets/img/avatars/5.jpg')} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                        <span className="avatar-status badge-success"></span>
-                      </div>
-                    </td>
-                    <td>
-                      <div>Agapetus Tadeáš</div>
-                      <div className="small text-muted">
-                        <span>New</span> | Registered: Jan 1, 2015
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <i className="flag-icon flag-icon-es h4 mb-0" title="es" id="es"></i>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-left">
-                          <strong>22%</strong>
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="flag-icon flag-icon-in h4 mb-0"
+                          title="in"
+                          id="in"
+                        />
+                      </td>
+                      <td>
+                        <div className="clearfix">
+                          <div className="float-left">
+                            <strong>74%</strong>
+                          </div>
+                          <div className="float-right">
+                            <small className="text-muted">
+                              Jun 11, 2015 - Jul 10, 2015
+                            </small>
+                          </div>
                         </div>
-                        <div className="float-right">
-                          <small className="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                        <Progress
+                          className="progress-xs"
+                          color="warning"
+                          value="74"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="fa fa-cc-stripe"
+                          style={{ fontSize: `${24}px` }}
+                        />
+                      </td>
+                      <td>
+                        <div className="small text-muted">Last login</div>
+                        <strong>1 hour ago</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-center">
+                        <div className="avatar">
+                          <img
+                            src={require('../../../public/assets/img/avatars/4.jpg')}
+                            className="img-avatar"
+                            alt="admin@bootstrapmaster.com"
+                          />
+                          <span className="avatar-status badge-secondary" />
                         </div>
-                      </div>
-                      <Progress className="progress-xs" color="info" value="22" />
-                    </td>
-                    <td className="text-center">
-                      <i className="fa fa-google-wallet" style={{ fontSize: 24 + 'px' }}></i>
-                    </td>
-                    <td>
-                      <div className="small text-muted">Last login</div>
-                      <strong>Last week</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="text-center">
-                      <div className="avatar">
-                        <img src={require('../../../public/assets/img/avatars/6.jpg')} className="img-avatar" alt="admin@bootstrapmaster.com" />
-                        <span className="avatar-status badge-danger"></span>
-                      </div>
-                    </td>
-                    <td>
-                      <div>Friderik Dávid</div>
-                      <div className="small text-muted">
-                        <span>New</span> | Registered: Jan 1, 2015
-                      </div>
-                    </td>
-                    <td className="text-center">
-                      <i className="flag-icon flag-icon-pl h4 mb-0" title="pl" id="pl"></i>
-                    </td>
-                    <td>
-                      <div className="clearfix">
-                        <div className="float-left">
-                          <strong>43%</strong>
+                      </td>
+                      <td>
+                        <div>Enéas Kwadwo</div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
                         </div>
-                        <div className="float-right">
-                          <small className="text-muted">Jun 11, 2015 - Jul 10, 2015</small>
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="flag-icon flag-icon-fr h4 mb-0"
+                          title="fr"
+                          id="fr"
+                        />
+                      </td>
+                      <td>
+                        <div className="clearfix">
+                          <div className="float-left">
+                            <strong>98%</strong>
+                          </div>
+                          <div className="float-right">
+                            <small className="text-muted">
+                              Jun 11, 2015 - Jul 10, 2015
+                            </small>
+                          </div>
                         </div>
-                      </div>
-                      <Progress className="progress-xs" color="success" value="43" />
-                    </td>
-                    <td className="text-center">
-                      <i className="fa fa-cc-amex" style={{ fontSize: 24 + 'px' }}></i>
-                    </td>
-                    <td>
-                      <div className="small text-muted">Last login</div>
-                      <strong>Yesterday</strong>
-                    </td>
-                  </tr>
+                        <Progress
+                          className="progress-xs"
+                          color="danger"
+                          value="98"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="fa fa-paypal"
+                          style={{ fontSize: `${24}px` }}
+                        />
+                      </td>
+                      <td>
+                        <div className="small text-muted">Last login</div>
+                        <strong>Last month</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-center">
+                        <div className="avatar">
+                          <img
+                            src={require('../../../public/assets/img/avatars/5.jpg')}
+                            className="img-avatar"
+                            alt="admin@bootstrapmaster.com"
+                          />
+                          <span className="avatar-status badge-success" />
+                        </div>
+                      </td>
+                      <td>
+                        <div>Agapetus Tadeáš</div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="flag-icon flag-icon-es h4 mb-0"
+                          title="es"
+                          id="es"
+                        />
+                      </td>
+                      <td>
+                        <div className="clearfix">
+                          <div className="float-left">
+                            <strong>22%</strong>
+                          </div>
+                          <div className="float-right">
+                            <small className="text-muted">
+                              Jun 11, 2015 - Jul 10, 2015
+                            </small>
+                          </div>
+                        </div>
+                        <Progress
+                          className="progress-xs"
+                          color="info"
+                          value="22"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="fa fa-google-wallet"
+                          style={{ fontSize: `${24}px` }}
+                        />
+                      </td>
+                      <td>
+                        <div className="small text-muted">Last login</div>
+                        <strong>Last week</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="text-center">
+                        <div className="avatar">
+                          <img
+                            src={require('../../../public/assets/img/avatars/6.jpg')}
+                            className="img-avatar"
+                            alt="admin@bootstrapmaster.com"
+                          />
+                          <span className="avatar-status badge-danger" />
+                        </div>
+                      </td>
+                      <td>
+                        <div>Friderik Dávid</div>
+                        <div className="small text-muted">
+                          <span>New</span> | Registered: Jan 1, 2015
+                        </div>
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="flag-icon flag-icon-pl h4 mb-0"
+                          title="pl"
+                          id="pl"
+                        />
+                      </td>
+                      <td>
+                        <div className="clearfix">
+                          <div className="float-left">
+                            <strong>43%</strong>
+                          </div>
+                          <div className="float-right">
+                            <small className="text-muted">
+                              Jun 11, 2015 - Jul 10, 2015
+                            </small>
+                          </div>
+                        </div>
+                        <Progress
+                          className="progress-xs"
+                          color="success"
+                          value="43"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <i
+                          className="fa fa-cc-amex"
+                          style={{ fontSize: `${24}px` }}
+                        />
+                      </td>
+                      <td>
+                        <div className="small text-muted">Last login</div>
+                        <strong>Yesterday</strong>
+                      </td>
+                    </tr>
                   </tbody>
                 </Table>
               </CardBody>

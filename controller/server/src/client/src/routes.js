@@ -1,5 +1,5 @@
 import React from 'react';
-import Loadable from 'react-loadable'
+import Loadable from 'react-loadable';
 
 import DefaultLayout from './containers/DefaultLayout';
 
@@ -182,12 +182,36 @@ const User = Loadable({
   loading: Loading,
 });
 
+// ADDED
 
+const Bluetooth = Loadable({
+  loader: () => import('./views/Config/Bluetooth'),
+  loading: Loading,
+});
+
+const Settings = Loadable({
+  loader: () => import('./views/Config/Settings'),
+  loading: Loading,
+});
+
+const Temperature = Loadable({
+  loader: () => import('./views/Modules/Temperature'),
+  loading: Loading,
+});
+
+const Outlets = Loadable({
+  loader: () => import('./views/Outlets'),
+  loading: Loading,
+});
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: '/', exact: true, name: 'Home', component: DefaultLayout },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
+  { path: '/config/bluetooth', name: 'Bluetooth', component: Bluetooth },
+  { path: '/config/settings', name: 'Settings', component: Settings },
+  { path: '/modules/temperature', name: 'Temperature', component: Temperature },
+  { path: '/outlets', name: 'Outlets', component: Outlets },
   { path: '/theme', exact: true, name: 'Theme', component: Colors },
   { path: '/theme/colors', name: 'Colors', component: Colors },
   { path: '/theme/typography', name: 'Typography', component: Typography },
@@ -211,21 +235,42 @@ const routes = [
   { path: '/base/tooltips', name: 'Tooltips', component: Tooltips },
   { path: '/buttons', exact: true, name: 'Buttons', component: Buttons },
   { path: '/buttons/buttons', name: 'Buttons', component: Buttons },
-  { path: '/buttons/button-dropdowns', name: 'Button Dropdowns', component: ButtonDropdowns },
-  { path: '/buttons/button-groups', name: 'Button Groups', component: ButtonGroups },
-  { path: '/buttons/brand-buttons', name: 'Brand Buttons', component: BrandButtons },
+  {
+    path: '/buttons/button-dropdowns',
+    name: 'Button Dropdowns',
+    component: ButtonDropdowns,
+  },
+  {
+    path: '/buttons/button-groups',
+    name: 'Button Groups',
+    component: ButtonGroups,
+  },
+  {
+    path: '/buttons/brand-buttons',
+    name: 'Brand Buttons',
+    component: BrandButtons,
+  },
   { path: '/icons', exact: true, name: 'Icons', component: CoreUIIcons },
   { path: '/icons/coreui-icons', name: 'CoreUI Icons', component: CoreUIIcons },
   { path: '/icons/flags', name: 'Flags', component: Flags },
   { path: '/icons/font-awesome', name: 'Font Awesome', component: FontAwesome },
-  { path: '/icons/simple-line-icons', name: 'Simple Line Icons', component: SimpleLineIcons },
-  { path: '/notifications', exact: true, name: 'Notifications', component: Alerts },
+  {
+    path: '/icons/simple-line-icons',
+    name: 'Simple Line Icons',
+    component: SimpleLineIcons,
+  },
+  {
+    path: '/notifications',
+    exact: true,
+    name: 'Notifications',
+    component: Alerts,
+  },
   { path: '/notifications/alerts', name: 'Alerts', component: Alerts },
   { path: '/notifications/badges', name: 'Badges', component: Badges },
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
-  { path: '/users', exact: true,  name: 'Users', component: Users },
+  { path: '/users', exact: true, name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];
 
