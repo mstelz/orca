@@ -1,6 +1,6 @@
 {
-  "short_name": "Opex",
-  "name": "Opex - Open Source Aquarium Controller",
+  "short_name": "Orca",
+  "name": "Orca - Open source Reef Controller Assistant",
   "icons": [
     {
       "src": "favicon.ico",
