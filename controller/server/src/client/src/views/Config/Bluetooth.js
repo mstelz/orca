@@ -80,7 +80,6 @@ class Bluetooth extends Component {
       return this.state.devices.map((d, index) => (
         <Card key={d.device_uuid}>
           <CardHeader id="headingOne">
-            {/* Need to get rid of anoymous inner function on iterable element */}
             <Button
               block
               color="link"
