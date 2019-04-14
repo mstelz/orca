@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import moment from 'moment-timezone';
-import { Bar, Doughnut, Line, Pie, Polar, Radar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import {
   Button,
   ButtonGroup,
   ButtonToolbar,
   Card,
   CardBody,
-  CardColumns,
   CardFooter,
   CardHeader,
   CardTitle,
   Col,
-  Progress,
   Row,
 } from 'reactstrap';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
+import { getStyle } from '@coreui/coreui/dist/js/coreui-utilities';
 import CustomTooltips from '../../components/CustomTooltips';
 
 // TODO: Add Celcius Support Eventually
@@ -97,16 +95,16 @@ class Temperature extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getTempData(24);
+  }
+
   onRadioBtnClick(radioSelected) {
     this.setState({
       radioSelected,
     });
 
     switch (radioSelected) {
-      case 'day':
-        this.getTempData(24);
-        this.setState({ timespanLabel: moment().format('MM/DD/YYYY') });
-        break;
       case 'week':
         this.getTempData(168);
         this.setState({
@@ -122,6 +120,10 @@ class Temperature extends Component {
             .subtract(1, 'month')
             .format('MM/DD/YYYY')} - ${moment().format('MM/DD/YYYY')}`,
         });
+        break;
+      default:
+        this.getTempData(24);
+        this.setState({ timespanLabel: moment().format('MM/DD/YYYY') });
         break;
     }
   }
@@ -175,10 +177,6 @@ class Temperature extends Component {
           });
         }
       );
-  }
-
-  componentDidMount() {
-    this.getTempData(24);
   }
 
   render() {

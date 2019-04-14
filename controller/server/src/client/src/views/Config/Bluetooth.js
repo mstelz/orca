@@ -2,25 +2,15 @@ import React, { Component } from 'react';
 import {
   Badge,
   Button,
-  ButtonDropdown,
   Card,
   CardBody,
-  CardFooter,
   CardHeader,
   Col,
   Collapse,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Fade,
   Form,
   FormGroup,
   FormText,
-  FormFeedback,
   Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Label,
   Modal,
   ModalBody,
@@ -28,6 +18,12 @@ import {
   ModalHeader,
   Row,
 } from 'reactstrap';
+
+const infoLabelStyle = {
+  paddingRight: '2em',
+  fontWeight: 'bold',
+  paddingBottom: '1.5em',
+};
 
 class Bluetooth extends Component {
   constructor(props) {
@@ -308,11 +304,5 @@ class Bluetooth extends Component {
     );
   }
 }
-
-const infoLabelStyle = {
-  paddingRight: '2em',
-  fontWeight: 'bold',
-  paddingBottom: '1.5em',
-};
 
 export default Bluetooth;

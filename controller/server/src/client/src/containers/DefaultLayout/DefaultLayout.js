@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 
@@ -10,8 +10,8 @@ import navigation from '../../_nav';
 // routes config
 import routes from '../../routes';
 import DefaultAside from './DefaultAside';
-import DefaultFooter from './DefaultFooter';
-import DefaultHeader from './DefaultHeader';
+import FooterLayout from './FooterLayout';
+import HeaderLayout from './HeaderLayout';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -21,50 +21,46 @@ import SidebarFooter from '../../components/SidebarFooter';
 import CustomBreadcrumb from '../../components/Breadcrumb';
 import SidebarMinimizer from '../../components/SidebarMinimizer';
 
-class DefaultLayout extends Component {
-  render() {
-    return (
-      <div className="app">
-        <Header fixed>
-          <DefaultHeader />
-        </Header>
-        <div className="app-body">
-          <Sidebar fixed display="lg">
-            <SidebarHeader />
-            <SidebarForm />
-            <SidebarNav navConfig={navigation} {...this.props} />
-            <SidebarFooter />
-            <SidebarMinimizer />
-          </Sidebar>
-          <main className="main">
-            <CustomBreadcrumb appRoutes={routes} />
-            <Container fluid>
-              <Switch>
-                {routes.map((route, idx) => {
-                  return route.component ? (
-                    <Route
-                      key={idx}
-                      path={route.path}
-                      exact={route.exact}
-                      name={route.name}
-                      render={props => <route.component {...props} />}
-                    />
-                  ) : null;
-                })}
-                <Redirect from="/" to="/dashboard" />
-              </Switch>
-            </Container>
-          </main>
-          <Aside fixed>
-            <DefaultAside />
-          </Aside>
-        </div>
-        <Footer>
-          <DefaultFooter />
-        </Footer>
+export default function DefaultLayout(props) {
+  return (
+    <div className="app">
+      <Header fixed>
+        <HeaderLayout />
+      </Header>
+      <div className="app-body">
+        <Sidebar fixed display="lg">
+          <SidebarHeader />
+          <SidebarForm />
+          <SidebarNav navConfig={navigation} {...props} />
+          <SidebarFooter />
+          <SidebarMinimizer />
+        </Sidebar>
+        <main className="main">
+          <CustomBreadcrumb appRoutes={routes} />
+          <Container fluid>
+            <Switch>
+              {routes.map(route => {
+                return route.component ? (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    exact={route.exact}
+                    name={route.name}
+                    render={p => <route.component {...p} />}
+                  />
+                ) : null;
+              })}
+              <Redirect from="/" to="/dashboard" />
+            </Switch>
+          </Container>
+        </main>
+        <Aside fixed>
+          <DefaultAside />
+        </Aside>
       </div>
-    );
-  }
+      <Footer>
+        <FooterLayout />
+      </Footer>
+    </div>
+  );
 }
-
-export default DefaultLayout;

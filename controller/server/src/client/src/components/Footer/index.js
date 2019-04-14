@@ -6,33 +6,31 @@ const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   fixed: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 const defaultProps = {
+  children: undefined,
+  className: '',
   tag: 'footer',
-  fixed: false
+  fixed: false,
 };
 
 class Footer extends Component {
-  constructor(props) {
-    super(props);
-
-    this.isFixed = this.isFixed.bind(this);
+  static isFixed(fixed) {
+    if (fixed) {
+      document.body.classList.add('footer-fixed');
+    }
   }
 
   componentDidMount() {
-    this.isFixed(this.props.fixed);
-  }
-
-  isFixed(fixed) {
-    if (fixed) { document.body.classList.add('footer-fixed'); }
+    Footer.isFixed(this.props.fixed);
   }
 
   render() {
     const { className, children, tag: Tag, ...attributes } = this.props;
 
-    delete attributes.fixed
+    delete attributes.fixed;
 
     const classes = classNames(className, 'app-footer');
 

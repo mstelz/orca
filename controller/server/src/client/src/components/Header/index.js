@@ -6,21 +6,25 @@ const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   fixed: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 const defaultProps = {
+  children: undefined,
+  className: '',
   tag: 'header',
-  fixed: false
+  fixed: false,
 };
 
 class Header extends Component {
-  componentDidMount() {
-    this.isFixed(this.props.fixed);
+  static isFixed(fixed) {
+    if (fixed) {
+      document.body.classList.add('header-fixed');
+    }
   }
 
-  isFixed(fixed) {
-    if (fixed) { document.body.classList.add('header-fixed'); }
+  componentDidMount() {
+    Header.isFixed(this.props.fixed);
   }
 
   // breakpoint(breakpoint) {
@@ -30,7 +34,7 @@ class Header extends Component {
   render() {
     const { className, children, tag: Tag, ...attributes } = this.props;
 
-    delete attributes.fixed
+    delete attributes.fixed;
 
     const classes = classNames(className, 'app-header', 'navbar');
 

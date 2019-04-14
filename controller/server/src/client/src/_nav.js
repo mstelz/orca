@@ -82,28 +82,6 @@ export default {
       name: 'Statistics',
       url: '/buttons',
       icon: 'fa fa-bar-chart',
-      children: [
-        {
-          name: 'Buttons',
-          url: '/buttons/buttons',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Button dropdowns',
-          url: '/buttons/button-dropdowns',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Button groups',
-          url: '/buttons/button-groups',
-          icon: 'icon-cursor',
-        },
-        {
-          name: 'Brand Buttons',
-          url: '/buttons/brand-buttons',
-          icon: 'icon-cursor',
-        },
-      ],
     },
     {
       name: 'Macros',
@@ -148,23 +126,6 @@ export default {
       name: 'Notifications',
       url: '/notifications',
       icon: 'fa fa-warning',
-      children: [
-        {
-          name: 'Alerts',
-          url: '/notifications/alerts',
-          icon: 'icon-bell',
-        },
-        {
-          name: 'Badges',
-          url: '/notifications/badges',
-          icon: 'icon-bell',
-        },
-        {
-          name: 'Modals',
-          url: '/notifications/modals',
-          icon: 'icon-bell',
-        },
-      ],
     },
     {
       name: 'Equipment',
@@ -214,106 +175,6 @@ export default {
           name: 'Error 500',
           url: '/500',
           icon: 'icon-star',
-        },
-      ],
-    },
-    {
-      name: 'Help',
-      url: '#',
-      icon: 'fa fa-question',
-      children: [
-        {
-          name: 'Breadcrumbs',
-          url: '/base/breadcrumbs',
-          icon: 'fa fa-thermometer-three-quarters',
-        },
-        {
-          name: 'Cards',
-          url: '/base/cards',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Carousels',
-          url: '/base/carousels',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Doser',
-          url: '/base/collapses',
-          icon: 'fa fa-eyedropper',
-        },
-        {
-          name: 'Dropdowns',
-          url: '/base/dropdowns',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Forms',
-          url: '/base/forms',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Jumbotrons',
-          url: '/base/jumbotrons',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'List groups',
-          url: '/base/list-groups',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Navs',
-          url: '/base/navs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Paginations',
-          url: '/base/paginations',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Popovers',
-          url: '/base/popovers',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Progress Bar',
-          url: '/base/progress-bar',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Switches',
-          url: '/base/switches',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tables',
-          url: '/base/tables',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tabs',
-          url: '/base/tabs',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Tooltips',
-          url: '/base/tooltips',
-          icon: 'icon-puzzle',
-        },
-        {
-          name: 'Colors',
-          url: '/theme/colors',
-          icon: 'fa fa-cogs',
-        },
-        {
-          name: 'Widgets',
-          url: '/widgets',
-          icon: 'fa fa-plug',
-          badge: {
-            variant: 'info',
-          },
         },
       ],
     },

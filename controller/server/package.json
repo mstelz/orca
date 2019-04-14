@@ -51,6 +51,7 @@
     "fs-extra": "7.0.1",
     "html-webpack-plugin": "3.2.0",
     "identity-obj-proxy": "3.0.0",
+    "imgur": "^0.3.1",
     "jest": "24.5.0",
     "jest-pnp-resolver": "1.2.1",
     "jest-resolve": "24.5.0",
@@ -59,8 +60,10 @@
     "moment": "2.24.0",
     "moment-timezone": "0.5.23",
     "noble": "1.9.1",
+    "node-cron": "^2.0.3",
     "node-sass": "4.11.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
+    "pi-camera": "^1.2.1",
     "pnp-webpack-plugin": "1.4.1",
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "3.0.0",
@@ -122,7 +125,7 @@
     "style-loader": "0.23.1",
     "webpack": "4.29.6",
     "webpack-cli": "3.3.0",
-    "webpack-dev-server": "3.2.1"
+    "webpack-dev-server": "3.3.1"
   },
   "proxy": "http://localhost:3000/",
   "repository": {

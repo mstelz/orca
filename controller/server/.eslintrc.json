@@ -7,6 +7,13 @@
     "node": true
   },
   "rules": {
+    "react/destructuring-assignment": [
+      "warn",
+      "always",
+      {
+        "ignoreClassFields": true
+      }
+    ],
     "no-console": "off",
     "comma-dangle": "off",
     "react/jsx-filename-extension": [

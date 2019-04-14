@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { asideMenuCssClasses, checkBreakpoint, validBreakpoints } from '../Shared';
+import {
+  asideMenuCssClasses,
+  checkBreakpoint,
+  validBreakpoints,
+} from '../Shared';
 import toggleClasses from '../Shared/toggle-classes';
 
 const propTypes = {
@@ -11,15 +15,17 @@ const propTypes = {
   fixed: PropTypes.bool,
   isOpen: PropTypes.bool,
   offCanvas: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 const defaultProps = {
+  children: undefined,
+  className: '',
   tag: 'aside',
   display: '',
   fixed: false,
   isOpen: false,
-  offCanvas: true
+  offCanvas: true,
 };
 
 class Aside extends Component {
@@ -38,27 +44,31 @@ class Aside extends Component {
   }
 
   isFixed(fixed) {
-    if (fixed) { document.body.classList.add('aside-menu-fixed'); }
+    if (fixed) {
+      document.body.classList.add('aside-menu-fixed');
+    }
   }
 
   isOffCanvas(offCanvas) {
-    if (offCanvas) { document.body.classList.add('aside-menu-off-canvas'); }
+    if (offCanvas) {
+      document.body.classList.add('aside-menu-off-canvas');
+    }
   }
 
   displayBreakpoint(display) {
     if (display && checkBreakpoint(display, validBreakpoints)) {
-      const cssClass = `aside-menu-${display}-show`
-      toggleClasses(cssClass, asideMenuCssClasses, true)
+      const cssClass = `aside-menu-${display}-show`;
+      toggleClasses(cssClass, asideMenuCssClasses, true);
     }
   }
 
   render() {
     const { className, children, tag: Tag, ...attributes } = this.props;
 
-    delete attributes.display
-    delete attributes.fixed
-    delete attributes.offCanvas
-    delete attributes.isOpen
+    delete attributes.display;
+    delete attributes.fixed;
+    delete attributes.offCanvas;
+    delete attributes.isOpen;
 
     const classes = classNames(className, 'aside-menu');
 

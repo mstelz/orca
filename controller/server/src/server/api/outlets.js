@@ -1,6 +1,33 @@
 const router = require('express').Router();
 const db = require('../config/database');
 
+// TODO: need to look at adding transactions
+const addOutlet = async outlet => {
+  const outletSql =
+    'INSERT INTO outlets (name, type, state, default_state) VALUES (?, ?, 0, ?);';
+  const lastRow = await db.run(outletSql, [
+    outlet.name,
+    outlet.type,
+    outlet.default_state,
+  ]);
+  if (outlet.type === 'GPIO') {
+    const outletGpioSql =
+      'INSERT INTO outlet_gpio (outlet_id, pin_num) VALUES (?, ?);';
+    await db.all(outletGpioSql, [lastRow.id, outlet.pin]);
+  } else {
+    const outletBtSql =
+      'INSERT INTO outlet_bt (outlet_id, device_uuid, service_uuid, char_uuid) VALUES (?, ?, ?,?)';
+    await db.all(outletBtSql, [
+      lastRow.id,
+      outlet.deviceUuid,
+      outlet.serviceUuid,
+      outlet.charUuid,
+    ]);
+  }
+
+  return lastRow;
+};
+
 router.get('/api/outlets', async (req, res, next) => {
   const sql = 'SELECT * FROM outlets';
   try {
@@ -36,32 +63,5 @@ router.delete('/api/outlets', (req, res, next) => {
 
   res.sendStatus(200);
 });
-
-// TODO: need to look at adding transactions
-const addOutlet = async outlet => {
-  const outletSql =
-    'INSERT INTO outlets (name, type, state, default_state) VALUES (?, ?, 0, ?);';
-  const lastRow = await db.run(outletSql, [
-    outlet.name,
-    outlet.type,
-    outlet.default_state,
-  ]);
-  if (outlet.type === 'GPIO') {
-    const outletGpioSql =
-      'INSERT INTO outlet_gpio (outlet_id, pin_num) VALUES (?, ?);';
-    await db.all(outletGpioSql, [lastRow.id, outlet.pin]);
-  } else {
-    const outletBtSql =
-      'INSERT INTO outlet_bt (outlet_id, device_uuid, service_uuid, char_uuid) VALUES (?, ?, ?,?)';
-    await db.all(outletBtSql, [
-      lastRow.id,
-      outlet.deviceUuid,
-      outlet.serviceUuid,
-      outlet.charUuid,
-    ]);
-  }
-
-  return lastRow;
-};
 
 module.exports = router;

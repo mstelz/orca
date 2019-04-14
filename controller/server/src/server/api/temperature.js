@@ -1,36 +1,36 @@
 const router = require('express').Router();
-const fs = require("fs");
+const fs = require('fs');
 
-router.get('/api/temperature', (req, res) => {
-  res.send({temperature: getTempFromDevice()});
-});
+function convertCelviustoFahrenheit(tempC) {
+  return (tempC * 9.0) / 5.0 + 32.0;
+}
 
 function getTempFromDevice() {
-  let base_dir = "/sys/bus/w1/devices";
-  let devices = fs.readdirSync(base_dir);
-  let device_file = base_dir + "/" + devices.filter(d => d.match("28*"))[0] + "/w1_slave";
+  const baseDir = '/sys/bus/w1/devices';
+  const devices = fs.readdirSync(baseDir);
+  const deviceFile = `${baseDir}/${
+    devices.filter(d => d.match('28*'))[0]
+  }/w1_slave`;
 
-  let data = fs.readFileSync(device_file, "utf8");
-  data = data.split("\n");
+  let data = fs.readFileSync(deviceFile, 'utf8');
+  data = data.split('\n');
 
   let confirm = data[0].trim();
-  confirm = confirm.substr(confirm.length -3);
+  confirm = confirm.substr(confirm.length - 3);
 
-  if(confirm != "YES") {
-    return;
-  } else {
-    let tempPos = data[1].indexOf("t=");
+  if (confirm === 'YES') {
+    const tempPos = data[1].indexOf('t=');
 
-    let temp = data[1].substr(tempPos+2);
-    let tempC = temp / 1000.0;
+    const temp = data[1].substr(tempPos + 2);
+    const tempC = temp / 1000.0;
 
     return convertCelviustoFahrenheit(tempC);
   }
+  return undefined;
 }
 
-function convertCelviustoFahrenheit(tempC) {
-  return tempC * 9.0 / 5.0 + 32.0;
-}
-
+router.get('/api/temperature', (req, res) => {
+  res.send({ temperature: getTempFromDevice() });
+});
 
 module.exports = router;

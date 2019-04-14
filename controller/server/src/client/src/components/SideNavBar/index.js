@@ -13,10 +13,12 @@ const propTypes = {
   navFunc: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   isOpen: PropTypes.bool,
   staticContext: PropTypes.any,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
 };
 
 const defaultProps = {
+  children: undefined,
+  className: '',
   tag: 'nav',
   navConfig: {
     items: [
@@ -24,10 +26,11 @@ const defaultProps = {
         name: 'Dashboard',
         url: '/dashboard',
         icon: 'icon-speedometer',
-        badge: { variant: 'info', text: 'NEW' }
-      }]
+        badge: { variant: 'info', text: 'NEW' },
+      },
+    ],
   },
-  isOpen: false
+  isOpen: false,
 };
 
 class SidebarNav extends Component {
@@ -63,24 +66,36 @@ class SidebarNav extends Component {
 
   // nav type
   navType(item, idx) {
-    return (
-      item.title ? this.navTitle(item, idx)
-        : item.divider ? this.navDivider(item, idx)
-          : item.label ? this.navLabel(item, idx)
-            : item.children ? this.navDropdown(item, idx)
-              : this.navItem(item, idx)
-    );
+    return item.title
+      ? this.navTitle(item, idx)
+      : item.divider
+      ? this.navDivider(item, idx)
+      : item.label
+      ? this.navLabel(item, idx)
+      : item.children
+      ? this.navDropdown(item, idx)
+      : this.navItem(item, idx);
   }
 
   // nav list section title
   navTitle(title, key) {
     const classes = classNames('nav-title', title.class);
-    return <li key={key} className={classes}>{this.navWrapper(title)} </li>;
+    return (
+      <li key={key} className={classes}>
+        {this.navWrapper(title)}{' '}
+      </li>
+    );
   }
 
   // simple wrapper for nav-title item
   navWrapper(item) {
-    return item.wrapper && item.wrapper.element ? React.createElement(item.wrapper.element, item.wrapper.attributes, item.name) : item.name;
+    return item.wrapper && item.wrapper.element
+      ? React.createElement(
+          item.wrapper.element,
+          item.wrapper.attributes,
+          item.name
+        )
+      : item.name;
   }
 
   // nav list divider
@@ -98,12 +113,10 @@ class SidebarNav extends Component {
         'nav-icon',
         !item.icon ? 'fa fa-circle' : item.icon,
         item.label.variant ? `text-${item.label.variant}` : '',
-        item.label.class ? item.label.class : '',
-      )
+        item.label.class ? item.label.class : ''
+      ),
     };
-    return (
-      this.navLink(item, key, classes)
-    );
+    return this.navLink(item, key, classes);
   }
 
   // nav dropdown
@@ -111,23 +124,31 @@ class SidebarNav extends Component {
     const classIcon = classNames('nav-icon', item.icon);
     return (
       <li key={key} className={this.activeRoute(item.url, this.props)}>
-        <a className="nav-link nav-dropdown-toggle" href="#" onClick={this.handleClick}><i className={classIcon} />{item.name}{this.navBadge(item.badge)}</a>
-        <ul className="nav-dropdown-items">
-          {this.navList(item.children)}
-        </ul>
-      </li>);
+        <a
+          className="nav-link nav-dropdown-toggle"
+          href="#"
+          onClick={this.handleClick}
+        >
+          <i className={classIcon} />
+          {item.name}
+          {this.navBadge(item.badge)}
+        </a>
+        <ul className="nav-dropdown-items">{this.navList(item.children)}</ul>
+      </li>
+    );
   }
 
   // nav item with nav link
   navItem(item, key) {
     const classes = {
       item: classNames(item.class),
-      link: classNames('nav-link', item.variant ? `nav-link-${item.variant}` : ''),
-      icon: classNames('nav-icon', item.icon)
+      link: classNames(
+        'nav-link',
+        item.variant ? `nav-link-${item.variant}` : ''
+      ),
+      icon: classNames('nav-icon', item.icon),
     };
-    return (
-      this.navLink(item, key, classes)
-    );
+    return this.navLink(item, key, classes);
   }
 
   // nav link
@@ -135,15 +156,24 @@ class SidebarNav extends Component {
     const url = item.url ? item.url : '';
     return (
       <NavItem key={key} className={classes.item}>
-        {
-          this.isExternal(url) ?
-            <RsNavLink href={url} className={classes.link} active>
-              <i className={classes.icon} />{item.name}{this.navBadge(item.badge)}
-            </RsNavLink> :
-            <NavLink to={url} className={classes.link} activeClassName="active" onClick={this.hideMobile}>
-              <i className={classes.icon} />{item.name}{this.navBadge(item.badge)}
-            </NavLink>
-        }
+        {this.isExternal(url) ? (
+          <RsNavLink href={url} className={classes.link} active>
+            <i className={classes.icon} />
+            {item.name}
+            {this.navBadge(item.badge)}
+          </RsNavLink>
+        ) : (
+          <NavLink
+            to={url}
+            className={classes.link}
+            activeClassName="active"
+            onClick={this.hideMobile}
+          >
+            <i className={classes.icon} />
+            {item.name}
+            {this.navBadge(item.badge)}
+          </NavLink>
+        )}
       </NavItem>
     );
   }
@@ -153,7 +183,9 @@ class SidebarNav extends Component {
     if (badge) {
       const classes = classNames(badge.class);
       return (
-        <Badge className={classes} color={badge.variant}>{badge.text}</Badge>
+        <Badge className={classes} color={badge.variant}>
+          {badge.text}
+        </Badge>
       );
     }
     return null;
@@ -167,21 +199,24 @@ class SidebarNav extends Component {
   render() {
     const { className, children, navConfig, ...attributes } = this.props;
 
-    delete attributes.isOpen
-    delete attributes.staticContext
-    delete attributes.Tag
+    delete attributes.isOpen;
+    delete attributes.staticContext;
+    delete attributes.Tag;
 
     const navClasses = classNames(className, 'sidebar-nav');
 
     // ToDo: find better rtl fix
-    const isRtl = getComputedStyle(document.querySelector('html')).direction === 'rtl'
+    const isRtl =
+      getComputedStyle(document.querySelector('html')).direction === 'rtl';
 
     // sidebar-nav root
     return (
-      <PerfectScrollbar className={navClasses} {...attributes} option={{ suppressScrollX: !isRtl }} >
-        <Nav>
-          {children || this.navList(navConfig.items)}
-        </Nav>
+      <PerfectScrollbar
+        className={navClasses}
+        {...attributes}
+        option={{ suppressScrollX: !isRtl }}
+      >
+        <Nav>{children || this.navList(navConfig.items)}</Nav>
       </PerfectScrollbar>
     );
   }
