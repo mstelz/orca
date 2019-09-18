@@ -214,7 +214,7 @@ class SidebarNav extends Component {
       <PerfectScrollbar
         className={navClasses}
         {...attributes}
-        option={{ suppressScrollX: !isRtl }}
+        options={{ suppressScrollX: !isRtl }}
       >
         <Nav>{children || this.navList(navConfig.items)}</Nav>
       </PerfectScrollbar>
