@@ -134,7 +134,9 @@ module.exports = {
               {
                 loader: 'sass-loader',
                 options: {
-                  includePaths: ['absolute/path/a', 'absolute/path/b'],
+                  sassOptions: {
+                    includePaths: ['absolute/path/a', 'absolute/path/b'],
+                  }
                 },
               },
             ],

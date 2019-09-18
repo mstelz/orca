@@ -208,7 +208,7 @@ class Outlets extends Component {
                 <option value="" disabled>
                   Please Select
                 </option>
-                {this.state.devices.map((val, i) => (
+                {this.state.devices && this.state.devices.map((val, i) => (
                   <option key={val.device_uuid} value={i}>
                     {val.name}
                     {i}
