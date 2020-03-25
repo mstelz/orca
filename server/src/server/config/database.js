@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 class Database {
   constructor() {
     this.db = new sqlite3.Database(
-      path.join(__dirname, '../../../db/Orca.db'),
+      path.join(__dirname, '../../../db/orca.db'),
       sqlite3.OPEN_READWRITE,
       err => {
         if (err) {
