@@ -1,0 +1,21 @@
+.brand-container {
+  width: 184px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+.navbar {
+  border-bottom: 1px solid #c8ced3;
+  background-color: #fff;
+}
+
+.nav-toggle {
+  padding-top: 0.9rem;
+  color: #73818f;
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  color: #2f353a;
+}

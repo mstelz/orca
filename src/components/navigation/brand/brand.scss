@@ -1,0 +1,24 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+// may not be needed
+.navbar-brand {
+  display: inline-block;
+  padding-top: 0.33594rem;
+  padding-bottom: 0.33594rem;
+  margin-right: 1rem;
+  font-size: 1.09375rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.navbar-brand .navbar-brand-full {
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+}
+
+.navbar-brand .navbar-brand-minimized {
+  @include media-breakpoint-up(lg) {
+    display: none;
+  }
+}

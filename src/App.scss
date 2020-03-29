@@ -1,0 +1,36 @@
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer {
+  display: flex;
+  flex: 0 0 50px;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #f0f3f5;
+  border-top: 1px solid #c8ced3;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  overflow-x: hidden;
+}
+
+.sidebar {
+  flex: 0 0 200px;
+  display: flex;
+}
+
+.collapsing.width {
+  position: relative;
+  flex: 0 0 0;
+  overflow: hidden;
+  -webkit-transition: flex 0.35s ease-in-out;
+  transition: flex 0.35s ease-in-out;
+}
