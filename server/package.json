@@ -45,7 +45,7 @@
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.14.3",
-    "express": "4.17.1",
+    "express": "4.20.0",
     "flag-icon-css": "3.3.0",
     "font-awesome": "4.7.0",
     "fs-extra": "8.1.0",
